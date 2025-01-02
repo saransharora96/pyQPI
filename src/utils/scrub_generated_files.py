@@ -1,4 +1,4 @@
-from src.utils.dir_utils import remove_directories
+from utils.dir_utils import remove_directories
 
 
 if __name__ == "__main__":

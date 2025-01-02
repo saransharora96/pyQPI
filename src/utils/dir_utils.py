@@ -189,7 +189,7 @@ def update_processed_file(tracker_path, file_path):
         file.write(normalized_path + '\n')
 
 
-def reset_processing_environment(dataset_location, tracker_path, output_csv_relative_path):
+def reset_processing_environment(dataset_location, log_paths, output_csv_relative_path):
     # Remove directories and specific files
     generated_dir = [
         "MIP", "MIP_scaled", "Phase", "Phase_scaled", "Image_binary_mask",
@@ -197,11 +197,9 @@ def reset_processing_environment(dataset_location, tracker_path, output_csv_rela
         "Tomogram_segmented"
     ]
     remove_directories(dataset_location, generated_dir)
-    remove_files(dataset_location, r"", ".png")  # Delete .png thumbnails
-    remove_files(dataset_location, r"T\d{3}_", ".tiff")  # Delete T***_ (un-stitched)
 
     # Remove logs and output files
-    for file_path in [tracker_path, os.path.join(dataset_location, output_csv_relative_path)]:
+    for file_path in list(log_paths.values()) + [os.path.join(dataset_location, output_csv_relative_path)]:
         if os.path.exists(file_path):
             os.remove(file_path)
             print(f"Deleted file: {file_path}")

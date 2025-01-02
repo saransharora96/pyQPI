@@ -1,9 +1,9 @@
 import os
-import numpy as np
+import cupy as cp
 from tifffile import imwrite
 from typing import Dict, Any
-from src.classes.Segmentation import Segmentation, process_tomogram
-from src.classes.FeatureExtraction import FeatureExtraction
+from classes.Segmentation import Segmentation, process_tomogram
+from classes.FeatureExtraction import FeatureExtraction
 from memory_profiler import profile
 
 
@@ -41,7 +41,10 @@ class AuxiliaryDataGeneration:
         path = os.path.join(directory, f"{filename}.tiff")
         if scale:
             data = (data - data.min()) / (data.max() - data.min())
-        imwrite(path, data.astype(np.float32))
+
+        # Convert CuPy array to NumPy array explicitly
+        data_numpy = data.get()  # Ensures compatibility with tifffile.imwrite
+        imwrite(path, data_numpy.astype(cp.float32))
         return path
 
     def generate_and_save_auxiliary_data(self):
