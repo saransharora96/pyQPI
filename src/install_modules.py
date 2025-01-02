@@ -45,5 +45,6 @@ def upgrade_pip():
 
 
 if __name__ == '__main__':
-    install_packages()
     upgrade_pip()
+    install_packages()
+

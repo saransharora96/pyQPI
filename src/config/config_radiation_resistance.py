@@ -1,4 +1,5 @@
 INSTALLATION_NEEDED = False
+RESUME_PROCESSING = False
 
 # Tomocube Instrument Parameters
 wavelength = 532e-9       # wavelength (m)
@@ -9,7 +10,7 @@ pixel_z = 0.19
 background_ri = 1.337
 
 resistance_mapping = {
-    "CL1": "sensitive",
-    "CL2": "resistant",
-    "CL3": "intermediate"
+    "cell_line_1": "sensitive",
+    "cell_line_2": "resistant",
+    "cell_line_3": "intermediate"
 }

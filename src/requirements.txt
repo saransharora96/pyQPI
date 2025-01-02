@@ -4,3 +4,6 @@ scipy
 tifffile
 pandas
 tqdm
+scikit-image
+memory-profiler
+cupy-cuda12x
