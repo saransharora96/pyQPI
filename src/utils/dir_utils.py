@@ -1,5 +1,5 @@
 import os
-from typing import Dict, List
+from typing import Dict, List, Any
 import stat
 import shutil
 import subprocess
@@ -189,7 +189,7 @@ def update_processed_file(tracker_path, file_path):
         file.write(normalized_path + '\n')
 
 
-def reset_processing_environment(dataset_location, log_paths, output_csv_relative_path):
+def reset_processing_environment(dataset_location, processing_log_path, output_csv_path):
     # Remove directories and specific files
     generated_dir = [
         "MIP", "MIP_scaled", "Phase", "Phase_scaled", "Image_binary_mask",
@@ -199,7 +199,7 @@ def reset_processing_environment(dataset_location, log_paths, output_csv_relativ
     remove_directories(dataset_location, generated_dir)
 
     # Remove logs and output files
-    for file_path in list(log_paths.values()) + [os.path.join(dataset_location, output_csv_relative_path)]:
+    for file_path in [processing_log_path, output_csv_path]:
         if os.path.exists(file_path):
             os.remove(file_path)
             print(f"Deleted file: {file_path}")
@@ -214,11 +214,26 @@ def count_processed_files(base_dir, processed_files):
                 count += 1
     return count
 
-
-def append_results_to_csv(results, output_csv_path):
-    """Append new results to the existing CSV file or create a new one if it doesn't exist."""
-    df = pd.DataFrame(results)
+def update_csv(result: Dict[str, Any], output_csv_path: str):
+    """
+    Update an existing row in the CSV or append a new row if the file does not exist.
+    """
     if os.path.exists(output_csv_path):
-        df.to_csv(output_csv_path, mode='a', header=False, index=False)
+        df = pd.read_csv(output_csv_path)
+        file_path = result["file_path"]
+
+        # Check if the file already exists in the CSV
+        if file_path in df["file_path"].values:
+            # Update the existing row
+            index = df[df["file_path"] == file_path].index[0]
+            for key, value in result.items():
+                df.at[index, key] = value
+        else:
+            # Append a new row
+            df = pd.concat([df, pd.DataFrame([result])], ignore_index=True)
     else:
-        df.to_csv(output_csv_path, header=True, index=False)  # Ensure headers are written initially
+        # Create a new CSV if it doesn't exist
+        df = pd.DataFrame([result])
+
+    # Save the updated dataframe
+    df.to_csv(output_csv_path, index=False)

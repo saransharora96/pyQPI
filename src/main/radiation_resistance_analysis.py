@@ -5,6 +5,8 @@ from install_modules import upgrade_pip, install_packages
 from config.config_radiation_resistance import INSTALLATION_NEEDED, RESUME_PROCESSING
 import utils.dir_utils as file_utils
 from main.process_dataset import process_directory
+import pandas as pd
+from config.config_radiation_resistance import dataset_location, processing_log_path, output_csv_path
 
 logging.basicConfig(
     filename="../pyQPI/src/logs/error_record.log",
@@ -12,40 +14,38 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-
 def execute_code():
 
     start_time = time.time()  # Record the start time
     os.system('cls' if os.name == 'nt' else 'clear')
-    log_paths = {'processed':"../pyQPI/src/logs/feature_processing_completed.log",'skipped':"../pyQPI/src/logs/skipped_files.log"}
     
     if INSTALLATION_NEEDED:
         upgrade_pip()
         install_packages()
 
-    dataset_location = (
-        "D:\OneDrive_JohnsHopkins\Desktop\JohnsHopkins\Projects\OracleQPI\pyQPI\data"
-    )
-    # dataset_location = (
-    #     "E:\radiation_resistance_dataset_export"
-    # )
-
     file_utils.remove_files(dataset_location, r"", ".png")  # Delete .png thumbnails
     file_utils.remove_files(dataset_location, r"T\d{3}_", ".tiff")  # Delete T***_ (un-stitched)
 
     if RESUME_PROCESSING:
-        processed_files = file_utils.read_processed_files(log_paths["processed"])
+        processed_files = set()
+        processed_features = {}
+        if os.path.exists(output_csv_path):
+            existing_data = pd.read_csv(output_csv_path)
+            for _, row in existing_data.iterrows():
+                file_path = row["file_path"]
+                features = [col for col in row.index if col not in ["file_path", "error"] and not pd.isna(row[col])]
+                processed_features[file_path] = features
+            processed_files.update(existing_data['file_path'].tolist())
     else:
-        file_utils.reset_processing_environment(dataset_location, log_paths, "extracted_parameters.csv")
-        processed_files=set()
+        file_utils.reset_processing_environment(dataset_location, processing_log_path, output_csv_path)
+        processed_files = set()
+        processed_features = {}
 
     logging.info("Starting processing...")
     try:
         process_directory(
             base_dir=dataset_location,
-            output_csv="extracted_parameters.csv",
-            processed_files=processed_files,
-            log_paths=log_paths
+            output_csv_path=output_csv_path,
         )
         logging.info("Processing completed successfully.")
     except Exception as e:

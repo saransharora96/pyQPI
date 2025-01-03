@@ -1,5 +1,7 @@
+import os 
+
 INSTALLATION_NEEDED = False
-RESUME_PROCESSING = False
+RESUME_PROCESSING = True
 
 # Tomocube Instrument Parameters
 wavelength = 532e-9       # wavelength (m)
@@ -14,3 +16,14 @@ resistance_mapping = {
     "cell_line_2": "resistant",
     "cell_line_3": "intermediate"
 }
+
+processing_log_path = "../pyQPI/src/logs/skipped_files.log"
+
+dataset_location = (
+    "D:\OneDrive_JohnsHopkins\Desktop\JohnsHopkins\Projects\OracleQPI\pyQPI\data"
+)
+# dataset_location = (
+#     "E:\radiation_resistance_dataset_export"
+# )
+
+output_csv_path = os.path.join(dataset_location, "extracted_parameters.csv")
