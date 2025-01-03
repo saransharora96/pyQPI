@@ -1,4 +1,5 @@
 # Explainable QPI Analysis Toolkit (work in progress)
+Author: Saransh Arora
 
 ## Overview
 
