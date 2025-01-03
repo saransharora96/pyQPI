@@ -1,4 +1,4 @@
-# Explainable QPI Analysis Toolkit (work in progress)
+# pyQPI: An Explainable QPI Analysis Toolkit (work in progress)
 Author: Saransh Arora
 
 ## Overview
@@ -65,8 +65,7 @@ The toolkit includes modules for data segmentation, feature extraction, and radi
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your_username/radiation-resistance-analysis.git
-   cd radiation-resistance-analysis
+   git clone https://github.com/saransharora96/pyQPI.git
    ```
 2. Install dependencies:
    ```bash
