@@ -26,6 +26,8 @@ def execute_code():
     file_utils.remove_files(dataset_location, r"", ".png")  # Delete .png thumbnails
     file_utils.remove_files(dataset_location, r"T\d{3}_", ".tiff")  # Delete T***_ (un-stitched)
 
+    os.system('cls' if os.name == 'nt' else 'clear')
+
     if RESUME_PROCESSING:
         processed_files = set()
         processed_features = {}
@@ -42,6 +44,8 @@ def execute_code():
         processed_features = {}
 
     logging.info("Starting processing...")
+
+    file_utils.count_cells_in_dishes(dataset_location)
     try:
         process_directory(
             base_dir=dataset_location,

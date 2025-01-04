@@ -20,10 +20,10 @@ resistance_mapping = {
 processing_log_path = "../pyQPI/src/logs/skipped_files.log"
 
 dataset_location = (
-    "D:\OneDrive_JohnsHopkins\Desktop\JohnsHopkins\Projects\OracleQPI\pyQPI\data"
+    r"D:\OneDrive_JohnsHopkins\Desktop\JohnsHopkins\Projects\OracleQPI\pyQPI\data"
 )
 # dataset_location = (
-#     "E:\radiation_resistance_dataset_export"
+#     r"E:\radiation_resistance_dataset_export"
 # )
 
 output_csv_path = os.path.join(dataset_location, "extracted_parameters.csv")
