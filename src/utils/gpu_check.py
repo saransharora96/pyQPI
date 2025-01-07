@@ -1,41 +1,37 @@
-import pycuda.driver as cuda
-import pycuda.autoinit  # This is necessary for initializing CUDA driver
-from GPUtil import getGPUs
+import subprocess
+import xml.etree.ElementTree as ET
 
-def gpu_info():
-    # Check for GPUs and gather their information
-    gpus = getGPUs()
-    gpu_info_str = ""
-
-    # Iterate through all GPUs found by GPUtil
-    for gpu in gpus:
-        gpu_details = f"""
-        GPU: {gpu.name}
-        Total RAM: {round(gpu.memoryTotal / 1024, 2)} GB
-        Available RAM: {round(gpu.memoryFree / 1024, 2)} GB
-        Temperature: {gpu.temperature} °C
-        Load: {round(gpu.load * 100, 2)}%
-        """
-        gpu_info_str += gpu_details
-
-    # Check if CUDA is installed
+def parse_nvidia_smi_output():
     try:
-        cuda.init()
-        is_cuda_installed = "Yes"
-        cuda_version = f"{cuda.get_version()[0]}.{cuda.get_version()[1]}.{cuda.get_version()[2]}"
-    except cuda.Error:
-        is_cuda_installed = "No"
-        cuda_version = "N/A"
+        # Run nvidia-smi command to get GPU details in XML format
+        smi_output = subprocess.run(['nvidia-smi', '-q', '-x'], capture_output=True, text=True)
+        smi_xml = smi_output.stdout
+        
+        # Parse the XML output
+        root = ET.fromstring(smi_xml)
+        gpu_info_str = ""
+        
+        # Extract information for each GPU
+        for gpu in root.findall('gpu'):
+            name = gpu.find('product_name').text
+            memory_total = gpu.find('fb_memory_usage/total').text
+            memory_free = gpu.find('fb_memory_usage/free').text
+            temperature = gpu.find('temperature/gpu_temp').text
+            load = gpu.find('utilization/gpu_util').text
 
-    # Prepare the final formatted information
-    final_output = f"""
-    CUDA Installed: {is_cuda_installed}
-    CUDA Version: {cuda_version}
-    GPU Details: 
-    {gpu_info_str if gpu_info_str else 'No GPU available'}
-    """
-    return final_output
+            gpu_details = f"""
+            GPU: {name}
+            Total RAM: {memory_total}
+            Available RAM: {memory_free}
+            Temperature: {temperature}
+            Load: {load}
+            """
+            gpu_info_str += gpu_details
+
+        return gpu_info_str if gpu_info_str else 'No GPU available'
+    except Exception as e:
+        return f"Failed to get GPU details: {str(e)}"
 
 # Usage
-gpu_details = gpu_info()
+gpu_details = parse_nvidia_smi_output()
 print(gpu_details)
