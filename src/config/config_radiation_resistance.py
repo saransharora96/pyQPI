@@ -22,8 +22,11 @@ processing_log_path = "../pyQPI/src/logs/skipped_files.log"
 # dataset_location = (
 #     r"D:\OneDrive_JohnsHopkins\Desktop\JohnsHopkins\Projects\OracleQPI\pyQPI\data"
 # )
+# dataset_location = (
+#     "../pyQPI/data"
+# )
 dataset_location = (
-    "../pyQPI/data"
+    "../../../mnt/f/radiation_resistance_dataset_export/"
 )
 
 output_csv_path = os.path.join(dataset_location, "extracted_parameters.csv")

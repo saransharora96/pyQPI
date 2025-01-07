@@ -2,6 +2,7 @@ import os
 import gc
 from tifffile import TiffFile
 import cupy as cp
+import h5py
 
 class Cell:
     def __init__(self, tomogram_path: str, radiation_resistance: str, dish_number: int):
@@ -24,8 +25,13 @@ class Cell:
                 print(f"Error: Tomogram file not found at {self.tomogram_path}")
                 return None
         elif data_type in self.auxiliary_data_paths and data_type not in self.loaded_data:
-            with TiffFile(self.auxiliary_data_paths[data_type]) as tif:
-                self.loaded_data[data_type] = cp.asarray(tif.asarray().astype('float32'))
+            path = self.auxiliary_data_paths[data_type]
+            if path.endswith(".h5"):
+                with h5py.File(path, 'r') as h5file:
+                    self.loaded_data[data_type] = cp.asarray(h5file['data'][:])
+            elif path.endswith(".tiff"):
+                with TiffFile(path) as tif:
+                    self.loaded_data[data_type] = cp.asarray(tif.asarray().astype('float32'))
 
         return self.loaded_data.get(data_type)
 

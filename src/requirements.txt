@@ -10,3 +10,4 @@ cupy-cuda12x
 pycuda
 GPUtil 
 cucim
+h5py
