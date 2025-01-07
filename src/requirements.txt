@@ -8,4 +8,5 @@ scikit-image
 memory-profiler
 cupy-cuda12x
 pycuda
-GPUtil 
+GPUtil
+--extra-index-url https://pypi.nvidia.com cucim-cu12

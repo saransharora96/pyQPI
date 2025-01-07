@@ -1,4 +1,3 @@
-/data/
 /.venv/
 /code old 1/
 /code old 2/
@@ -6,4 +5,4 @@
 **/__pycache__/
 /__pycache__/
 /.run/
-requirements.txt
+/data/
