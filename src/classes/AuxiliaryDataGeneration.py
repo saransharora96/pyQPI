@@ -44,8 +44,8 @@ class AuxiliaryDataGeneration:
             data = (data - data.min()) / (data.max() - data.min())
 
         # Convert CuPy array to NumPy array explicitly
-        data_numpy = data.get()  # Ensures compatibility with tifffile.imwrite
-        imwrite(path, data_numpy.astype(cp.float32))
+        data = data.get()
+        imwrite(path, data.astype(cp.float32))
         return path
     
     @staticmethod

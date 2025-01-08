@@ -229,11 +229,8 @@ def update_csv(result: Dict[str, Any], output_csv_path: str):
             for key, value in result.items():
                 df.at[index, key] = value
         else:
-            # Append a new row
-            df = pd.concat([df, pd.DataFrame([result])], ignore_index=True)
+            df = pd.concat([df, pd.DataFrame([result])], ignore_index=True) # Append a new row
     else:
-        # Create a new CSV if it doesn't exist
-        df = pd.DataFrame([result])
+        df = pd.DataFrame([result]) # Create a new CSV if it doesn't exist
 
-    # Save the updated dataframe
     df.to_csv(output_csv_path, index=False)

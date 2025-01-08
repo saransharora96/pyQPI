@@ -7,6 +7,7 @@ import utils.dir_utils as file_utils
 from main.process_dataset import process_directory
 import pandas as pd
 from config.config_radiation_resistance import dataset_location, processing_log_path, output_csv_path
+from multiprocessing import Manager
 
 logging.basicConfig(
     filename="../pyQPI/src/logs/error_record.log",
@@ -18,6 +19,10 @@ def execute_code():
 
     start_time = time.time()  # Record the start time
     os.system('cls' if os.name == 'nt' else 'clear')
+
+    manager = Manager()
+    csv_lock = manager.Lock()
+
     
     if INSTALLATION_NEEDED:
         upgrade_pip()
@@ -50,6 +55,7 @@ def execute_code():
         process_directory(
             base_dir=dataset_location,
             output_csv_path=output_csv_path,
+            csv_lock = csv_lock
         )
         logging.info("Processing completed successfully.")
     except Exception as e:
