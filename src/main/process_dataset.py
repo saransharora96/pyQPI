@@ -4,40 +4,68 @@ import time
 import pandas as pd
 from typing import Any, Dict
 import cupy as cp
-from multiprocessing import Pool, Manager, Semaphore 
 import gc
+from multiprocessing import Pool, Manager, Semaphore 
 from threading import Thread
 import threading
-
-from rich.layout import Layout
-from rich.progress import Progress, TextColumn, BarColumn, TimeElapsedColumn, TimeRemainingColumn
+from logging.handlers import QueueHandler
 from rich.panel import Panel
 from rich.live import Live
-
+from rich.layout import Layout
+from rich.progress import (
+    Progress,
+    TextColumn,
+    BarColumn,
+    TimeElapsedColumn,
+    TimeRemainingColumn,
+)
 from classes.Cell import Cell
 from classes.AuxiliaryDataGeneration import AuxiliaryDataGeneration
-from config.config_radiation_resistance import background_ri, pixel_x,wavelength, resistance_mapping, memory_thresholds, max_workers, processing_log_path, output_csv_path, RESUME_PROCESSING, dataset_location, max_tasks_per_child
 from classes.FeatureExtraction import FeatureExtraction
 import utils.dir_utils as file_utils
+from config.config_radiation_resistance import (
+    background_ri,
+    pixel_x,
+    wavelength,
+    resistance_mapping,
+    files_with_errors,
+    output_csv_path,
+    dataset_location,
+    memory_thresholds,
+    max_workers,
+    initial_workers,
+    max_tasks_per_child,
+    resource_check_frequency,
+    RESUME_PROCESSING
+)
 
-
-def worker_initializer(semaphore):
+def worker_initializer(semaphore, log_queue):
     """
     Initialize global semaphore for workers.
     """
-    global global_semaphore
+    global global_semaphore, global_log_queue
     global_semaphore = semaphore
+    global_log_queue = log_queue
+
+    # Attach a QueueHandler to the root logger
+    queue_handler = QueueHandler(log_queue)
+    logging.root.handlers = []  # Remove existing handlers
+    logging.root.addHandler(queue_handler)
+    logging.root.setLevel(logging.INFO)  # Ensure correct logging level
 
 def log_result(file_path: str, result: Dict[str, Any], csv_lock):
+    """
+    Logs results using the global logging queue.
+    """
+    timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
     if "error" in result:
-        with open(processing_log_path, "a") as log_file:
-            log_file.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - Error processing file {file_path}: {result['error']}\n")
+        with open(files_with_errors, "a") as log_file:
+            log_file.write(f"{timestamp} - Error processing file {file_path}: {result['error']}\n")
         os.system('cls' if os.name == 'nt' else 'clear')
     else:
-        # Update the CSV with results
+        logging.info(f"{timestamp} - Successfully completed {file_path}")
         with csv_lock:
-            file_utils.update_csv(result, output_csv_path)
-                                     
+            file_utils.update_csv(result, output_csv_path)  # Update the CSV with results
 
 def process_cell(file_path: str, resistance_label: str, dish_number: int,
                  directories: Dict[str, str], processed_features: Dict[str, Any], csv_lock):
@@ -86,24 +114,21 @@ def process_cell(file_path: str, resistance_label: str, dish_number: int,
         log_result(file_path, results, csv_lock)
         return results
 
-
 def process_file_worker(args):
     """
     Worker function to process individual files.
     """
-    global global_semaphore  # Use the global semaphore
+    global global_semaphore, global_log_queue  # Use the global semaphore
     file_path, resistance_label, dish_number, directories, processed_features_in_each_file, csv_lock = args
-
     global_semaphore.acquire()
     try:
         result = process_cell(file_path, resistance_label, dish_number, directories, processed_features_in_each_file, csv_lock)
         if "error" not in result:
             processed_features_in_each_file[file_path] = list(result.keys())  # Store the processed features
-            log_result(file_path, result, csv_lock)
         else:
             logging.error(f"Error in result from process_cell for file {file_path}")
     except Exception as e:
-        logging.error(f"Error processing file {file_path}: {e}", exc_info=True)
+        logging.error(f"Error processing file {file_path}: {e}")
         result = {"file_path": file_path, "error": str(e)}
     finally:    
         global_semaphore.release()
@@ -112,59 +137,74 @@ def process_file_worker(args):
         gc.collect()
     return result
 
+def restart_pool(num_workers):
+    # not graceful, emergency hard cut for memory followed by restart 
 
-def resource_manager(progress_layout, current_workers, max_workers, semaphore, worker_lock, stop_event):
+    global pool
+    pool.terminate()  # Safely terminate the existing pool
+    pool.join()       # Wait for the pool's worker processes to exit
+    pool = Pool(processes=num_workers, maxtasksperchild=max_tasks_per_child)  # Create a new pool with fewer workers
+    logging.info(f"Pool restarted with {num_workers} workers.")
+
+def resource_manager(progress_layout, current_workers, semaphore, worker_lock, stop_event):
     """
     Monitors system resources, updates the Rich layout, and throttles workers based on memory usage.
     """
     upper_threshold, lower_threshold, critical_threshold = memory_thresholds
+    restart_counter = 0
 
     while not stop_event.is_set():
         try:
-            # Fetch resource usage
-            usage = file_utils.get_resource_usage()  # Assume this returns a dictionary of resource metrics
-            memory_usage = usage['memory_percent']
+            usage = file_utils.get_resource_usage()
+            cpu_usage = usage["cpu"]
+            cpu_memory_usage = cpu_usage["memory_percent"]
 
             try:
                 # Update worker counts based on memory usage
                 with worker_lock:
-                    if memory_usage > critical_threshold:
-                        global pool
-                        restart_counter += 1
+                    if cpu_memory_usage > critical_threshold:
                         logging.warning(f"Memory above critical threshold ({critical_threshold}%). Restarting pool... (Restart #{restart_counter})")
-                        pool.close()
-                        pool.join()
-                        pool = Pool(processes=max_workers, maxtasksperchild=5)
-                        current_workers.value = max_workers  # Reset worker count
-                    elif memory_usage > upper_threshold and current_workers.value > 1:
+                        restart_counter += 1
+                        semaphore.acquire()  # Block new tasks
+                        current_workers.value = max(min(current_workers.value - 1, max_workers),1)
+                        restart_pool(current_workers.value)
+                        semaphore.release()  # Allow tasks again
+
+                    elif cpu_memory_usage > upper_threshold and current_workers.value > 1:
                         current_workers.value -= 1  # Decrease workers
                         semaphore.acquire()
-                    elif memory_usage < lower_threshold and current_workers.value < max_workers:
+
+                    elif cpu_memory_usage < lower_threshold and current_workers.value < max_workers:
                         current_workers.value += 1  # Increase workers
                         semaphore.release()
             except:
                 logging.error("Unable to update current_workers", exc_info=True)
 
-
-            # Update the Rich layout
-            monitor_panel = Panel(
-                f"Workers: {current_workers.value}/{max_workers}"
-                f" | CPU: {usage['cpu_percent']:.1f}%"
-                f" | Memory: {usage['memory_percent']:.1f}%"
-                f" | GPU: {usage['gpu_percent']:.1f}%"
+            panel_text = (
+                f"CPU || Workers: {current_workers.value}/{max_workers}"
+                f" | Utilization: {cpu_usage['cpu_percent']:.1f}%"
+                f" | Memory: {cpu_usage['memory_percent']:.1f}%"
             )
+            for key, gpu in usage.items():
+                if "gpu" in key:
+                    panel_text += (
+                        f" || GPU: Utilization: {gpu['percent']:.1f}%"
+                        f" | Memory: {gpu['memory_used']:.1f}/{gpu['memory_total']:.1f} GB"
+                        f" | Temperature: {gpu['temperature']:.1f}°C"
+                    )
+            monitor_panel = Panel(panel_text)
             progress_layout["monitor"].update(monitor_panel)
 
         except Exception as e:
-            logging.error(f"Error in resource manager: {e}")
+            logging.error(f"Error in resource manager: {e}", exc_info=True)
             break
-        finally:
-            time.sleep(2)  # Delay to avoid tight looping
 
+        finally:
+            time.sleep(resource_check_frequency)  # Delay to avoid tight looping
 
 def process_dish(dish_path: str, resistance_label: str, dish_number: int, completely_processed_files: list, 
                  processed_features_for_each_file: Dict[str, Any], csv_lock, progress, progress_task, 
-                 start_time, semaphore, already_processed):
+                 start_time, semaphore, already_processed, log_queue):
     """
     Process all files in a dish directory. Files are processed if they are not in the completely_processed_files set 
     for the features that are missing in processed_features_for_each_file
@@ -185,7 +225,6 @@ def process_dish(dish_path: str, resistance_label: str, dish_number: int, comple
         and os.path.isfile(file)
         and file not in completely_processed_files
     ]
-
     args_list = [
         (
             file,
@@ -193,19 +232,22 @@ def process_dish(dish_path: str, resistance_label: str, dish_number: int, comple
             dish_number,
             directories,
             processed_features_for_each_file,
-            csv_lock
+            csv_lock,
         )
         for file in files
     ]
-
     try:
-        with Pool(processes=max_workers, maxtasksperchild=max_tasks_per_child, initializer=worker_initializer, initargs=(semaphore,)) as pool:
+        with Pool(
+            processes=initial_workers, 
+            maxtasksperchild=max_tasks_per_child, 
+            initializer=worker_initializer, 
+            initargs=(semaphore,log_queue)
+        ) as pool:
             for _ in pool.imap_unordered(process_file_worker, args_list):
                 
                 elapsed_time = time.time() - start_time
                 completed_files = progress.tasks[progress_task].completed - already_processed
                 seconds_per_file = elapsed_time / completed_files if completed_files > 0 else 0.0
-                
                 progress.update(
                     progress_task, 
                     advance=1, 
@@ -220,10 +262,9 @@ def process_dish(dish_path: str, resistance_label: str, dish_number: int, comple
         gc.collect()
         cp.get_default_pinned_memory_pool().free_all_blocks()
 
-
 def process_resistance_folder(resistance_folder: str, base_dir: str, completely_processed_files: list,
                               processed_features_for_each_file: Dict[str, Any], csv_lock, progress, 
-                              progress_task, start_time, semaphore, already_processed) -> None:
+                              progress_task, start_time, semaphore, already_processed, log_queue) -> None:
     """
     Process all dishes in a resistance folder. Each dish is processed if it's a directory and it starts with 'dish'.
 
@@ -258,26 +299,24 @@ def process_resistance_folder(resistance_folder: str, base_dir: str, completely_
                 progress_task, 
                 start_time, 
                 semaphore, 
-                already_processed
+                already_processed,
+                log_queue
                 )
 
-
-def process_directory(base_dir: str, output_csv_path: str, csv_lock) -> None:
+def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) -> None:
     """
     Process all resistance folders and dishes in the base directory and save results to a CSV file.
     Initializes and manages processed files and features to avoid redundant processing.
     """
-
      # Setup multiprocessing managers for state sharing across processes
     manager = Manager()
     stop_event = threading.Event()
     start_time = time.time()  # Record the start time
     worker_lock = manager.Lock()
-
     processed_features_for_each_file = manager.dict()
     completely_processed_files = list() # Files where all features are processed
     files_in_csv = set()
-    
+
     if RESUME_PROCESSING and os.path.exists(output_csv_path):
         existing_data = pd.read_csv(output_csv_path)
         files_in_csv.update(existing_data['file_path'].tolist())
@@ -294,17 +333,17 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock) -> None:
                     completely_processed_files.append(file_path)
 
     else:
-        file_utils.reset_processing_environment(dataset_location, processing_log_path, output_csv_path)
+        file_utils.reset_processing_environment(dataset_location, files_with_errors, output_csv_path)
 
     total_files = file_utils.count_total_files(base_dir, resistance_mapping)
     already_processed = len(completely_processed_files)
 
     # Multiprocessing setup
-    current_workers = manager.Value('i', max_workers)
+    current_workers = manager.Value('i', initial_workers)
 
     # Define progress bar
     progress = Progress(
-        TextColumn("[bold blue]Overall Progress:"),
+        TextColumn("[bold blue]OVERALL PROGRESS:"),
         TextColumn(" | [cyan]Cell Line: {task.fields[current_cell_line]}"),
         TextColumn(" | [cyan]Dish: {task.fields[current_dish]}"),
         BarColumn(),
@@ -322,14 +361,12 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock) -> None:
         Layout(name="monitor", size=3),
         Layout(progress, name="progress", ratio=1)
     )
-
     semaphore = Semaphore(max_workers)
     resource_manager_thread = Thread(
         target=resource_manager,
         args=(
             progress_layout, 
-            current_workers, 
-            max_workers, 
+            current_workers,  
             semaphore, 
             worker_lock, 
             stop_event),
@@ -354,7 +391,8 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock) -> None:
                             task, 
                             start_time, 
                             semaphore,
-                            already_processed
+                            already_processed,
+                            log_queue
                             )
                     except Exception as e:
                         error_message = f"Error processing resistance folder {resistance_folder}: {e}"

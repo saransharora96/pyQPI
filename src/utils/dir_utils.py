@@ -246,18 +246,31 @@ def get_gpu_usage():
     try:
         # Run the nvidia-smi command to query GPU usage
         result = subprocess.run(
-            ['nvidia-smi', '--query-gpu=utilization.gpu', '--format=csv,noheader,nounits'],
+            [
+                'nvidia-smi', 
+                '--query-gpu=utilization.gpu,memory.used,memory.total,temperature.gpu', 
+                '--format=csv,noheader,nounits'
+            ],
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
         )
         if result.returncode != 0:
-            return 0.0  # Return 0 if nvidia-smi fails
+            return {"gpu_percent": 0.0, "memory_used": 0, "memory_total": 0, "temperature": 0}
 
         # Parse the output (e.g., "34 %" -> 34)
-        gpu_usage_lines = result.stdout.strip().split('\n')
-        gpu_utilizations = [float(line.strip()) for line in gpu_usage_lines if line.strip().isdigit()]
-        return max(gpu_utilizations, default=0.0)  # Return the max utilization if multiple GPUs
+        gpu_stats_lines = result.stdout.strip().split('\n')
+        gpu_stats = []
+        for line in gpu_stats_lines:
+            gpu_util, mem_used, mem_total, temp = map(str.strip, line.split(','))
+            gpu_stats.append({
+                "gpu_percent": float(gpu_util),
+                "memory_used": float(mem_used),
+                "memory_total": float(mem_total),
+                "temperature": float(temp)
+            })
+        return gpu_stats
     except Exception as e:
-        logging.error("error finding GPU usage", exc_info=True)
+        logging.error("Error retrieving GPU usage", exc_info=True)
+        return [{"gpu_percent": 0.0, "memory_used": 0, "memory_total": 0, "temperature": 0}]
 
 def get_resource_usage():
     """
@@ -265,12 +278,26 @@ def get_resource_usage():
     Returns:
         dict: A dictionary containing usage stats.
     """
-    try:
-        usage = {
-            "cpu_percent": psutil.cpu_percent(),
-            "memory_percent": psutil.virtual_memory().percent,
-            "gpu_percent": get_gpu_usage()  # Use the custom GPU usage function
+    gpu_stats = get_gpu_usage()  # Get GPU stats from a function that returns a list of dictionaries
+
+    # Get CPU usage statistics
+    cpu_usage = {
+        "cpu_percent": psutil.cpu_percent(),
+        "memory_percent": psutil.virtual_memory().percent
+    }
+
+    # Create a dictionary to hold all usage statistics, including CPU and each individual GPU
+    usage_stats = {
+        "cpu": cpu_usage
+    }
+
+    # Iterate over each GPU's statistics and add to the dictionary
+    for index, gpu in enumerate(gpu_stats):
+        usage_stats[f"gpu_{index + 1}"] = {
+            "percent": gpu['gpu_percent'],
+            "memory_used": gpu['memory_used'],
+            "memory_total": gpu['memory_total'],
+            "temperature": gpu['temperature']
         }
-    except:
-        logging.error("Could not read data", exc_info=True)
-    return usage
+
+    return usage_stats

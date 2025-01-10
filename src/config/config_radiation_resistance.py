@@ -12,12 +12,13 @@ pixel_z = 0.19
 background_ri = 1.337
 
 resistance_mapping = {
-    "cell_line_1": "sensitive",
-    "cell_line_2": "resistant",
-    "cell_line_3": "intermediate"
+    "cell_line_1": "Sensitive",
+    "cell_line_2": "Resistant",
+    "cell_line_3": "Intermediate"
 }
 
-processing_log_path = "../pyQPI/src/logs/skipped_files.log"
+log_file_path = "../pyQPI/src/logs/log_file.log"
+files_with_errors = "../pyQPI/src/logs/files_with_errors_skipped_during_processing.log"
 
 # dataset_location = (
 #     r"D:\OneDrive_JohnsHopkins\Desktop\JohnsHopkins\Projects\OracleQPI\pyQPI\data"
@@ -32,6 +33,8 @@ disk_mount = '/mnt/f'
 
 output_csv_path = os.path.join(dataset_location, "extracted_parameters.csv")
 
-memory_thresholds = [40, 30, 50]
-max_workers = 6
-max_tasks_per_child = 5
+memory_thresholds = [40, 25, 50]
+max_workers = 12
+initial_workers = 3
+max_tasks_per_child = 10
+resource_check_frequency = 5 #seconds

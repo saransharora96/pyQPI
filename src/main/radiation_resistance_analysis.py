@@ -1,28 +1,39 @@
 import os
 import time
 import logging
+from logging.handlers import QueueHandler, QueueListener
+from multiprocessing import Manager, Queue, Process
+import multiprocessing
 from install_modules import upgrade_pip, install_packages
-from config.config_radiation_resistance import INSTALLATION_NEEDED, RESUME_PROCESSING
+from config.config_radiation_resistance import INSTALLATION_NEEDED, dataset_location, output_csv_path, log_file_path
 import utils.dir_utils as file_utils
 from main.process_dataset import process_directory
-import pandas as pd
-from config.config_radiation_resistance import dataset_location, output_csv_path
-from multiprocessing import Manager
-import multiprocessing
 
+def setup_logging(log_file_path: str, log_queue: Queue):
+    """Set up logging to use a Queue for multiprocessing-safe logging."""
+    # Remove existing handlers
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
 
-def setup_logging():
-    """ Setup logging configuration. """
-    logging.basicConfig(
-        filename="../pyQPI/src/logs/error_record.log",  # Ensure this path is correct and accessible
-        filemode='a',  # Append mode
-        level=logging.INFO,
-        format="%(asctime)s - %(levelname)s - %(message)s"
-    )
+    # Add a QueueHandler to pass logs to the main process
+    queue_handler = QueueHandler(log_queue)
+    logging.root.addHandler(queue_handler)
+    logging.root.setLevel(logging.INFO)
+
+def configure_listener(log_file_path: str, log_queue: Queue):
+    """Configure the QueueListener to write logs from the queue to a file."""
+    file_handler = logging.FileHandler(log_file_path, mode='a')
+    file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+    listener = QueueListener(log_queue, file_handler)
+    return listener
 
 def execute_code():
 
-    setup_logging()
+    log_queue = Queue()
+    setup_logging(log_file_path, log_queue)
+    listener = configure_listener(log_file_path, log_queue)
+    listener.start()
+
     start_time = time.time()  # Record the start time
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -44,7 +55,8 @@ def execute_code():
         process_directory(
             base_dir=dataset_location,
             output_csv_path=output_csv_path,
-            csv_lock = csv_lock
+            csv_lock = csv_lock,
+            log_queue = log_queue
         )
         logging.info("Processing completed successfully.")
     except Exception as e:
@@ -54,7 +66,7 @@ def execute_code():
     end_time = time.time()  # Record the end time
     elapsed_time = end_time - start_time  # Calculate the elapsed time
     print(f"Elapsed time: {elapsed_time:.2f} seconds")
-
+    listener.stop() 
 
 if __name__ == "__main__":
 
