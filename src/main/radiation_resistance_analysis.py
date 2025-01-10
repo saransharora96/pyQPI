@@ -6,23 +6,28 @@ from config.config_radiation_resistance import INSTALLATION_NEEDED, RESUME_PROCE
 import utils.dir_utils as file_utils
 from main.process_dataset import process_directory
 import pandas as pd
-from config.config_radiation_resistance import dataset_location, processing_log_path, output_csv_path
+from config.config_radiation_resistance import dataset_location, output_csv_path
 from multiprocessing import Manager
+import multiprocessing
 
-logging.basicConfig(
-    filename="../pyQPI/src/logs/error_record.log",
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
+
+def setup_logging():
+    """ Setup logging configuration. """
+    logging.basicConfig(
+        filename="../pyQPI/src/logs/error_record.log",  # Ensure this path is correct and accessible
+        filemode='a',  # Append mode
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s"
+    )
 
 def execute_code():
 
+    setup_logging()
     start_time = time.time()  # Record the start time
     os.system('cls' if os.name == 'nt' else 'clear')
 
     manager = Manager()
     csv_lock = manager.Lock()
-
     
     if INSTALLATION_NEEDED:
         upgrade_pip()
@@ -32,25 +37,9 @@ def execute_code():
     file_utils.remove_files(dataset_location, r"T\d{3}_", ".tiff")  # Delete T***_ (un-stitched)
 
     os.system('cls' if os.name == 'nt' else 'clear')
-
-    if RESUME_PROCESSING:
-        processed_files = set()
-        processed_features = {}
-        if os.path.exists(output_csv_path):
-            existing_data = pd.read_csv(output_csv_path)
-            for _, row in existing_data.iterrows():
-                file_path = row["file_path"]
-                features = [col for col in row.index if col not in ["file_path", "error"] and not pd.isna(row[col])]
-                processed_features[file_path] = features
-            processed_files.update(existing_data['file_path'].tolist())
-    else:
-        file_utils.reset_processing_environment(dataset_location, processing_log_path, output_csv_path)
-        processed_files = set()
-        processed_features = {}
-
     logging.info("Starting processing...")
-
     file_utils.count_cells_in_dishes(dataset_location)
+
     try:
         process_directory(
             base_dir=dataset_location,
@@ -68,4 +57,6 @@ def execute_code():
 
 
 if __name__ == "__main__":
+
+    multiprocessing.set_start_method("spawn")  # compatibility for debugging
     execute_code()

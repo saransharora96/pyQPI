@@ -31,7 +31,9 @@ class Segmentation:
             binary_mask = image > threshold
         else:
             raise ValueError(f"Unknown method: {method}. Supported methods: 'manual', 'otsu', 'adaptive'.")
-
+        
+        del image  # Free memory of the input image
+        cp.get_default_memory_pool().free_all_blocks()  # Free GPU memory
         return binary_mask
 
     @staticmethod
@@ -65,6 +67,8 @@ class Segmentation:
             else:
                 raise ValueError(f"Unknown operation: {operation}. Supported operations: 'dilate', 'erode'.")
 
+        del binary_mask  # Free memory of the input mask
+        cp.get_default_memory_pool().free_all_blocks()  # Free GPU memory
         return processed_mask
 
     @staticmethod
@@ -72,7 +76,11 @@ class Segmentation:
         if binary_mask is None or binary_mask.size == 0:
             raise ValueError("Binary mask is empty or invalid.")
 
-        return cp.asarray(binary_fill_holes(cp.asnumpy(binary_mask)))
+        filled = binary_fill_holes(cp.asnumpy(binary_mask))
+        filled_gpu = cp.asarray(filled)
+        del filled  # Free CPU memory
+        cp.get_default_memory_pool().free_all_blocks()  # Free GPU memory
+        return filled_gpu
 
     @staticmethod
     def fill_holes_slice_by_slice(binary_mask):
@@ -81,7 +89,10 @@ class Segmentation:
 
         filled_mask = cp.zeros_like(binary_mask, dtype=bool)
         for i in range(binary_mask.shape[0]):
-            filled_mask[i] = cp.asarray(binary_fill_holes(cp.asnumpy(binary_mask[i])))
+            slice_cpu = binary_fill_holes(cp.asnumpy(binary_mask[i]))
+            filled_mask[i] = cp.asarray(slice_cpu)
+            del slice_cpu  # Free CPU memory
+            cp.get_default_memory_pool().free_all_blocks()  # Free GPU memory
 
         return filled_mask
 
@@ -94,10 +105,18 @@ class Segmentation:
         if num_features == 0:
             return binary_mask  # Return the mask unchanged if no features are present
 
-        component_sizes = [cp.sum(labeled_mask == i) for i in range(1, num_features + 1)]
-        largest_component_label = component_sizes.index(max(component_sizes)) + 1
+        largest_component_label = 0
+        max_size = 0
+        for i in range(1, num_features + 1):
+            component_size = cp.sum(labeled_mask == i)
+            if component_size > max_size:
+                max_size = component_size
+                largest_component_label = i
 
-        return labeled_mask == largest_component_label
+        largest_component = labeled_mask == largest_component_label
+        del labeled_mask  # Free memory for the labeled mask
+        cp.get_default_memory_pool().free_all_blocks()  # Free GPU memory
+        return largest_component
 
 
 def process_tomogram(tomogram, processor):

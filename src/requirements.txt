@@ -11,3 +11,4 @@ pycuda
 GPUtil 
 cucim
 h5py
+rich

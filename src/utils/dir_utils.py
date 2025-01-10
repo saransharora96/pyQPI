@@ -5,6 +5,8 @@ import shutil
 import subprocess
 import re
 import pandas as pd
+import psutil
+import logging
 
 
 # utilities for data reading and directory processing
@@ -234,3 +236,41 @@ def update_csv(result: Dict[str, Any], output_csv_path: str):
         df = pd.DataFrame([result]) # Create a new CSV if it doesn't exist
 
     df.to_csv(output_csv_path, index=False)
+
+def get_gpu_usage():
+    """
+    Retrieve GPU utilization using nvidia-smi.
+    Returns:
+        float: GPU utilization as a percentage. Returns 0 if no GPUs are detected or an error occurs.
+    """
+    try:
+        # Run the nvidia-smi command to query GPU usage
+        result = subprocess.run(
+            ['nvidia-smi', '--query-gpu=utilization.gpu', '--format=csv,noheader,nounits'],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+        )
+        if result.returncode != 0:
+            return 0.0  # Return 0 if nvidia-smi fails
+
+        # Parse the output (e.g., "34 %" -> 34)
+        gpu_usage_lines = result.stdout.strip().split('\n')
+        gpu_utilizations = [float(line.strip()) for line in gpu_usage_lines if line.strip().isdigit()]
+        return max(gpu_utilizations, default=0.0)  # Return the max utilization if multiple GPUs
+    except Exception as e:
+        logging.error("error finding GPU usage", exc_info=True)
+
+def get_resource_usage():
+    """
+    Get current resource usage for CPU, memory, disk, and GPU.
+    Returns:
+        dict: A dictionary containing usage stats.
+    """
+    try:
+        usage = {
+            "cpu_percent": psutil.cpu_percent(),
+            "memory_percent": psutil.virtual_memory().percent,
+            "gpu_percent": get_gpu_usage()  # Use the custom GPU usage function
+        }
+    except:
+        logging.error("Could not read data", exc_info=True)
+    return usage

@@ -1,7 +1,7 @@
 import os 
 
 INSTALLATION_NEEDED = False
-RESUME_PROCESSING = False
+RESUME_PROCESSING = True
 
 # Tomocube Instrument Parameters
 wavelength = 532e-9       # wavelength (m)
@@ -28,5 +28,10 @@ processing_log_path = "../pyQPI/src/logs/skipped_files.log"
 dataset_location = (
     "../../../mnt/f/radiation_resistance_dataset_export/"
 )
+disk_mount = '/mnt/f'
 
 output_csv_path = os.path.join(dataset_location, "extracted_parameters.csv")
+
+memory_thresholds = [40, 30, 50]
+max_workers = 6
+max_tasks_per_child = 5

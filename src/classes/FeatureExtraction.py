@@ -26,9 +26,10 @@ class FeatureExtraction:
 
         # Calculate the voxel volume in float32
         voxel_volume = cp.float32(pixel_x * pixel_y * pixel_z)
-
-        # Sum the mass, multiply by the voxel volume, and return the result
         total_mass = cp.sum(tomogram) * voxel_volume
+        del tomogram
+        cp.get_default_memory_pool().free_all_blocks()
+
         return float(cp.asnumpy(cp.round(total_mass, 2)))
 
     @staticmethod
@@ -55,6 +56,9 @@ class FeatureExtraction:
         voxel_volume = pixel_x * pixel_y * pixel_z  # Calculate the volume of a single voxel        
         total_volume = white_pixel_count * voxel_volume  # Calculate total cell volume
 
+        del binary_mask
+        cp.get_default_memory_pool().free_all_blocks()
+
         return float(cp.asnumpy(total_volume))
 
     @staticmethod
@@ -69,7 +73,10 @@ class FeatureExtraction:
             cupy.ndarray: 2D MIP image.
         """
         tomogram = cp.asarray(tomogram, dtype=cp.float32)
-        return cp.max(tomogram, axis=0)
+        mip = cp.max(tomogram, axis=0)
+        del tomogram
+        cp.get_default_memory_pool().free_all_blocks()
+        return mip
 
     @staticmethod
     def generate_phase_delay_image(tomogram: cp.ndarray, pixel_size: float, wavelength: float, medium_ri: float):
@@ -87,6 +94,8 @@ class FeatureExtraction:
         """
         tomogram = cp.asarray(tomogram, dtype=cp.float32)
         phase_shift = (2 * cp.pi / cp.float32(wavelength)) * cp.sum((tomogram - cp.float32(medium_ri)) * cp.float32(pixel_size), axis=0)
+        del tomogram
+        cp.get_default_memory_pool().free_all_blocks()
         return phase_shift
 
     FEATURE_METHODS = {

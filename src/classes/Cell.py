@@ -19,8 +19,9 @@ class Cell:
         if data_type == 'tomogram' and 'tomogram' not in self.loaded_data:
             if os.path.exists(self.tomogram_path):
                 with TiffFile(self.tomogram_path) as tif:
-                    # Load data as CuPy array directly
-                    self.loaded_data['tomogram'] = cp.asarray(tif.asarray().astype('float32'))/10000
+                    temp_data = tif.asarray().astype('float32') / 10000
+                    self.loaded_data['tomogram'] = cp.asarray(temp_data)
+                    del temp_data  # Free CPU memory            
             else:
                 print(f"Error: Tomogram file not found at {self.tomogram_path}")
                 return None
@@ -28,10 +29,14 @@ class Cell:
             path = self.auxiliary_data_paths[data_type]
             if path.endswith(".h5"):
                 with h5py.File(path, 'r') as h5file:
-                    self.loaded_data[data_type] = cp.asarray(h5file['data'][:])
+                    temp_data = h5file['data'][:]
+                    self.loaded_data[data_type] = cp.asarray(temp_data)
+                    del temp_data  # Free CPU memory
             elif path.endswith(".tiff"):
                 with TiffFile(path) as tif:
-                    self.loaded_data[data_type] = cp.asarray(tif.asarray().astype('float32'))
+                    temp_data = tif.asarray().astype('float32')
+                    self.loaded_data[data_type] = cp.asarray(temp_data)
+                    del temp_data  # Free CPU memory
 
         return self.loaded_data.get(data_type)
 
@@ -56,3 +61,4 @@ class Cell:
     def unload_all_data(self):
         for data_type in list(self.loaded_data.keys()):
             self.unload_data(data_type)
+        cp.get_default_memory_pool().free_all_blocks() 

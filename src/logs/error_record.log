@@ -13493,3 +13493,3003 @@ Traceback (most recent call last):
     file_utils.update_csv(result, output_csv_path)
 TypeError: update_csv() missing 1 required positional argument: 'lock'
 2025-01-08 13:48:16,721 - INFO - Starting processing...
+2025-01-08 15:55:30,415 - INFO - Starting processing...
+2025-01-08 16:02:33,106 - INFO - Starting processing...
+2025-01-08 16:25:52,632 - INFO - Starting processing...
+2025-01-08 16:26:05,422 - ERROR - Processing failed with error: name 'progress_bar' is not defined
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 55, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 216, in process_directory
+    process_resistance_folder(resistance_folder, base_dir, processed_files, file_bar, resource_bar, output_csv_path, processed_features, csv_lock)
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 177, in process_resistance_folder
+    progress_bar.set_description(f"Processing: cell Line = {resistance_folder}, dish = {dish_folder}")
+    ^^^^^^^^^^^^
+NameError: name 'progress_bar' is not defined
+2025-01-08 16:26:36,669 - INFO - Starting processing...
+2025-01-08 16:49:14,663 - INFO - Starting processing...
+2025-01-08 16:50:34,767 - INFO - Starting processing...
+2025-01-08 16:54:58,258 - INFO - Starting processing...
+2025-01-08 17:11:14,091 - INFO - Starting processing...
+2025-01-08 17:12:25,023 - INFO - Starting processing...
+2025-01-08 19:39:08,946 - INFO - Starting processing...
+2025-01-08 19:48:21,994 - INFO - Starting processing...
+2025-01-08 19:48:34,147 - ERROR - Processing failed with error: 'ListProxy' object has no attribute 'update'
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 55, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 204, in process_directory
+    processed_files.update(existing_data['file_path'].tolist())
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ListProxy' object has no attribute 'update'
+2025-01-08 19:49:44,774 - INFO - Starting processing...
+2025-01-08 20:03:50,635 - INFO - Starting processing...
+2025-01-08 20:04:09,301 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131021.697.2022-05-14_SA_CL1_LowConc-006_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:09,325 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.130934.371.2022-05-14_SA_CL1_LowConc-005_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:09,528 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.130425.824.2022-05-14_SA_CL1_LowConc-001_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:09,564 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131129.544.2022-05-14_SA_CL1_LowConc-008_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:09,579 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.130910.202.2022-05-14_SA_CL1_LowConc-004_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:09,621 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131311.510.2022-05-14_SA_CL1_LowConc-011_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:09,621 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.130841.150.2022-05-14_SA_CL1_LowConc-003_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:09,626 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131222.762.2022-05-14_SA_CL1_LowConc-009_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:09,627 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.130702.841.2022-05-14_SA_CL1_LowConc-002_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:09,628 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131249.167.2022-05-14_SA_CL1_LowConc-010_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:09,631 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131345.026.2022-05-14_SA_CL1_LowConc-012_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:09,645 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131059.885.2022-05-14_SA_CL1_LowConc-007_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:14,409 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131419.966.2022-05-14_SA_CL1_LowConc-013_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:14,464 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131450.230.2022-05-14_SA_CL1_LowConc-014_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:14,609 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131518.872.2022-05-14_SA_CL1_LowConc-015_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:14,822 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131552.996.2022-05-14_SA_CL1_LowConc-016_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:14,882 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131607.012.2022-05-14_SA_CL1_LowConc-017_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:15,118 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131643.982.2022-05-14_SA_CL1_LowConc-019_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:15,361 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131624.482.2022-05-14_SA_CL1_LowConc-018_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:15,389 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131740.042.2022-05-14_SA_CL1_LowConc-021_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:15,399 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131807.670.2022-05-14_SA_CL1_LowConc-023_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:15,401 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131831.838.2022-05-14_SA_CL1_LowConc-024_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:15,402 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131757.107.2022-05-14_SA_CL1_LowConc-022_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:15,404 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131717.496.2022-05-14_SA_CL1_LowConc-020_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:19,381 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131842.400.2022-05-14_SA_CL1_LowConc-025_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:19,409 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131900.686.2022-05-14_SA_CL1_LowConc-026_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:19,493 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131927.089.2022-05-14_SA_CL1_LowConc-027_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:19,681 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.131946.795.2022-05-14_SA_CL1_LowConc-028_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:19,763 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132009.135.2022-05-14_SA_CL1_LowConc-029_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:19,872 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132149.073.2022-05-14_SA_CL1_LowConc-030_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:20,268 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132208.982.2022-05-14_SA_CL1_LowConc-031_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:20,441 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132218.324.2022-05-14_SA_CL1_LowConc-032_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:20,717 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132313.373.2022-05-14_SA_CL1_LowConc-034_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:20,720 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132446.808.2022-05-14_SA_CL1_LowConc-036_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:20,720 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132435.433.2022-05-14_SA_CL1_LowConc-035_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:20,721 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132255.294.2022-05-14_SA_CL1_LowConc-033_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:24,146 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132514.228.2022-05-14_SA_CL1_LowConc-038_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:24,154 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132459.807.2022-05-14_SA_CL1_LowConc-037_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:24,158 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132527.232.2022-05-14_SA_CL1_LowConc-039_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:24,327 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132615.980.2022-05-14_SA_CL1_LowConc-041_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:24,328 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132601.152.2022-05-14_SA_CL1_LowConc-040_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:24,343 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132631.010.2022-05-14_SA_CL1_LowConc-042_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:24,817 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132651.733.2022-05-14_SA_CL1_LowConc-043_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:25,215 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132714.275.2022-05-14_SA_CL1_LowConc-044_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:25,433 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132800.385.2022-05-14_SA_CL1_LowConc-046_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:25,445 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132732.760.2022-05-14_SA_CL1_LowConc-045_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:25,575 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132846.088.2022-05-14_SA_CL1_LowConc-048_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:25,599 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132823.951.2022-05-14_SA_CL1_LowConc-047_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:28,526 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132958.811.2022-05-14_SA_CL1_LowConc-050_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:28,558 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.132945.197.2022-05-14_SA_CL1_LowConc-049_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:28,561 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133021.966.2022-05-14_SA_CL1_LowConc-051_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:28,670 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133108.278.2022-05-14_SA_CL1_LowConc-053_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:28,683 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133037.807.2022-05-14_SA_CL1_LowConc-052_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:28,684 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133127.572.2022-05-14_SA_CL1_LowConc-054_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:28,965 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133148.292.2022-05-14_SA_CL1_LowConc-055_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:29,763 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133206.982.2022-05-14_SA_CL1_LowConc-056_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:30,018 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133241.713.2022-05-14_SA_CL1_LowConc-058_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:30,058 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133253.903.2022-05-14_SA_CL1_LowConc-059_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:30,058 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133227.089.2022-05-14_SA_CL1_LowConc-057_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:31,856 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133302.840.2022-05-14_SA_CL1_LowConc-060_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:32,164 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133314.216.2022-05-14_SA_CL1_LowConc-061_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:32,218 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133326.401.2022-05-14_SA_CL1_LowConc-062_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:32,349 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133358.496.2022-05-14_SA_CL1_LowConc-063_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:32,349 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133545.948.2022-05-14_SA_CL1_LowConc-064_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:32,438 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133622.513.2022-05-14_SA_CL1_LowConc-065_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:32,444 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133635.511.2022-05-14_SA_CL1_LowConc-066_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:33,605 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133814.026.2022-05-14_SA_CL1_LowConc-069_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:33,646 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133713.089.2022-05-14_SA_CL1_LowConc-067_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:33,650 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133752.293.2022-05-14_SA_CL1_LowConc-068_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:34,146 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133828.245.2022-05-14_SA_CL1_LowConc-070_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:35,965 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133842.873.2022-05-14_SA_CL1_LowConc-071_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:36,666 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133858.714.2022-05-14_SA_CL1_LowConc-072_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:36,678 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133918.419.2022-05-14_SA_CL1_LowConc-073_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:36,960 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133945.228.2022-05-14_SA_CL1_LowConc-075_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:37,002 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.133929.182.2022-05-14_SA_CL1_LowConc-074_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:37,011 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.134034.182.2022-05-14_SA_CL1_LowConc-076_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:37,015 - WARNING - Feature dry_mass failed for file ../../../mnt/f/radiation_resistance_dataset_export/cell_line_1/dish_1/20220514.134053.279.2022-05-14_SA_CL1_LowConc-077_RI Tomogram.tiff: Required data 'tomogram_segmented' is missing for feature 'dry_mass'.
+2025-01-08 20:04:45,604 - INFO - Starting processing...
+2025-01-08 20:06:51,461 - INFO - Starting processing...
+2025-01-08 20:07:59,994 - INFO - Starting processing...
+2025-01-08 20:09:05,159 - INFO - Starting processing...
+2025-01-08 20:23:21,377 - INFO - Starting processing...
+2025-01-08 20:37:12,781 - INFO - Starting processing...
+2025-01-08 20:59:43,088 - INFO - Starting processing...
+2025-01-08 21:19:06,630 - INFO - Starting processing...
+2025-01-08 21:19:18,586 - ERROR - Error in worker pool: '<' not supported between instances of 'Synchronized' and 'int'
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 156, in process_dish
+    with Pool(processes=current_workers) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 204, in __init__
+    if processes < 1:
+       ^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'Synchronized' and 'int'
+2025-01-08 21:19:18,589 - ERROR - Processing failed with error: unsupported operand type(s) for //: 'Synchronized' and 'int'
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 156, in process_dish
+    with Pool(processes=current_workers) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 204, in __init__
+    if processes < 1:
+       ^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'Synchronized' and 'int'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 55, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 248, in process_directory
+    process_resistance_folder(resistance_folder, base_dir, processed_files, file_bar, output_csv_path, processed_features, csv_lock)
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 204, in process_resistance_folder
+    process_dish(dish_path, resistance_label, dish_number, file_bar, processed_files, output_csv_path, processed_features, csv_lock)
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 169, in process_dish
+    current_workers = max(1, current_workers // 2)  # Scale down workers
+                             ~~~~~~~~~~~~~~~~^^~~
+TypeError: unsupported operand type(s) for //: 'Synchronized' and 'int'
+2025-01-08 21:25:22,569 - INFO - Starting processing...
+2025-01-08 21:25:34,229 - ERROR - Error in worker pool: '<' not supported between instances of 'Synchronized' and 'int'
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 157, in process_dish
+    with Pool(processes=current_workers) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 204, in __init__
+    if processes < 1:
+       ^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'Synchronized' and 'int'
+2025-01-08 21:25:34,232 - ERROR - Processing failed with error: unsupported operand type(s) for //: 'Synchronized' and 'int'
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 157, in process_dish
+    with Pool(processes=current_workers) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 204, in __init__
+    if processes < 1:
+       ^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'Synchronized' and 'int'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 55, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 249, in process_directory
+    process_resistance_folder(resistance_folder, base_dir, processed_files, file_bar, output_csv_path, processed_features, csv_lock)
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 205, in process_resistance_folder
+    process_dish(dish_path, resistance_label, dish_number, file_bar, processed_files, output_csv_path, processed_features, csv_lock)
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 170, in process_dish
+    current_workers = max(1, current_workers // 2)  # Scale down workers
+                             ~~~~~~~~~~~~~~~~^^~~
+TypeError: unsupported operand type(s) for //: 'Synchronized' and 'int'
+2025-01-08 21:26:14,015 - INFO - Starting processing...
+2025-01-08 21:26:26,808 - ERROR - Processing failed with error: '<' not supported between instances of 'Synchronized' and 'int'
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 55, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 244, in process_directory
+    process_resistance_folder(resistance_folder, base_dir, processed_files, file_bar, output_csv_path, processed_features, csv_lock)
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 200, in process_resistance_folder
+    process_dish(dish_path, resistance_label, dish_number, file_bar, processed_files, output_csv_path, processed_features, csv_lock)
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 156, in process_dish
+    with Pool(processes=current_workers) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 204, in __init__
+    if processes < 1:
+       ^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'Synchronized' and 'int'
+2025-01-08 21:28:20,183 - INFO - Starting processing...
+2025-01-08 21:46:04,030 - INFO - Starting processing...
+2025-01-08 21:48:59,115 - INFO - Starting processing...
+2025-01-08 21:51:18,639 - INFO - Starting processing...
+2025-01-08 21:52:56,584 - INFO - Starting processing...
+2025-01-08 22:06:40,333 - INFO - Starting processing...
+2025-01-08 22:06:52,116 - ERROR - Processing failed with error: name 'file_bar' is not defined
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 55, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 271, in process_directory
+    process_resistance_folder(resistance_folder, base_dir, processed_files, file_bar, output_csv_path, processed_features, csv_lock)
+                                                                            ^^^^^^^^
+NameError: name 'file_bar' is not defined
+2025-01-08 22:07:44,495 - INFO - Starting processing...
+2025-01-08 22:07:56,534 - ERROR - Processing failed with error: name 'file_bar' is not defined
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 55, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 271, in process_directory
+    process_resistance_folder(resistance_folder, base_dir, processed_files, output_csv_path, processed_features, csv_lock)
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 216, in process_resistance_folder
+    process_dish(dish_path, resistance_label, dish_number, file_bar, processed_files, output_csv_path, processed_features, csv_lock)
+                                                           ^^^^^^^^
+NameError: name 'file_bar' is not defined
+2025-01-08 22:08:17,401 - INFO - Starting processing...
+2025-01-08 22:27:04,421 - INFO - Starting processing...
+2025-01-08 22:37:40,115 - INFO - Starting processing...
+2025-01-08 22:43:56,145 - INFO - Starting processing...
+2025-01-08 22:55:22,784 - INFO - Starting processing...
+2025-01-08 22:55:33,289 - ERROR - Processing failed with error: name 'TimeRemainingColumn' is not defined
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 55, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 255, in process_directory
+    TimeRemainingColumn(),
+    ^^^^^^^^^^^^^^^^^^^
+NameError: name 'TimeRemainingColumn' is not defined
+2025-01-08 23:02:41,846 - INFO - Starting processing...
+2025-01-08 23:10:16,083 - INFO - Starting processing...
+2025-01-08 23:10:27,888 - ERROR - Processing failed with error: name 'Live' is not defined
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 55, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 288, in process_directory
+    with Live(progress_layout, refresh_per_second=2, console=Console()):
+         ^^^^
+NameError: name 'Live' is not defined
+2025-01-08 23:11:01,715 - INFO - Starting processing...
+2025-01-08 23:14:35,627 - INFO - Starting processing...
+2025-01-08 23:18:14,222 - INFO - Starting processing...
+2025-01-08 23:19:22,625 - INFO - Starting processing...
+2025-01-08 23:26:36,468 - INFO - Starting processing...
+2025-01-08 23:30:33,144 - INFO - Starting processing...
+2025-01-08 23:30:45,233 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:30:47,234 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:30:49,235 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:30:51,236 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:30:53,237 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:30:55,238 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:30:57,238 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:30:59,239 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:01,239 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:02,555 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:04,556 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:06,556 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:08,557 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:10,558 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:12,559 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:14,559 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:16,560 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:18,561 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:20,562 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:22,562 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:24,563 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:26,564 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:28,564 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:30,565 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:32,565 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:31:33,865 - ERROR - Error updating resource monitor: [Errno 2] No such file or directory: 'F:/'
+2025-01-08 23:35:18,783 - INFO - Starting processing...
+2025-01-08 23:42:23,725 - INFO - Starting processing...
+2025-01-08 23:43:22,123 - INFO - Starting processing...
+2025-01-08 23:45:03,416 - INFO - Starting processing...
+2025-01-08 23:47:04,997 - ERROR - Error updating resource monitor: [Errno 32] Broken pipe
+2025-01-08 23:47:22,277 - INFO - Starting processing...
+2025-01-08 23:53:15,348 - INFO - Starting processing...
+2025-01-08 23:57:39,125 - INFO - Starting processing...
+2025-01-09 00:04:03,626 - INFO - Starting processing...
+2025-01-09 00:18:32,517 - INFO - Starting processing...
+2025-01-09 00:21:20,538 - INFO - Starting processing...
+2025-01-09 00:23:37,333 - INFO - Starting processing...
+2025-01-09 00:28:22,185 - INFO - Starting processing...
+2025-01-09 00:35:28,053 - ERROR - Error updating resource monitor: [Errno 32] Broken pipe
+2025-01-09 00:44:42,348 - INFO - Starting processing...
+2025-01-09 00:44:54,298 - ERROR - Processing failed with error: Semaphore objects should only be shared between processes through inheritance
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 54, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 306, in process_directory
+    process_resistance_folder(resistance_folder, base_dir, processed_files, processed_features, csv_lock, progress, task, start_time, stop_event)
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 234, in process_resistance_folder
+    process_dish(dish_path, resistance_label, dish_number, processed_files, processed_features, csv_lock, progress, progress_task, start_time, stop_event)
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 196, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 873, in next
+    raise value
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 540, in _handle_tasks
+    put(task)
+  File "/usr/lib/python3.12/multiprocessing/connection.py", line 206, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/reduction.py", line 51, in dumps
+    cls(buf, protocol).dump(obj)
+  File "/usr/lib/python3.12/multiprocessing/synchronize.py", line 101, in __getstate__
+    context.assert_spawning(self)
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 374, in assert_spawning
+    raise RuntimeError(
+RuntimeError: Semaphore objects should only be shared between processes through inheritance
+2025-01-09 00:52:24,691 - INFO - Starting processing...
+2025-01-09 01:00:00,844 - INFO - Starting processing...
+2025-01-09 01:00:41,494 - INFO - Starting processing...
+2025-01-09 01:08:45,158 - INFO - Starting processing...
+2025-01-09 01:08:57,568 - ERROR - Processing failed with error: name 'semaphore' is not defined
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 54, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 298, in process_directory
+    args=(semaphore, current_workers, max_workers, stop_event),
+         ^^^^^^^^^
+NameError: name 'semaphore' is not defined. Did you mean: 'Semaphore'?
+2025-01-09 01:11:57,543 - INFO - Starting processing...
+2025-01-09 01:12:10,258 - ERROR - Processing failed with error: name 'global_semaphore' is not defined
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 54, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 312, in process_directory
+    process_resistance_folder(resistance_folder, base_dir, processed_files, processed_features, csv_lock, progress, task, start_time, stop_event)
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 232, in process_resistance_folder
+    process_dish(dish_path, resistance_label, dish_number, processed_files, processed_features, csv_lock, progress, progress_task, start_time, stop_event)
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 193, in process_dish
+    with Pool(processes=max_workers, initializer=worker_initializer, initargs=(global_semaphore,)) as pool:
+                                                                               ^^^^^^^^^^^^^^^^
+NameError: name 'global_semaphore' is not defined
+2025-01-09 01:16:23,648 - INFO - Starting processing...
+2025-01-09 01:17:50,654 - INFO - Starting processing...
+2025-01-09 01:21:22,604 - INFO - Starting processing...
+2025-01-09 01:23:41,952 - INFO - Starting processing...
+2025-01-09 01:25:00,440 - INFO - Starting processing...
+2025-01-09 01:28:07,722 - INFO - Starting processing...
+2025-01-09 01:28:37,452 - INFO - Starting processing...
+2025-01-09 01:30:50,198 - INFO - Starting processing...
+2025-01-09 01:33:08,938 - INFO - Starting processing...
+2025-01-09 01:34:22,795 - INFO - Starting processing...
+2025-01-09 01:35:00,753 - INFO - Starting processing...
+2025-01-09 01:37:02,537 - INFO - Starting processing...
+2025-01-09 01:46:05,119 - INFO - Starting processing...
+2025-01-09 01:47:07,247 - INFO - Starting processing...
+2025-01-09 01:58:31,836 - INFO - Starting processing...
+2025-01-09 02:10:07,895 - INFO - Starting processing...
+2025-01-09 02:15:42,258 - INFO - Starting processing...
+2025-01-09 02:20:18,637 - INFO - Starting processing...
+2025-01-09 02:29:02,861 - INFO - Starting processing...
+2025-01-09 02:34:08,895 - INFO - Starting processing...
+2025-01-09 02:38:13,882 - INFO - Starting processing...
+2025-01-09 02:38:25,722 - ERROR - I logged this
+NoneType: None
+2025-01-09 02:48:06,319 - INFO - Starting processing...
+2025-01-09 02:48:20,060 - ERROR - I logged this
+NoneType: None
+2025-01-09 02:55:57,685 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 228, in process_dish
+    None: Results are saved directly to the CSV file after each cell is processed.
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 227, in process_dish
+    Returns:
+        ^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-01-09 02:56:12,731 - INFO - Starting processing...
+2025-01-09 03:09:14,216 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 200, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 199, in process_dish
+    with Pool(processes=max_workers, initializer=worker_initializer, initargs=(semaphore,)) as pool:
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-01-09 03:09:15,451 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 134, in resource_manager
+    with worker_lock:
+  File "/usr/lib/python3.12/multiprocessing/managers.py", line 1055, in __enter__
+    return self._callmethod('acquire')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/managers.py", line 820, in _callmethod
+    conn.send((self._id, methodname, args, kwds))
+  File "/usr/lib/python3.12/multiprocessing/connection.py", line 206, in send
+    self._send_bytes(_ForkingPickler.dumps(obj))
+  File "/usr/lib/python3.12/multiprocessing/connection.py", line 427, in _send_bytes
+    self._send(header + buf)
+  File "/usr/lib/python3.12/multiprocessing/connection.py", line 384, in _send
+    n = write(self._handle, buf)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [Errno 32] Broken pipe
+2025-01-09 03:09:15,452 - ERROR - Error in resource manager: [Errno 32] Broken pipe
+2025-01-09 03:10:44,348 - INFO - Starting processing...
+2025-01-09 03:10:46,236 - INFO - Starting processing...
+2025-01-09 03:28:15,307 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 200, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 199, in process_dish
+    with Pool(processes=max_workers, maxtasksperchild=10, initializer=worker_initializer, initargs=(semaphore,)) as pool:
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-01-09 03:29:49,351 - INFO - Starting processing...
+2025-01-09 03:42:29,505 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:42:31,609 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:42:33,728 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:42:35,382 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:42:37,682 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:42:40,081 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:42:42,331 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:42:44,457 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:42:46,608 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:42:48,778 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:42:51,007 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:42:54,224 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:42:56,324 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:42:58,579 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:01,723 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:03,973 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:06,265 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:07,975 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:10,204 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:12,521 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:14,989 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:17,131 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:19,308 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:21,428 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:24,027 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:26,127 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:29,456 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:31,953 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:34,284 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:36,413 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:37,982 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:40,105 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:42,257 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:44,472 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:48,051 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:50,189 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:52,590 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:55,512 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:43:58,008 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:01,674 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:04,373 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:06,608 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:09,578 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:11,790 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:14,267 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:16,445 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:18,639 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:21,359 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:25,492 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:32,831 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:34,929 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:37,435 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:42,211 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:45,729 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:52,864 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:55,011 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:44:57,495 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:01,396 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:04,351 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:06,573 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:08,875 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:11,043 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:12,529 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:14,679 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:17,161 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:19,337 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:21,445 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:23,541 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:25,652 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:28,000 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:30,206 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:33,302 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:35,459 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:37,652 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:40,279 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:43,739 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:45,224 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:47,382 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:50,232 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:55,605 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:45:57,927 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:00,505 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:02,643 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:05,329 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:07,884 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:10,013 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:12,760 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:15,100 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:16,732 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:19,897 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:22,073 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:25,035 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:27,190 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:29,598 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:43,396 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:45,516 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:49,503 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:52,323 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:54,979 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:46:58,089 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:00,655 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:07,514 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:09,976 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:15,120 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:17,346 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:18,936 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:24,244 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:26,993 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:29,130 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:31,746 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:33,890 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:36,152 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:38,249 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:40,356 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:42,455 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:44,597 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:46,698 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:48,851 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:50,269 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:52,362 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:54,462 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:56,552 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:47:58,651 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:00,806 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:02,914 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:05,026 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:07,167 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:09,277 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:11,388 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:13,483 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:15,573 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:17,662 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:21,774 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:23,186 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:25,284 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:27,375 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:29,471 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:31,567 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    pool.close()
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:33,673 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^
+NameError: name 'pool' is not defined. Did you mean: 'Pool'?
+2025-01-09 03:48:34,634 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 207, in process_dish
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 206, in process_dish
+    current_workers = Value('i', max_workers)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-01-09 04:02:48,921 - INFO - Starting processing...
+2025-01-09 04:03:01,017 - ERROR - Processing failed with error: 'float' object cannot be interpreted as an integer
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 61, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 315, in process_directory
+    semaphore = Semaphore(max_workers)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/context.py", line 83, in Semaphore
+    return Semaphore(value, ctx=self.get_context())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/synchronize.py", line 133, in __init__
+    SemLock.__init__(self, SEMAPHORE, value, SEM_VALUE_MAX, ctx=ctx)
+  File "/usr/lib/python3.12/multiprocessing/synchronize.py", line 57, in __init__
+    sl = self._semlock = _multiprocessing.SemLock(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'float' object cannot be interpreted as an integer
+2025-01-09 04:03:45,419 - INFO - Starting processing...
+2025-01-09 04:19:57,882 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:00,016 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:02,243 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:04,335 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:06,515 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:08,654 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:10,740 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:14,972 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:20,527 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:26,869 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:30,632 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:33,186 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:36,583 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:38,721 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:41,676 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:47,760 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:50,574 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:53,142 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:54,822 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:57,054 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:20:59,511 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:02,271 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:05,371 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:07,538 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:09,643 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:11,728 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:14,995 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:17,161 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:19,276 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:21,592 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:23,689 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:26,952 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:30,772 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:37,002 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:39,467 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:43,341 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:46,565 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:48,798 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:51,118 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:54,800 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:21:57,892 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:00,533 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:04,317 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:06,526 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:08,700 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:11,049 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:14,181 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:16,294 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:18,436 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:20,571 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:22,696 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:24,782 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:27,564 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:29,666 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:31,287 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:33,385 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:35,475 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:37,565 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:39,653 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:41,738 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:43,822 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:45,916 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:48,002 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:50,088 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:52,188 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:54,277 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:56,361 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:22:58,449 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:23:00,573 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:23:02,153 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:23:04,251 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:23:06,351 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:23:09,782 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:23:12,058 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:23:14,784 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:23:16,876 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:23:44,200 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:27:59,232 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:01,325 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:03,424 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:05,574 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:07,694 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:09,868 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:12,036 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:14,164 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:23,097 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:36,513 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:39,605 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:43,521 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:45,729 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:48,092 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:50,333 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:52,414 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:54,502 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:57,568 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:28:59,716 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:01,805 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:03,908 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:05,997 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:08,494 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:10,610 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:12,708 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:14,856 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:16,942 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:19,033 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:21,128 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:22,615 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:24,703 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:28,528 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:30,645 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:32,756 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:34,871 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:36,974 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:39,075 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:41,182 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:43,280 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:45,371 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:47,457 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:49,551 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:51,698 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:53,221 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:55,376 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:57,530 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:29:59,665 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:30:01,824 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:30:03,912 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:30:06,010 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:30:08,100 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:30:10,189 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:30:12,277 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:30:14,364 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:30:16,451 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:30:18,540 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:30:20,631 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:30:27,278 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:30:34,528 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:30:39,532 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:32:07,087 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:32:09,175 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:32:11,274 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:32:13,367 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:32:15,458 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:32:17,556 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 04:32:19,655 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 139, in resource_manager
+    restart_counter += 1
+    ^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'restart_counter' where it is not associated with a value
+2025-01-09 07:23:44,778 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 210, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+2025-01-09 07:23:49,193 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 210, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+2025-01-09 07:23:55,943 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 210, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+2025-01-09 18:34:02,300 - INFO - Starting processing...
+2025-01-09 18:34:15,566 - ERROR - Processing failed with error: 'SyncManager' object has no attribute 'set'
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 44, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 253, in process_directory
+    partially_processed_files = manager.set()  # This will track files with missing features
+                                ^^^^^^^^^^^
+AttributeError: 'SyncManager' object has no attribute 'set'
+2025-01-09 18:40:54,038 - INFO - Starting processing...
+2025-01-09 18:41:06,743 - ERROR - Processing failed with error: "['error'] not found in axis"
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/radiation_resistance_analysis.py", line 44, in execute_code
+    process_directory(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 261, in process_directory
+    features = set(existing_data.loc[existing_data['file_path'] == file_path].drop(columns=['file_path', 'error']).dropna(axis=1).columns)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/barmanlab/pyQPI/.venv/lib/python3.12/site-packages/pandas/core/frame.py", line 5581, in drop
+    return super().drop(
+           ^^^^^^^^^^^^^
+  File "/home/barmanlab/pyQPI/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 4788, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/barmanlab/pyQPI/.venv/lib/python3.12/site-packages/pandas/core/generic.py", line 4830, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/barmanlab/pyQPI/.venv/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 7070, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['error'] not found in axis"
+2025-01-09 18:45:54,265 - INFO - Starting processing...
+2025-01-09 18:46:07,786 - ERROR - Error processing resistance folder cell_line_1: process_dish() takes 10 positional arguments but 12 were given
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 324, in process_directory
+    process_resistance_folder(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 237, in process_resistance_folder
+    process_dish(dish_path, resistance_label, dish_number, completely_processed_files, processed_features_for_each_file, csv_lock, progress, progress_task, start_time, stop_event, progress_layout, semaphore)
+TypeError: process_dish() takes 10 positional arguments but 12 were given
+2025-01-09 18:46:07,793 - ERROR - Error processing resistance folder cell_line_2: process_dish() takes 10 positional arguments but 12 were given
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 324, in process_directory
+    process_resistance_folder(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 237, in process_resistance_folder
+    process_dish(dish_path, resistance_label, dish_number, completely_processed_files, processed_features_for_each_file, csv_lock, progress, progress_task, start_time, stop_event, progress_layout, semaphore)
+TypeError: process_dish() takes 10 positional arguments but 12 were given
+2025-01-09 18:46:07,798 - ERROR - Error processing resistance folder cell_line_3: process_dish() takes 10 positional arguments but 12 were given
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 324, in process_directory
+    process_resistance_folder(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 237, in process_resistance_folder
+    process_dish(dish_path, resistance_label, dish_number, completely_processed_files, processed_features_for_each_file, csv_lock, progress, progress_task, start_time, stop_event, progress_layout, semaphore)
+TypeError: process_dish() takes 10 positional arguments but 12 were given
+2025-01-09 18:46:10,090 - INFO - Processing completed successfully.
+2025-01-09 18:46:39,178 - INFO - Starting processing...
+2025-01-09 18:46:52,784 - ERROR - Error processing resistance folder cell_line_1: process_dish() takes 10 positional arguments but 12 were given
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 324, in process_directory
+    process_resistance_folder(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 237, in process_resistance_folder
+    process_dish(dish_path, resistance_label, dish_number, completely_processed_files, processed_features_for_each_file, csv_lock, progress, progress_task, start_time, stop_event, progress_layout, semaphore)
+TypeError: process_dish() takes 10 positional arguments but 12 were given
+2025-01-09 18:46:52,790 - ERROR - Error processing resistance folder cell_line_2: process_dish() takes 10 positional arguments but 12 were given
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 324, in process_directory
+    process_resistance_folder(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 237, in process_resistance_folder
+    process_dish(dish_path, resistance_label, dish_number, completely_processed_files, processed_features_for_each_file, csv_lock, progress, progress_task, start_time, stop_event, progress_layout, semaphore)
+TypeError: process_dish() takes 10 positional arguments but 12 were given
+2025-01-09 18:46:52,796 - ERROR - Error processing resistance folder cell_line_3: process_dish() takes 10 positional arguments but 12 were given
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 324, in process_directory
+    process_resistance_folder(
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 237, in process_resistance_folder
+    process_dish(dish_path, resistance_label, dish_number, completely_processed_files, processed_features_for_each_file, csv_lock, progress, progress_task, start_time, stop_event, progress_layout, semaphore)
+TypeError: process_dish() takes 10 positional arguments but 12 were given
+2025-01-09 18:46:54,974 - INFO - Processing completed successfully.
+2025-01-09 18:49:04,352 - INFO - Starting processing...
+2025-01-09 18:49:48,443 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 198, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 197, in process_dish
+    with Pool(processes=max_workers, maxtasksperchild=max_tasks_per_child, initializer=worker_initializer, initargs=(semaphore,)) as pool:
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-01-09 18:53:20,842 - INFO - Starting processing...
+2025-01-09 18:57:17,519 - INFO - Starting processing...
+2025-01-09 19:38:34,964 - INFO - Starting processing...
+2025-01-09 19:39:31,753 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 198, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 197, in process_dish
+    with Pool(processes=max_workers, maxtasksperchild=max_tasks_per_child, initializer=worker_initializer, initargs=(semaphore,)) as pool:
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-01-09 19:39:32,490 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 198, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+2025-01-09 19:39:35,511 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 198, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+2025-01-09 19:44:07,975 - INFO - Starting processing...
+2025-01-09 19:45:09,605 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 199, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 198, in process_dish
+    with Pool(processes=max_workers, maxtasksperchild=max_tasks_per_child, initializer=worker_initializer, initargs=(semaphore,)) as pool:
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-01-09 19:45:10,376 - ERROR - Unable to update current_workers
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 130, in resource_manager
+    with worker_lock:
+  File "/usr/lib/python3.12/multiprocessing/managers.py", line 1055, in __enter__
+    return self._callmethod('acquire')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/managers.py", line 836, in _callmethod
+    raise convert_to_error(kind, result)
+multiprocessing.managers.RemoteError: 
+---------------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/managers.py", line 260, in serve_client
+    self.id_to_local_proxy_obj[ident]
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+KeyError: '7fba24bd07c0'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/managers.py", line 262, in serve_client
+    raise ke
+  File "/usr/lib/python3.12/multiprocessing/managers.py", line 256, in serve_client
+    obj, exposed, gettypeid = id_to_obj[ident]
+                              ~~~~~~~~~^^^^^^^
+KeyError: '7fba24bd07c0'
+---------------------------------------------------------------------------
+2025-01-09 19:45:10,377 - ERROR - Error in resource manager: [Errno 32] Broken pipe
+2025-01-09 19:46:24,194 - INFO - Starting processing...
+2025-01-09 19:46:52,735 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 199, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 198, in process_dish
+    with Pool(processes=max_workers, maxtasksperchild=max_tasks_per_child, initializer=worker_initializer, initargs=(semaphore,)) as pool:
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-01-09 19:46:53,447 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 199, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+2025-01-09 19:48:41,272 - INFO - Starting processing...
+2025-01-09 19:49:13,419 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 205, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 204, in process_dish
+    with Pool(processes=max_workers, maxtasksperchild=max_tasks_per_child, initializer=worker_initializer, initargs=(semaphore,)) as pool:
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-01-09 19:50:07,819 - INFO - Starting processing...
+2025-01-09 19:50:27,913 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 201, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+2025-01-09 19:51:16,156 - INFO - Starting processing...
+2025-01-09 19:51:37,604 - INFO - Starting processing...
+2025-01-09 19:53:20,073 - INFO - Starting processing...
+2025-01-09 19:54:25,216 - INFO - Starting processing...
+2025-01-09 19:58:55,012 - INFO - Starting processing...
+2025-01-09 19:59:31,169 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 200, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 199, in process_dish
+    with Pool(processes=max_workers, maxtasksperchild=max_tasks_per_child, initializer=worker_initializer, initargs=(semaphore,)) as pool:
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-01-09 20:00:09,448 - INFO - Starting processing...
+2025-01-09 20:03:30,724 - INFO - Starting processing...
+2025-01-09 20:06:09,067 - INFO - Starting processing...
+2025-01-09 20:06:33,439 - INFO - Processing completed successfully.
+2025-01-09 20:07:05,820 - INFO - Starting processing...
+2025-01-09 20:09:49,807 - INFO - Starting processing...
+2025-01-09 20:13:03,170 - INFO - Starting processing...
+2025-01-09 20:15:02,871 - INFO - Starting processing...
+2025-01-09 20:15:47,603 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 202, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+2025-01-09 20:16:00,321 - INFO - Starting processing...
+2025-01-09 20:16:42,080 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 201, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+2025-01-09 20:17:43,402 - INFO - Starting processing...
+2025-01-09 20:19:00,790 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 201, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 200, in process_dish
+    with Pool(processes=max_workers, maxtasksperchild=max_tasks_per_child, initializer=worker_initializer, initargs=(semaphore,)) as pool:
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-01-09 20:20:22,439 - INFO - Starting processing...
+2025-01-09 20:24:21,412 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 201, in process_dish
+    try:
+         
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 200, in process_dish
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-01-09 20:24:30,722 - INFO - Starting processing...
+2025-01-09 20:26:22,765 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 203, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 202, in process_dish
+    with Pool(processes=max_workers, maxtasksperchild=max_tasks_per_child, initializer=worker_initializer, initargs=(semaphore,)) as pool:
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-01-09 20:26:49,609 - INFO - Starting processing...
+2025-01-09 20:26:53,112 - INFO - Processing completed successfully.
+2025-01-09 20:27:09,475 - INFO - Starting processing...
+2025-01-09 20:27:12,948 - INFO - Processing completed successfully.
+2025-01-09 20:27:26,251 - INFO - Starting processing...
+2025-01-09 20:28:25,608 - INFO - Processing completed successfully.
+2025-01-09 20:28:37,604 - INFO - Starting processing...
+2025-01-09 20:29:36,890 - INFO - Processing completed successfully.
+2025-01-09 20:30:46,328 - INFO - Starting processing...
+2025-01-09 20:32:07,861 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 856, in next
+    item = self._items.popleft()
+           ^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from an empty deque
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 203, in process_dish
+    for _ in pool.imap_unordered(process_file_worker, args_list):
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 861, in next
+    self._cond.wait(timeout)
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/barmanlab/pyQPI/src/main/process_dataset.py", line 202, in process_dish
+    with Pool(processes=max_workers, maxtasksperchild=max_tasks_per_child, initializer=worker_initializer, initargs=(semaphore,)) as pool:
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
