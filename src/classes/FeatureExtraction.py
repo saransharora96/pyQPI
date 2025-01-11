@@ -1,5 +1,6 @@
 import cupy as cp
-from config.config_radiation_resistance import background_ri, alpha, pixel_x, pixel_y, pixel_z, wavelength
+from config.config_radiation_resistance import background_ri, alpha, pixel_x, pixel_y, pixel_z
+from utils.dir_utils import ensure_cupy_array
 
 class FeatureExtraction:
 
@@ -19,12 +20,10 @@ class FeatureExtraction:
             float: The dry mass of the cell in picograms, rounded to two decimal places.
         """
         # Ensure tomogram is a CuPy array
-        tomogram = cp.asarray(tomogram, dtype=cp.float32)
+        tomogram = ensure_cupy_array(tomogram)
         tomogram -= cp.float32(background_ri)
         tomogram /= cp.float32(alpha)
         tomogram = cp.clip(tomogram, 0, None)
-
-        # Calculate the voxel volume in float32
         voxel_volume = cp.float32(pixel_x * pixel_y * pixel_z)
         total_mass = cp.sum(tomogram) * voxel_volume
         del tomogram
@@ -50,7 +49,7 @@ class FeatureExtraction:
             raise ValueError("The binary mask is empty or None.")
 
         # Ensure binary mask is a CuPy array and boolean
-        binary_mask = cp.asarray(binary_mask, dtype=bool)
+        binary_mask = ensure_cupy_array(binary_mask, dtype=bool)
 
         white_pixel_count = cp.sum(binary_mask)  # Count the number of white pixels (True values)         
         voxel_volume = pixel_x * pixel_y * pixel_z  # Calculate the volume of a single voxel        
@@ -72,7 +71,7 @@ class FeatureExtraction:
         Returns:
             cupy.ndarray: 2D MIP image.
         """
-        tomogram = cp.asarray(tomogram, dtype=cp.float32)
+        tomogram = ensure_cupy_array(tomogram)
         mip = cp.max(tomogram, axis=0)
         del tomogram
         cp.get_default_memory_pool().free_all_blocks()
@@ -92,7 +91,7 @@ class FeatureExtraction:
         Returns:
             cupy.ndarray: The phase delay image.
         """
-        tomogram = cp.asarray(tomogram, dtype=cp.float32)
+        tomogram = ensure_cupy_array(tomogram)
         phase_shift = (2 * cp.pi / cp.float32(wavelength)) * cp.sum((tomogram - cp.float32(medium_ri)) * cp.float32(pixel_size), axis=0)
         del tomogram
         cp.get_default_memory_pool().free_all_blocks()

@@ -3,6 +3,8 @@ from cucim.skimage.morphology import binary_dilation, binary_erosion, remove_sma
 from cucim.skimage.measure import label
 from cucim.skimage.filters import threshold_otsu, threshold_local
 from scipy.ndimage import binary_fill_holes
+from utils.dir_utils import ensure_cupy_array
+import logging
 
 class Segmentation:
 
@@ -15,7 +17,7 @@ class Segmentation:
         if image is None or image.size == 0 or cp.all(image == 0):
             raise ValueError("Image is empty or invalid.")
 
-        image = cp.asarray(image, dtype=cp.float32)
+        image = ensure_cupy_array(image)
 
         if method == "manual":
             if manual_threshold is None:
@@ -61,9 +63,9 @@ class Segmentation:
         processed_mask = binary_mask
         for _ in range(iterations):
             if operation == "dilate":
-                processed_mask = binary_dilation(processed_mask, structuring_element)
+                binary_dilation(processed_mask, structuring_element, out=processed_mask)
             elif operation == "erode":
-                processed_mask = binary_erosion(processed_mask, structuring_element)
+                binary_erosion(processed_mask, structuring_element, out=processed_mask)
             else:
                 raise ValueError(f"Unknown operation: {operation}. Supported operations: 'dilate', 'erode'.")
 
@@ -75,12 +77,8 @@ class Segmentation:
     def fill_holes_in_mask(binary_mask):
         if binary_mask is None or binary_mask.size == 0:
             raise ValueError("Binary mask is empty or invalid.")
+        return ensure_cupy_array(binary_fill_holes(cp.asnumpy(binary_mask)), dtype=bool)
 
-        filled = binary_fill_holes(cp.asnumpy(binary_mask))
-        filled_gpu = cp.asarray(filled)
-        del filled  # Free CPU memory
-        cp.get_default_memory_pool().free_all_blocks()  # Free GPU memory
-        return filled_gpu
 
     @staticmethod
     def fill_holes_slice_by_slice(binary_mask):
@@ -89,8 +87,7 @@ class Segmentation:
 
         filled_mask = cp.zeros_like(binary_mask, dtype=bool)
         for i in range(binary_mask.shape[0]):
-            slice_cpu = binary_fill_holes(cp.asnumpy(binary_mask[i]))
-            filled_mask[i] = cp.asarray(slice_cpu)
+            filled_mask[i] = ensure_cupy_array(binary_fill_holes(cp.asnumpy(binary_mask[i])), dtype=bool)
             del slice_cpu  # Free CPU memory
             cp.get_default_memory_pool().free_all_blocks()  # Free GPU memory
 
@@ -120,6 +117,15 @@ class Segmentation:
 
 
 def process_tomogram(tomogram, processor):
-    if not isinstance(tomogram, cp.ndarray):
-        tomogram = cp.asarray(tomogram)
-    return processor.threshold_data(tomogram)
+    try:
+        if not isinstance(tomogram, cp.ndarray):
+            tomogram = cp.asarray(tomogram)
+
+        binary_mask = processor.threshold_data(tomogram)
+        if binary_mask is None or binary_mask.size == 0:
+            raise ValueError("Generated binary mask is invalid (None or empty).")
+
+        return binary_mask
+    except Exception as e:
+        logging.error(f"Error in process_tomogram: {e}", exc_info=True)
+        return None

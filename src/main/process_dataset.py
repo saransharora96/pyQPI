@@ -38,6 +38,7 @@ from config.config_radiation_resistance import (
     resource_check_frequency,
     RESUME_PROCESSING
 )
+import asyncio
 
 def worker_initializer(semaphore, log_queue):
     """
@@ -67,13 +68,13 @@ def log_result(file_path: str, result: Dict[str, Any], csv_lock):
         with csv_lock:
             file_utils.update_csv(result, output_csv_path)  # Update the CSV with results
 
-def process_cell(file_path: str, resistance_label: str, dish_number: int,
+async def process_cell(file_path: str, resistance_label: str, dish_number: int,
                  directories: Dict[str, str], processed_features: Dict[str, Any], csv_lock):
     results = {"file_path": file_path, "radiation_resistance": resistance_label, "dish_number": dish_number}
     try:
         cell = Cell(file_path, resistance_label, dish_number)
         auxiliary_generator = AuxiliaryDataGeneration(cell, directories, pixel_x=pixel_x, wavelength=wavelength, background_ri=background_ri)
-        auxiliary_generator.generate_and_save_auxiliary_data()
+        await auxiliary_generator.generate_and_save_auxiliary_data()
         del auxiliary_generator  # Free auxiliary generator
 
         # Process only unprocessed features
@@ -81,7 +82,7 @@ def process_cell(file_path: str, resistance_label: str, dish_number: int,
         for feature_name in unprocessed_features:
             feature_info = FeatureExtraction.FEATURE_METHODS[feature_name]
             try:
-                required_data = cell.load_data(feature_info["data_type"])
+                required_data = await cell.load_data(feature_info["data_type"])
                 if required_data is None:
                     raise ValueError(f"Required data '{feature_info['data_type']}' is missing for feature '{feature_name}'.")
 
@@ -122,13 +123,13 @@ def process_file_worker(args):
     file_path, resistance_label, dish_number, directories, processed_features_in_each_file, csv_lock = args
     global_semaphore.acquire()
     try:
-        result = process_cell(file_path, resistance_label, dish_number, directories, processed_features_in_each_file, csv_lock)
+        result = asyncio.run(process_cell(file_path, resistance_label, dish_number, directories, processed_features_in_each_file, csv_lock))
         if "error" not in result:
             processed_features_in_each_file[file_path] = list(result.keys())  # Store the processed features
         else:
-            logging.error(f"Error in result from process_cell for file {file_path}")
+            logging.error(f"Error in result from process_cell for file {file_path}", exc_info=True)
     except Exception as e:
-        logging.error(f"Error processing file {file_path}: {e}")
+        logging.error(f"Error processing file {file_path}: {e}", exc_info=True)
         result = {"file_path": file_path, "error": str(e)}
     finally:    
         global_semaphore.release()

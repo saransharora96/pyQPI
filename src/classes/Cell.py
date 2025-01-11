@@ -3,6 +3,7 @@ import gc
 from tifffile import TiffFile
 import cupy as cp
 import h5py
+import asyncio
 
 class Cell:
     def __init__(self, tomogram_path: str, radiation_resistance: str, dish_number: int):
@@ -12,7 +13,7 @@ class Cell:
         self.radiation_resistance = radiation_resistance
         self.dish_number = dish_number
 
-    def load_data(self, data_type: str):
+    async def load_data(self, data_type: str):
         """
         Load specified data type if it exists and is not already loaded, converting it to a CuPy array.
         """
@@ -52,8 +53,8 @@ class Cell:
     def add_auxiliary_data_path(self, data_type: str, file_path: str):
         self.auxiliary_data_paths[data_type] = file_path
 
-    def load_tomogram(self):
-        return self.load_data('tomogram')
+    async def load_tomogram(self):
+        return await self.load_data('tomogram')
 
     def unload_tomogram(self):
         self.unload_data('tomogram')

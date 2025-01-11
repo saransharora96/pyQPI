@@ -33,8 +33,8 @@ disk_mount = '/mnt/f'
 
 output_csv_path = os.path.join(dataset_location, "extracted_parameters.csv")
 
-memory_thresholds = [40, 25, 50]
+memory_thresholds = [40, 30, 50]
 max_workers = 12
 initial_workers = 3
-max_tasks_per_child = 10
+max_tasks_per_child = 7
 resource_check_frequency = 5 #seconds

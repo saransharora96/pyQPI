@@ -7,6 +7,7 @@ import re
 import pandas as pd
 import psutil
 import logging
+import cupy as cp
 
 
 # utilities for data reading and directory processing
@@ -301,3 +302,16 @@ def get_resource_usage():
         }
 
     return usage_stats
+
+def ensure_cupy_array(data, dtype=cp.float32):
+    """
+    Ensure the input is a CuPy array of the specified dtype.
+    
+    Args:
+        data: Input data, can be a NumPy array, CuPy array, or other compatible type.
+        dtype: Desired data type of the array.
+    
+    Returns:
+        cupy.ndarray: The input converted to a CuPy array if not already.
+    """
+    return data if isinstance(data, cp.ndarray) else cp.asarray(data, dtype=dtype)
