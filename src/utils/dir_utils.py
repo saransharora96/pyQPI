@@ -5,8 +5,6 @@ import shutil
 import subprocess
 import re
 import pandas as pd
-import psutil
-import logging
 import cupy as cp
 
 
@@ -237,71 +235,6 @@ def update_csv(result: Dict[str, Any], output_csv_path: str):
         df = pd.DataFrame([result]) # Create a new CSV if it doesn't exist
 
     df.to_csv(output_csv_path, index=False)
-
-def get_gpu_usage():
-    """
-    Retrieve GPU utilization using nvidia-smi.
-    Returns:
-        float: GPU utilization as a percentage. Returns 0 if no GPUs are detected or an error occurs.
-    """
-    try:
-        # Run the nvidia-smi command to query GPU usage
-        result = subprocess.run(
-            [
-                'nvidia-smi', 
-                '--query-gpu=utilization.gpu,memory.used,memory.total,temperature.gpu', 
-                '--format=csv,noheader,nounits'
-            ],
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
-        )
-        if result.returncode != 0:
-            return {"gpu_percent": 0.0, "memory_used": 0, "memory_total": 0, "temperature": 0}
-
-        # Parse the output (e.g., "34 %" -> 34)
-        gpu_stats_lines = result.stdout.strip().split('\n')
-        gpu_stats = []
-        for line in gpu_stats_lines:
-            gpu_util, mem_used, mem_total, temp = map(str.strip, line.split(','))
-            gpu_stats.append({
-                "gpu_percent": float(gpu_util),
-                "memory_used": float(mem_used),
-                "memory_total": float(mem_total),
-                "temperature": float(temp)
-            })
-        return gpu_stats
-    except Exception as e:
-        logging.error("Error retrieving GPU usage", exc_info=True)
-        return [{"gpu_percent": 0.0, "memory_used": 0, "memory_total": 0, "temperature": 0}]
-
-def get_resource_usage():
-    """
-    Get current resource usage for CPU, memory, disk, and GPU.
-    Returns:
-        dict: A dictionary containing usage stats.
-    """
-    gpu_stats = get_gpu_usage()  # Get GPU stats from a function that returns a list of dictionaries
-
-    # Get CPU usage statistics
-    cpu_usage = {
-        "cpu_percent": psutil.cpu_percent(),
-        "memory_percent": psutil.virtual_memory().percent
-    }
-
-    # Create a dictionary to hold all usage statistics, including CPU and each individual GPU
-    usage_stats = {
-        "cpu": cpu_usage
-    }
-
-    # Iterate over each GPU's statistics and add to the dictionary
-    for index, gpu in enumerate(gpu_stats):
-        usage_stats[f"gpu_{index + 1}"] = {
-            "percent": gpu['gpu_percent'],
-            "memory_used": gpu['memory_used'],
-            "memory_total": gpu['memory_total'],
-            "temperature": gpu['temperature']
-        }
-
-    return usage_stats
 
 def ensure_cupy_array(data, dtype=cp.float32):
     """

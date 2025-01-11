@@ -59,6 +59,8 @@ class AuxiliaryDataGeneration:
         except Exception as e:
             logging.error(f"Failed to save image at {path}: {e}")
             return None
+        finally:
+            del data    
 
     def _sync_save_image(self, data, path):
         with TiffWriter(path) as tiff_writer:
@@ -68,15 +70,18 @@ class AuxiliaryDataGeneration:
         """Save data to an HDF5 file asynchronously."""
         path = os.path.join(directory, f"{filename}.h5")
         try:
+            data = data.get()
             await asyncio.to_thread(self._sync_save_h5, data, path)
             return path
         except Exception as e:
             logging.error(f"Failed to save HDF5 file at {path}: {e}")
             return None
+        finally:
+            del data
 
     def _sync_save_h5(self, data, path):
         with h5py.File(path, "w") as h5file:
-            h5file.create_dataset("data", data=data.get(), dtype='float32', compression="gzip")
+            h5file.create_dataset("data", data=data, dtype='float32', compression="gzip")
 
 
     async def generate_and_save_auxiliary_data(self):
@@ -133,6 +138,8 @@ class AuxiliaryDataGeneration:
             except Exception as e:
                 logging.error(f"Error generating tomogram_segmented for {self.cell.tomogram_path}: {e}", exc_info=True)
 
+            del tomogram_binary_mask
+            cp.get_default_memory_pool().free_all_blocks()
             # Generate and save MIP
             try:
                 mip = FeatureExtraction.generate_mip(tomogram)
@@ -148,6 +155,9 @@ class AuxiliaryDataGeneration:
             # mip_scaled_path = self.save_image(mip, self.directories['mip_scaled'], f"{base_name}_mip_scaled", scale=True)
             # self.cell.add_auxiliary_data_path('mip_scaled', mip_scaled_path)
 
+            del tomogram
+            cp.get_default_memory_pool().free_all_blocks()
+
             # Generate and save segmented MIP
             try:
                 segmented_mip = FeatureExtraction.generate_mip(tomogram_segmented)
@@ -156,7 +166,8 @@ class AuxiliaryDataGeneration:
                     self.cell.add_auxiliary_data_path('mip_segmented', segmented_mip_path)
                 else:
                     logging.error(f"Failed to save segmented MIP for {self.cell.tomogram_path}")
-                del segmented_mip
+                del segmented_mip, tomogram_segmented
+                cp.get_default_memory_pool().free_all_blocks()
             except Exception as e:
                 logging.error(f"Error generating segmented MIP for {self.cell.tomogram_path}: {e}", exc_info=True)
 
@@ -168,7 +179,8 @@ class AuxiliaryDataGeneration:
                     self.cell.add_auxiliary_data_path('mip_segmented_scaled', mip_segmented_scaled_path)
                 else:
                     logging.error(f"Failed to save scaled segmented MIP for {self.cell.tomogram_path}")
-                del mip_segmented_scaled
+                del mip_segmented_scaled, binary_mask_image, mip
+                cp.get_default_memory_pool().free_all_blocks()
             except Exception as e:
                 logging.error(f"Error generating scaled segmented MIP for {self.cell.tomogram_path}: {e}", exc_info=True)
 

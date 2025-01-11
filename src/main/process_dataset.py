@@ -1,85 +1,70 @@
 import os
 import logging
 import time
+from time import sleep
 import pandas as pd
 from typing import Any, Dict
 import cupy as cp
 import gc
-from multiprocessing import Pool, Manager, Semaphore, Queue
+import asyncio
+from multiprocessing import Pool, Manager, Semaphore, Value
 from threading import Thread
 import threading
+from collections import deque
 from logging.handlers import QueueHandler
-from rich.panel import Panel
 from rich.live import Live
-from rich.layout import Layout
-from rich.progress import (
-    Progress,
-    TextColumn,
-    BarColumn,
-    TimeElapsedColumn,
-    TimeRemainingColumn,
-)
 from classes.Cell import Cell
 from classes.AuxiliaryDataGeneration import AuxiliaryDataGeneration
 from classes.FeatureExtraction import FeatureExtraction
 import utils.dir_utils as file_utils
+from resource_management import resource_manager
+from progress_bar import initialize_progress_bar, update_progress_bar
+from progress_logging import log_result 
 from config.config_radiation_resistance import (
     background_ri,
     pixel_x,
     wavelength,
     resistance_mapping,
     files_with_errors,
-    output_csv_path,
     dataset_location,
-    memory_thresholds,
     max_workers,
     initial_workers,
     max_tasks_per_child,
-    resource_check_frequency,
     queue_chunk_size,
+    max_large_tasks,
     RESUME_PROCESSING,
     ENABLE_LOGGING
 )
-import asyncio
 
-pool = None
 
-def worker_initializer(semaphore, log_queue, ENABLE_LOGGING):
+def worker_initializer(semaphore, log_queue, active_workers, worker_lock, active_large_tasks, ENABLE_LOGGING):
     """
     Initialize global semaphore for workers.
     """
-    global global_semaphore, global_log_queue
+    global global_semaphore, global_log_queue, global_active_workers, global_worker_lock, global_active_large_tasks
     global_semaphore = semaphore
     global_log_queue = log_queue
+    global_active_workers = active_workers 
+    global_worker_lock = worker_lock
+    global_active_large_tasks = active_large_tasks
 
-    # Remove existing handlers
-    logging.root.handlers = []
+    # Clear existing logging handlers to avoid duplicates
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
 
     if ENABLE_LOGGING:
-        # Add QueueHandler to pass logs to the main process
+        # Set up logging to pass logs to the main process
         queue_handler = QueueHandler(log_queue)
         logging.root.addHandler(queue_handler)
-        logging.root.setLevel(logging.INFO)
+        logging.root.setLevel(logging.DEBUG)
+        logging.debug("Worker initialized with logging enabled.")
     else:
-        # Suppress logging by setting a high log level
+        # Suppress logging
         logging.root.setLevel(logging.CRITICAL)
-
-def log_result(file_path: str, result: Dict[str, Any], csv_lock):
-    """
-    Logs results using the global logging queue.
-    """
-    timestamp = time.strftime('%Y-%m-%d %H:%M:%S')
-    if "error" in result:
-        with open(files_with_errors, "a") as log_file:
-            log_file.write(f"{timestamp} - Error processing file {file_path}: {result['error']}\n")
-        os.system('cls' if os.name == 'nt' else 'clear')
-    else:
-        logging.info(f"{timestamp} - Successfully completed {file_path}")
-        with csv_lock:
-            file_utils.update_csv(result, output_csv_path)  # Update the CSV with results
+        logging.debug("Worker initialized with logging suppressed.")
 
 async def process_cell(file_path: str, resistance_label: str, dish_number: int,
-                 directories: Dict[str, str], processed_features: Dict[str, Any], csv_lock,):
+                 directories: Dict[str, str], processed_features: Dict[str, Any], csv_lock, worker_index: int):
     results = {"file_path": file_path, "radiation_resistance": resistance_label, "dish_number": dish_number}
     try:
         cell = Cell(file_path, resistance_label, dish_number)
@@ -111,140 +96,68 @@ async def process_cell(file_path: str, resistance_label: str, dish_number: int,
                 logging.warning(f"Feature {feature_name} failed for file {file_path}: {e}")
                 results[f"error"] = str(e)
 
+    except Exception as e:
+        logging.error(f"Error processing cell {file_path}: {e}", exc_info=True)
+        results["error"] = str(e)
+        log_result(file_path, results, csv_lock, worker_index)
+        return results
+    
+    finally:
         cell.unload_all_data()
         del cell  # Explicitly delete the object
         cp.get_default_memory_pool().free_all_blocks()  # Free CuPy memory blocks
         cp.get_default_pinned_memory_pool().free_all_blocks()
         gc.collect()  # Trigger garbage collection
-
-        log_result(file_path, results, csv_lock)
+        log_result(file_path, results, csv_lock, worker_index)
         return results
 
-    except Exception as e:
-        logging.error(f"Error processing cell {file_path}: {e}", exc_info=True)
-        results["error"] = str(e)
-        log_result(file_path, results, csv_lock)
-        return results
-
-
-def process_file_worker(task):
+def process_file_worker(task, worker_index=-1):
     """
     Worker function to process individual files.
     """
-    global global_semaphore, global_log_queue  # Use the global semaphore
-    global_semaphore.acquire()
+    global global_semaphore, global_log_queue, global_worker_lock  # Use the global semaphore
+
+    task_id = id(task)
+    file_path, resistance_label, dish_number, directories, processed_features, csv_lock = task
+
     try:
+        global_semaphore.acquire()
+        
+        logging.debug(f"[Task {task_id}] Worker {worker_index} started.")
+        start_time = time.time()
 
-        (
-            file_path,
-            resistance_label,
-            dish_number,
-            directories,
-            processed_features,
-            csv_lock,
-        ) = task
-
-        result = asyncio.run(
-            process_cell(
-                file_path,
-                resistance_label,
-                dish_number,
-                directories,
-                processed_features,
-                csv_lock,
-                )
-            )
-        return result
+        _ = asyncio.run(process_cell(file_path, resistance_label, dish_number, directories, processed_features, csv_lock, worker_index))
+        elapsed_time = time.time() - start_time
+        return {
+            "task_id": task_id,
+            "worker_index": worker_index,
+            "file_path": file_path,
+            "dish_number": dish_number,
+            "radiation_resistance": resistance_label,
+            "elapsed_time": elapsed_time
+        }
+    
     except Exception as e:
-        logging.error(f"Worker encountered an error: {e}", exc_info=True)
-        return {"file_path": file_path, "radiation_resistance": "Unknown", "dish_number": "Unknown", "error": str(e)}
+        logging.error(f"[Task {task_id}] Worker encountered an error: {e}", exc_info=True)
+        return {
+            "task_id": task_id,
+            "worker_index": worker_index,
+            "file_path": task[0] if isinstance(task, tuple) else None,
+            "dish_number": task[2] if isinstance(task, tuple) else None,
+            "error": str(e)
+        }
+    
     finally:    
         global_semaphore.release()
         cp.get_default_memory_pool().free_all_blocks() 
         cp.get_default_pinned_memory_pool().free_all_blocks()
         gc.collect()
-
-def restart_pool_ungracefully(num_workers):
-    # not graceful, emergency hard cut for memory followed by restart 
-
-    global pool
-    if pool is not None:
-        pool.terminate()  # Safely terminate the existing pool
-        pool.join()       # Wait for the pool's worker processes to exit
-    pool = Pool(processes=num_workers, maxtasksperchild=max_tasks_per_child)  # Create a new pool with fewer workers
-    logging.info(f"Pool restarted with {num_workers} workers.")
-
-def recreate_pool(worker_count):
-    global pool
-    if pool is not None:
-        pool.close()
-        pool.join()
-    pool = Pool(processes=worker_count)
-
-def update_ui(progress_layout, usage, current_workers):
-    cpu_usage = usage["cpu"]
-    panel_text = (
-        f"CPU || Workers: {current_workers.value}/{max_workers}"
-        f" | Utilization: {cpu_usage['cpu_percent']:.1f}%"
-        f" | Memory: {cpu_usage['memory_percent']:.1f}%"
-    )
-    for key, gpu in usage.items():
-        if "gpu" in key:
-            panel_text += (
-                f" || GPU: Utilization: {gpu['percent']:.1f}%"
-                f" | Memory: {gpu['memory_used']:.1f}/{gpu['memory_total']:.1f} GB"
-                f" | Temperature: {gpu['temperature']:.1f}°C"
-            )
-    monitor_panel = Panel(panel_text)
-    progress_layout["monitor"].update(monitor_panel)
-
-def resource_manager(progress_layout, current_workers, semaphore, worker_lock, stop_event):
-    """
-    Monitors system resources, updates the Rich layout, and throttles workers based on memory usage.
-    """
-    upper_threshold, lower_threshold, critical_threshold = memory_thresholds
-    restart_counter = 0
-
-    while not stop_event.is_set():
-        try:
-            usage = file_utils.get_resource_usage()
-            cpu_usage = usage["cpu"]
-            cpu_memory_usage = cpu_usage["memory_percent"]
-
-            try:
-                # Update worker counts based on memory usage
-                with worker_lock:
-                    if cpu_memory_usage > critical_threshold:
-                        logging.warning(f"Memory above critical threshold ({critical_threshold}%). Restarting pool... (Restart #{restart_counter})")
-                        restart_counter += 1
-                        semaphore.acquire()  # Block new tasks
-                        current_workers.value = max(min(current_workers.value - 1, max_workers),1)
-                        restart_pool_ungracefully(current_workers.value)
-                        semaphore.release()  # Allow tasks again
-
-                    elif cpu_memory_usage > upper_threshold and current_workers.value > 1:
-                        current_workers.value -= 1  # Decrease workers
-                        semaphore.acquire()
-                        recreate_pool(current_workers.value)
-
-                    elif cpu_memory_usage < lower_threshold and current_workers.value < max_workers:
-                        current_workers.value += 1  # Increase workers
-                        semaphore.release()
-                        recreate_pool(current_workers.value)
-
-            except:
-                logging.error("Unable to update current_workers", exc_info=True)
-            update_ui(progress_layout, usage, current_workers)
-        except Exception as e:
-            logging.error(f"Error in resource manager: {e}", exc_info=True)
-            break
-
-        finally:
-            time.sleep(resource_check_frequency)  # Delay to avoid tight looping
+        logging.debug(f"[Task {task_id}] Worker {worker_index} finished in {elapsed_time:.2f} seconds.")
 
 def populate_queue(base_dir, resistance_mapping, task_queue, completely_processed_files, processed_features_for_each_file, csv_lock):
     """Populate a multiprocessing queue with all file processing tasks."""
     
+    tasks = []
     for resistance_folder in resistance_mapping.keys():
         resistance_path = os.path.join(base_dir, resistance_folder)
         if not os.path.isdir(resistance_path):
@@ -270,35 +183,29 @@ def populate_queue(base_dir, resistance_mapping, task_queue, completely_processe
                 and file not in completely_processed_files
             ]
             for file_path in files:
-                task_queue.put(
-                    (
-                    file_path, 
-                    resistance_label, 
-                    dish_number, 
-                    directories,
-                    processed_features_for_each_file,
-                    csv_lock
-                    )
-                )
+                file_size = os.path.getsize(file_path)
+                tasks.append((file_size,(file_path, resistance_label, dish_number, directories, processed_features_for_each_file, csv_lock)))
+    tasks.sort(reverse=True, key=lambda x: x[0])
+    task_queue.extend([task for _, task in tasks]) 
 
 def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) -> None:
-    """
-    Process all resistance folders and dishes in the base directory and save results to a CSV file.
-    Initializes and manages processed files and features to avoid redundant processing.
-    """
-     # Setup multiprocessing managers for state sharing across processes
+
+    # Setup multiprocessing managers for state sharing across processes
     manager = Manager()
     task_queue = manager.Queue()
     stop_event = threading.Event()
     worker_lock = manager.Lock()
+    active_workers = manager.Value('i', 0)  # Tracks the number of active workers
+    paused = manager.Value('b', False)
     processed_features_for_each_file = manager.dict()
-    completely_processed_files = list() # Files where all features are processed
+
+    completely_processed_files = list()  # Files where all features are processed
     files_in_csv = set()
 
     if RESUME_PROCESSING and os.path.exists(output_csv_path):
         existing_data = pd.read_csv(output_csv_path)
         files_in_csv.update(existing_data['file_path'].tolist())
-        all_features = set(FeatureExtraction.FEATURE_METHODS.keys()) # Define all possible features
+        all_features = set(FeatureExtraction.FEATURE_METHODS.keys())  # Define all possible features
 
         for _, row in existing_data.iterrows():
             file_path = row["file_path"]
@@ -315,70 +222,158 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
 
     total_files = file_utils.count_total_files(base_dir, resistance_mapping)
     already_processed = len(completely_processed_files)
-    
-    try:
-        populate_queue(base_dir, resistance_mapping, task_queue, completely_processed_files, processed_features_for_each_file, csv_lock)
-    except:
-        logging.error("Error populating queue", exc_info=True)
-        
-    # Define progress bar
-    progress = Progress(
-        TextColumn("[bold blue]OVERALL PROGRESS:"),
-        TextColumn(" | [cyan]Cell Line: {task.fields[current_cell_line]}"),
-        TextColumn(" | [cyan]Dish: {task.fields[current_dish]}"),
-        BarColumn(),
-        "[progress.percentage]{task.percentage:>3.0f}%",
-        TimeElapsedColumn(),
-        TimeRemainingColumn(),
-        TextColumn("[green]{task.completed}/{task.total} files"),
-        TextColumn(" | [green]{task.fields[seconds_per_file]:.2f} sec/file")
-    )
-    progress_task = progress.add_task("Processing Files", total=total_files, completed=already_processed, seconds_per_file=0.0, current_dish="Starting...", current_cell_line="Starting...")
+    progress, progress_layout, progress_task = initialize_progress_bar(total_files, already_processed)
 
-    # Define rich layout
-    progress_layout = Layout()
-    progress_layout.split(
-        Layout(name="monitor", size=3),
-        Layout(progress, name="progress", ratio=1)
-    )
     current_workers = manager.Value('i', initial_workers)
     semaphore = Semaphore(max_workers)
     resource_manager_thread = Thread(
         target=resource_manager,
         args=(
-            progress_layout, 
-            current_workers,  
-            semaphore, 
-            worker_lock, 
-            stop_event),
+            progress_layout,
+            current_workers,
+            active_workers,
+            semaphore,
+            worker_lock,
+            paused,
+            stop_event
+        ),
         daemon=True
     )
     resource_manager_thread.start()
-    start_time = time.time()  # Record the start time
+
+    try:
+        task_queue = deque()
+        populate_queue(base_dir, resistance_mapping, task_queue, completely_processed_files, processed_features_for_each_file, csv_lock)
+    except:
+        logging.error("Error populating queue", exc_info=True)
+
+    session_start_time = time.time()
+    session_file_count = 0
+  
+    active_large_tasks = manager.Value('i', 0)
+    reserved_workers = [0, 4, 8]
+    active_worker_cores = manager.dict({i: False for i in range(current_workers.value)})
+
     with Live(progress_layout, refresh_per_second=1):
         try:
             with Pool(
-                processes=initial_workers, 
-                maxtasksperchild=max_tasks_per_child, 
-                initializer=worker_initializer, 
-                initargs=(semaphore,log_queue, ENABLE_LOGGING)
+                processes=initial_workers,
+                maxtasksperchild=max_tasks_per_child,
+                initializer=worker_initializer,
+                initargs=(semaphore, log_queue, active_workers, worker_lock, active_large_tasks, ENABLE_LOGGING)
             ) as pool:
-                while not task_queue.empty():
-                    chunk = [task_queue.get() for _ in range(min(queue_chunk_size, task_queue.qsize()))]
+                # List to track async results of large tasks
+                large_task_results = []
+                
+                while task_queue or large_task_results:
+                    if paused.value:
+                        sleep(1)
+                        continue
 
-                    for result in pool.imap_unordered(process_file_worker, chunk):
-                        # Update progress bar in the main process
-                        elapsed_time = time.time() - start_time
-                        completed_files = progress.tasks[progress_task].completed + 1
-                        seconds_per_file = elapsed_time / completed_files if completed_files > 0 else 0.0
+                    # Assign large tasks only when memory usage is low and fewer than 2 large tasks are active
+                    large_tasks = []
+                    with worker_lock:  # Use the shared lock
+                        if active_large_tasks.value < max_large_tasks:
+                            while not paused.value and task_queue and len(large_tasks) < (max_large_tasks - active_large_tasks.value):
+                                large_tasks.append(task_queue.popleft())
 
-                        progress.update(
-                            progress_task,
-                            advance=1,
-                            seconds_per_file=seconds_per_file,
-                            current_cell_line=result.get("radiation_resistance", "Unknown"),
-                            current_dish=result.get("dish_number", "Unknown"),
-                        )
+                    if large_tasks:
+                        logging.debug(f"Submitting {len(large_tasks)} large tasks.")
+
+                        for task in large_tasks:
+                            # Find the first free reserved worker
+                            free_worker = next(
+                                (core for core in reserved_workers if not active_worker_cores.get(core, False)),
+                                None
+                            )
+                            if free_worker is not None:
+                                with worker_lock:
+                                    active_worker_cores[free_worker] = True  # Mark reserved worker as active
+                                    active_large_tasks.value += 1  # Increment active large task count
+                                    active_workers.value += 1
+                                
+                                logging.debug(f"Assigning large task {id(task)} to reserved worker {free_worker}")
+
+                                # Submit the large task
+                                async_result = pool.apply_async(
+                                    process_file_worker,
+                                    args=(task,),
+                                    kwds={"worker_index": free_worker}
+                                )
+                                large_task_results.append(async_result)
+                                session_file_count += 1
+                            else:
+                                logging.warning("No reserved workers available for large tasks.")
+
+                    # Check for completion of large tasks
+                    for async_result in large_task_results[:]:
+                        if async_result.ready():  # Non-blocking check
+                            result = async_result.get()  # Retrieve the result
+                            large_task_results.remove(async_result)
+                            with worker_lock:
+                                # Mark the reserved worker as free
+                                worker_index = result.get("worker_index", None)
+                                if worker_index in reserved_workers:
+                                    active_worker_cores[worker_index] = False  # Free the reserved worker
+                                    logging.debug(f"Worker {worker_index} is now free for large tasks.")
+                                active_large_tasks.value -= 1  # Decrement active large task count
+                                active_workers.value -= 1
+                                logging.debug(f"Active large tasks decremented: {active_large_tasks.value}")
+                            update_progress_bar(progress, progress_task, session_start_time, session_file_count, result)
+
+                    if active_workers.value < current_workers.value:  # Use remaining workers
+                        # Submit smaller tasks for other workers
+                        small_tasks = []
+                        while (
+                            not paused.value and task_queue 
+                            and len(small_tasks) < (current_workers.value - active_workers.value) 
+                            and len(small_tasks) < queue_chunk_size
+                            and len(small_tasks) < max_workers-max_large_tasks
+                        ):
+                            small_tasks.append(task_queue.pop())  # Get the smallest task
+                        
+                        if small_tasks:
+                            logging.debug(f"Submitting {len(small_tasks)} small tasks.")
+                            for task in small_tasks:
+                                # Find the first free, non-reserved worker
+                                free_worker = next(
+                                    (core for core, active in active_worker_cores.items()
+                                    if not active and core not in reserved_workers),
+                                    None
+                                )
+                                if free_worker is not None:
+                                    with worker_lock:
+                                        active_worker_cores[free_worker] = True  # Mark worker as active
+                                        active_workers.value += 1
+
+                                    logging.debug(f"Assigning small task {id(task)} to worker {free_worker}")
+                                    
+                                     # Submit the task with a callback to update the progress bar
+                                    def task_complete_callback(result):
+                                        with worker_lock:
+                                            worker_index = result.get("worker_index")
+                                            if worker_index is not None:
+                                                active_worker_cores[worker_index] = False
+                                                active_workers.value -= 1
+                                                logging.debug(f"Worker {worker_index} is now free. Active workers decremented to: {active_workers.value}")
+                                            else:
+                                                logging.error("Callback result missing 'worker_index'.")
+                                        update_progress_bar(progress, progress_task, session_start_time, session_file_count, result)
+
+                                    # Submit the task
+                                    async_result = pool.apply_async(
+                                        process_file_worker,
+                                        args=(task,),
+                                        kwds={"worker_index": free_worker},
+                                        callback=task_complete_callback
+                                    )
+                                    session_file_count += 1
+                                else:
+                                    logging.debug("No free workers available for small tasks.")
+                                    break
+                                    
+                                # Allow some time for tasks to progress (more efficient for CPU)
+                                sleep(0.1)
 
             logging.info("All tasks completed.")
         except:
@@ -386,8 +381,8 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
         finally:
             pool.close()
             pool.join()
-            stop_event.set() # stop threads
+            stop_event.set()  # stop threads
             gc.collect()
             cp.get_default_memory_pool().free_all_blocks()
             resource_manager_thread.join()
-            os.system("cls" if os.name == "nt" else "clear") # clear terminal
+            os.system("cls" if os.name == "nt" else "clear")  # clear terminal

@@ -1,7 +1,7 @@
 import os 
 
 INSTALLATION_NEEDED = False
-RESUME_PROCESSING = False
+RESUME_PROCESSING = True
 ENABLE_LOGGING = True
 
 # Tomocube Instrument Parameters
@@ -34,9 +34,10 @@ disk_mount = '/mnt/f'
 
 output_csv_path = os.path.join(dataset_location, "extracted_parameters.csv")
 
-memory_thresholds = [40, 30, 50] # percentages
+memory_threshold = 80 # percent
 max_workers = 12
 initial_workers = 12
-max_tasks_per_child = 5
-resource_check_frequency = 5 #seconds
-queue_chunk_size = 24
+max_tasks_per_child = 3
+resource_check_frequency = 3 #seconds
+queue_chunk_size = 20
+max_large_tasks = 3
