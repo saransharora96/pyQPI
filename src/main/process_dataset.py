@@ -5,7 +5,7 @@ import pandas as pd
 from typing import Any, Dict
 import cupy as cp
 import gc
-from multiprocessing import Pool, Manager, Semaphore 
+from multiprocessing import Pool, Manager, Semaphore, Queue
 from threading import Thread
 import threading
 from logging.handlers import QueueHandler
@@ -79,7 +79,7 @@ def log_result(file_path: str, result: Dict[str, Any], csv_lock):
             file_utils.update_csv(result, output_csv_path)  # Update the CSV with results
 
 async def process_cell(file_path: str, resistance_label: str, dish_number: int,
-                 directories: Dict[str, str], processed_features: Dict[str, Any], csv_lock):
+                 directories: Dict[str, str], processed_features: Dict[str, Any], csv_lock,):
     results = {"file_path": file_path, "radiation_resistance": resistance_label, "dish_number": dish_number}
     try:
         cell = Cell(file_path, resistance_label, dish_number)
@@ -116,6 +116,7 @@ async def process_cell(file_path: str, resistance_label: str, dish_number: int,
         cp.get_default_memory_pool().free_all_blocks()  # Free CuPy memory blocks
         cp.get_default_pinned_memory_pool().free_all_blocks()
         gc.collect()  # Trigger garbage collection
+
         log_result(file_path, results, csv_lock)
         return results
 
@@ -125,28 +126,43 @@ async def process_cell(file_path: str, resistance_label: str, dish_number: int,
         log_result(file_path, results, csv_lock)
         return results
 
-def process_file_worker(args):
+
+def process_file_worker(task):
     """
     Worker function to process individual files.
     """
     global global_semaphore, global_log_queue  # Use the global semaphore
-    file_path, resistance_label, dish_number, directories, processed_features_in_each_file, csv_lock = args
     global_semaphore.acquire()
     try:
-        result = asyncio.run(process_cell(file_path, resistance_label, dish_number, directories, processed_features_in_each_file, csv_lock))
-        if "error" not in result:
-            processed_features_in_each_file[file_path] = list(result.keys())  # Store the processed features
-        else:
-            logging.error(f"Error in result from process_cell for file {file_path}", exc_info=True)
+
+        (
+            file_path,
+            resistance_label,
+            dish_number,
+            directories,
+            processed_features,
+            csv_lock,
+        ) = task
+
+        result = asyncio.run(
+            process_cell(
+                file_path,
+                resistance_label,
+                dish_number,
+                directories,
+                processed_features,
+                csv_lock,
+                )
+            )
+        return result
     except Exception as e:
-        logging.error(f"Error processing file {file_path}: {e}", exc_info=True)
-        result = {"file_path": file_path, "error": str(e)}
+        logging.error(f"Worker encountered an error: {e}", exc_info=True)
+        return {"file_path": file_path, "radiation_resistance": "Unknown", "dish_number": "Unknown", "error": str(e)}
     finally:    
         global_semaphore.release()
         cp.get_default_memory_pool().free_all_blocks() 
         cp.get_default_pinned_memory_pool().free_all_blocks()
         gc.collect()
-    return result
 
 def restart_pool_ungracefully(num_workers):
     # not graceful, emergency hard cut for memory followed by restart 
@@ -226,108 +242,43 @@ def resource_manager(progress_layout, current_workers, semaphore, worker_lock, s
         finally:
             time.sleep(resource_check_frequency)  # Delay to avoid tight looping
 
-def process_dish(dish_path: str, resistance_label: str, dish_number: int, completely_processed_files: list, 
-                 processed_features_for_each_file: Dict[str, Any], csv_lock, progress, progress_task, 
-                 start_time, semaphore, already_processed, log_queue):
-    """
-    Process all files in a dish directory. Files are processed if they are not in the completely_processed_files set 
-    for the features that are missing in processed_features_for_each_file
-    """
-    dish_path = os.path.normpath(dish_path)
-    directories = file_utils.get_output_directories(dish_path)
-    files_in_directory = [os.path.join(dish_path, filename) for filename in os.listdir(dish_path)]
-    completely_processed_files = set(completely_processed_files)
+def populate_queue(base_dir, resistance_mapping, task_queue, completely_processed_files, processed_features_for_each_file, csv_lock):
+    """Populate a multiprocessing queue with all file processing tasks."""
+    
+    for resistance_folder in resistance_mapping.keys():
+        resistance_path = os.path.join(base_dir, resistance_folder)
+        if not os.path.isdir(resistance_path):
+            continue
+        for dish_folder in os.listdir(resistance_path):
+            dish_path = os.path.join(resistance_path, dish_folder)
+            if os.path.isdir(dish_path) and dish_folder.startswith("dish"):
+                resistance_label, dish_number = file_utils.get_resistance_label_and_dish(
+                    resistance_mapping, resistance_path, dish_folder
+                )
+            directories = file_utils.get_output_directories(dish_path)
+            files_in_directory = [os.path.join(dish_path, filename) for filename in os.listdir(dish_path)]
+            completely_processed_files = set(completely_processed_files)
 
-    # List all valid files in the dish directory
-    files = [
-        file for file in files_in_directory
-        if file.endswith((".tiff", ".tif"))
-        and "MIP" not in file
-        and "phase" not in file
-        and "mask" not in file
-        and "segment" not in file
-        and os.path.isfile(file)
-        and file not in completely_processed_files
-    ]
-    args_list = [
-        (
-            file,
-            resistance_label,
-            dish_number,
-            directories,
-            processed_features_for_each_file,
-            csv_lock,
-        )
-        for file in files
-    ]
-    chunk_size = queue_chunk_size
-    try:
-        with Pool(
-            processes=initial_workers, 
-            maxtasksperchild=max_tasks_per_child, 
-            initializer=worker_initializer, 
-            initargs=(semaphore,log_queue, ENABLE_LOGGING)
-        ) as pool:
-            for i in range(0, len(args_list), chunk_size):
-                chunk = args_list[i:i + chunk_size]
-                for _ in pool.imap_unordered(process_file_worker, chunk):
-                    
-                    elapsed_time = time.time() - start_time
-                    completed_files = progress.tasks[progress_task].completed - already_processed
-                    seconds_per_file = elapsed_time / completed_files if completed_files > 0 else 0.0
-                    progress.update(
-                        progress_task, 
-                        advance=1, 
-                        seconds_per_file=seconds_per_file, 
-                        current_cell_line=resistance_label, 
-                        current_dish=dish_number
-                        )
-    except:
-        logging.error("Error with pool", exc_info=True)
-    finally:
-        cp.get_default_memory_pool().free_all_blocks()
-        gc.collect()
-        cp.get_default_pinned_memory_pool().free_all_blocks()
-
-def process_resistance_folder(resistance_folder: str, base_dir: str, completely_processed_files: list,
-                              processed_features_for_each_file: Dict[str, Any], csv_lock, progress, 
-                              progress_task, start_time, semaphore, already_processed, log_queue) -> None:
-    """
-    Process all dishes in a resistance folder. Each dish is processed if it's a directory and it starts with 'dish'.
-
-    Args:
-    resistance_folder (str): The folder name representing a specific resistance category.
-    base_dir (str): The base directory where resistance folders are located.
-    processed_files (set): Set of file paths that have been processed.
-    completed_files (str): Path to the file tracking processed files.
-    progress_bar (tqdm): Progress bar instance for visual feedback.
-    output_csv_path (str): Path to the CSV file where results are appended after processing each cell.
-
-    Returns:
-    None: Results are saved directly to the CSV file after each cell is processed.
-    """
-    resistance_path = os.path.join(base_dir, resistance_folder)
-    if not os.path.isdir(resistance_path):
-        return  # If the path is not a directory, there's nothing to process.
-
-    for dish_folder in os.listdir(resistance_path):
-        dish_path = os.path.join(resistance_path, dish_folder)
-        if os.path.isdir(dish_path) and dish_folder.startswith("dish"):
-            resistance_label, dish_number = file_utils.get_resistance_label_and_dish(
-                resistance_mapping, resistance_path, dish_folder
-            )
-            process_dish(
-                dish_path, 
-                resistance_label, 
-                dish_number, 
-                completely_processed_files, 
-                processed_features_for_each_file, 
-                csv_lock, progress, 
-                progress_task, 
-                start_time, 
-                semaphore, 
-                already_processed,
-                log_queue
+            files = [
+                file for file in files_in_directory
+                if file.endswith((".tiff", ".tif"))
+                and "MIP" not in file
+                and "phase" not in file
+                and "mask" not in file
+                and "segment" not in file
+                and os.path.isfile(file)
+                and file not in completely_processed_files
+            ]
+            for file_path in files:
+                task_queue.put(
+                    (
+                    file_path, 
+                    resistance_label, 
+                    dish_number, 
+                    directories,
+                    processed_features_for_each_file,
+                    csv_lock
+                    )
                 )
 
 def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) -> None:
@@ -337,8 +288,8 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
     """
      # Setup multiprocessing managers for state sharing across processes
     manager = Manager()
+    task_queue = manager.Queue()
     stop_event = threading.Event()
-    start_time = time.time()  # Record the start time
     worker_lock = manager.Lock()
     processed_features_for_each_file = manager.dict()
     completely_processed_files = list() # Files where all features are processed
@@ -364,10 +315,12 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
 
     total_files = file_utils.count_total_files(base_dir, resistance_mapping)
     already_processed = len(completely_processed_files)
-
-    # Multiprocessing setup
-    current_workers = manager.Value('i', initial_workers)
-
+    
+    try:
+        populate_queue(base_dir, resistance_mapping, task_queue, completely_processed_files, processed_features_for_each_file, csv_lock)
+    except:
+        logging.error("Error populating queue", exc_info=True)
+        
     # Define progress bar
     progress = Progress(
         TextColumn("[bold blue]OVERALL PROGRESS:"),
@@ -380,7 +333,7 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
         TextColumn("[green]{task.completed}/{task.total} files"),
         TextColumn(" | [green]{task.fields[seconds_per_file]:.2f} sec/file")
     )
-    task = progress.add_task("Processing Files", total=total_files, completed=already_processed, seconds_per_file=0.0, current_dish="Starting...", current_cell_line="Starting...")
+    progress_task = progress.add_task("Processing Files", total=total_files, completed=already_processed, seconds_per_file=0.0, current_dish="Starting...", current_cell_line="Starting...")
 
     # Define rich layout
     progress_layout = Layout()
@@ -388,6 +341,7 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
         Layout(name="monitor", size=3),
         Layout(progress, name="progress", ratio=1)
     )
+    current_workers = manager.Value('i', initial_workers)
     semaphore = Semaphore(max_workers)
     resource_manager_thread = Thread(
         target=resource_manager,
@@ -400,31 +354,40 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
         daemon=True
     )
     resource_manager_thread.start()
-    
-    # Render live dashboard
-    try:
-        with Live(progress_layout, refresh_per_second=1):
-            for resistance_folder in resistance_mapping.keys():
-                resistance_path = os.path.join(base_dir, resistance_folder)
-                if os.path.isdir(resistance_path):
-                    try:
-                        process_resistance_folder(
-                            resistance_folder, 
-                            base_dir, 
-                            completely_processed_files, 
-                            processed_features_for_each_file, 
-                            csv_lock, 
-                            progress, 
-                            task, 
-                            start_time, 
-                            semaphore,
-                            already_processed,
-                            log_queue
-                            )
-                    except Exception as e:
-                        error_message = f"Error processing resistance folder {resistance_folder}: {e}"
-                        logging.error(error_message, exc_info=True)
-    finally:
-        stop_event.set() # stop threads
-        resource_manager_thread.join()
-        os.system("cls" if os.name == "nt" else "clear") # clear terminal
+    start_time = time.time()  # Record the start time
+    with Live(progress_layout, refresh_per_second=1):
+        try:
+            with Pool(
+                processes=initial_workers, 
+                maxtasksperchild=max_tasks_per_child, 
+                initializer=worker_initializer, 
+                initargs=(semaphore,log_queue, ENABLE_LOGGING)
+            ) as pool:
+                while not task_queue.empty():
+                    chunk = [task_queue.get() for _ in range(min(queue_chunk_size, task_queue.qsize()))]
+
+                    for result in pool.imap_unordered(process_file_worker, chunk):
+                        # Update progress bar in the main process
+                        elapsed_time = time.time() - start_time
+                        completed_files = progress.tasks[progress_task].completed + 1
+                        seconds_per_file = elapsed_time / completed_files if completed_files > 0 else 0.0
+
+                        progress.update(
+                            progress_task,
+                            advance=1,
+                            seconds_per_file=seconds_per_file,
+                            current_cell_line=result.get("radiation_resistance", "Unknown"),
+                            current_dish=result.get("dish_number", "Unknown"),
+                        )
+
+            logging.info("All tasks completed.")
+        except:
+            logging.error("Error with pool", exc_info=True)
+        finally:
+            pool.close()
+            pool.join()
+            stop_event.set() # stop threads
+            gc.collect()
+            cp.get_default_memory_pool().free_all_blocks()
+            resource_manager_thread.join()
+            os.system("cls" if os.name == "nt" else "clear") # clear terminal

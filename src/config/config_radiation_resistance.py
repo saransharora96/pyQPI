@@ -2,7 +2,7 @@ import os
 
 INSTALLATION_NEEDED = False
 RESUME_PROCESSING = False
-ENABLE_LOGGING = False
+ENABLE_LOGGING = True
 
 # Tomocube Instrument Parameters
 wavelength = 532e-9       # wavelength (m)
