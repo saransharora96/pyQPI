@@ -98,5 +98,4 @@ def execute_code():
 
 if __name__ == "__main__":
 
-    multiprocessing.set_start_method("spawn")  # compatibility for debugging
     execute_code()

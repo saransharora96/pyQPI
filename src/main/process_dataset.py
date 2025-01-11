@@ -5,9 +5,10 @@ import pandas as pd
 from typing import Any, Dict
 import cupy as cp
 import gc
-from multiprocessing import Pool, Manager, Semaphore, Queue
+from multiprocessing import Pool, Manager, Semaphore, TimeoutError
 from threading import Thread
 import threading
+from collections import deque
 from logging.handlers import QueueHandler
 from rich.panel import Panel
 from rich.live import Live
@@ -74,12 +75,12 @@ def log_result(file_path: str, result: Dict[str, Any], csv_lock):
             log_file.write(f"{timestamp} - Error processing file {file_path}: {result['error']}\n")
         os.system('cls' if os.name == 'nt' else 'clear')
     else:
-        logging.info(f"{timestamp} - Successfully completed {file_path}")
+        logging.info(f"{result["worker_index"]} - Successfully completed {file_path}")
         with csv_lock:
             file_utils.update_csv(result, output_csv_path)  # Update the CSV with results
 
 async def process_cell(file_path: str, resistance_label: str, dish_number: int,
-                 directories: Dict[str, str], processed_features: Dict[str, Any], csv_lock,):
+                 directories: Dict[str, str], processed_features: Dict[str, Any], csv_lock):
     results = {"file_path": file_path, "radiation_resistance": resistance_label, "dish_number": dish_number}
     try:
         cell = Cell(file_path, resistance_label, dish_number)
@@ -127,22 +128,14 @@ async def process_cell(file_path: str, resistance_label: str, dish_number: int,
         return results
 
 
-def process_file_worker(task):
+def process_file_worker(task, worker_index=None):
     """
     Worker function to process individual files.
     """
     global global_semaphore, global_log_queue  # Use the global semaphore
     global_semaphore.acquire()
     try:
-
-        (
-            file_path,
-            resistance_label,
-            dish_number,
-            directories,
-            processed_features,
-            csv_lock,
-        ) = task
+        file_path, resistance_label, dish_number, directories, processed_features, csv_lock = task
 
         result = asyncio.run(
             process_cell(
@@ -152,12 +145,18 @@ def process_file_worker(task):
                 directories,
                 processed_features,
                 csv_lock,
+                worker_index
                 )
             )
-        return result
+        return {"file_path": file_path, "dish_number": dish_number, "radiation_resistance": resistance_label, "worked_index": worker_index}
     except Exception as e:
         logging.error(f"Worker encountered an error: {e}", exc_info=True)
-        return {"file_path": file_path, "radiation_resistance": "Unknown", "dish_number": "Unknown", "error": str(e)}
+        return {
+            "file_path": task[0],
+            "dish_number": task[2],
+            "error": str(e),
+            "work_index": worker_index,
+        }
     finally:    
         global_semaphore.release()
         cp.get_default_memory_pool().free_all_blocks() 
@@ -222,7 +221,7 @@ def resource_manager(progress_layout, current_workers, semaphore, worker_lock, s
                         restart_pool_ungracefully(current_workers.value)
                         semaphore.release()  # Allow tasks again
 
-                    elif cpu_memory_usage > upper_threshold and current_workers.value > 1:
+                    elif cpu_memory_usage > upper_threshold and current_workers.value > 2:
                         current_workers.value -= 1  # Decrease workers
                         semaphore.acquire()
                         recreate_pool(current_workers.value)
@@ -245,6 +244,7 @@ def resource_manager(progress_layout, current_workers, semaphore, worker_lock, s
 def populate_queue(base_dir, resistance_mapping, task_queue, completely_processed_files, processed_features_for_each_file, csv_lock):
     """Populate a multiprocessing queue with all file processing tasks."""
     
+    tasks = []
     for resistance_folder in resistance_mapping.keys():
         resistance_path = os.path.join(base_dir, resistance_folder)
         if not os.path.isdir(resistance_path):
@@ -270,16 +270,22 @@ def populate_queue(base_dir, resistance_mapping, task_queue, completely_processe
                 and file not in completely_processed_files
             ]
             for file_path in files:
-                task_queue.put(
+                file_size = os.path.getsize(file_path)
+                tasks.append(
                     (
-                    file_path, 
-                    resistance_label, 
-                    dish_number, 
-                    directories,
-                    processed_features_for_each_file,
-                    csv_lock
+                    file_size,
+                        (
+                        file_path, 
+                        resistance_label, 
+                        dish_number, 
+                        directories,
+                        processed_features_for_each_file,
+                        csv_lock
+                        )
                     )
                 )
+    tasks.sort(reverse=True, key=lambda x: x[0])
+    task_queue.extend([task for _, task in tasks]) 
 
 def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) -> None:
     """
@@ -316,6 +322,8 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
     total_files = file_utils.count_total_files(base_dir, resistance_mapping)
     already_processed = len(completely_processed_files)
     
+    task_queue = deque()
+
     try:
         populate_queue(base_dir, resistance_mapping, task_queue, completely_processed_files, processed_features_for_each_file, csv_lock)
     except:
@@ -355,6 +363,7 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
     )
     resource_manager_thread.start()
     start_time = time.time()  # Record the start time
+    large_task_results = []  # Track AsyncResult objects for large tasks
     with Live(progress_layout, refresh_per_second=1):
         try:
             with Pool(
@@ -363,11 +372,12 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
                 initializer=worker_initializer, 
                 initargs=(semaphore,log_queue, ENABLE_LOGGING)
             ) as pool:
-                while not task_queue.empty():
-                    chunk = [task_queue.get() for _ in range(min(queue_chunk_size, task_queue.qsize()))]
+                while task_queue or large_task_results:
+                    completed_large_tasks = [task for task in large_task_results if task.ready()]
+                    for task in completed_large_tasks:
+                        result = task.get()  # Fetch the result of the completed task
+                        large_task_results.remove(task)
 
-                    for result in pool.imap_unordered(process_file_worker, chunk):
-                        # Update progress bar in the main process
                         elapsed_time = time.time() - start_time
                         completed_files = progress.tasks[progress_task].completed + 1
                         seconds_per_file = elapsed_time / completed_files if completed_files > 0 else 0.0
@@ -376,10 +386,51 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
                             progress_task,
                             advance=1,
                             seconds_per_file=seconds_per_file,
-                            current_cell_line=result.get("radiation_resistance", "Unknown"),
                             current_dish=result.get("dish_number", "Unknown"),
+                            current_cell_line=result.get("radiation_resistance", "Unknown"),
                         )
 
+                    usage = file_utils.get_resource_usage()
+                    memory_usage = usage["cpu"]["memory_percent"]
+
+                    if task_queue and memory_usage < memory_thresholds[0]:
+                        largest_task = task_queue.popleft()  # Get the largest task
+                        try:
+                            async_result = pool.apply_async(
+                                process_file_worker, args=(largest_task,), kwds={"worker_index": 0}
+                            )
+                        except TimeoutError:
+                            logging.error(f"Task timed out: {largest_task}")
+                        large_task_results.append(async_result)
+
+                    # Submit a chunk of smaller tasks
+                    small_tasks = []
+                    while (
+                        memory_usage < memory_thresholds[0]
+                        and len(small_tasks) < queue_chunk_size
+                        and task_queue
+                    ):
+                        small_tasks.append(task_queue.pop())  # Get the smallest task
+
+                    # Process small tasks incrementally
+                    if small_tasks:
+                        for result in pool.imap_unordered(process_file_worker, small_tasks):
+                            resistance_label = result.get("radiation_resistance", "Unknown")
+                            dish_number = result.get("dish_number", "Unknown")
+
+                            elapsed_time = time.time() - start_time
+                            completed_files = progress.tasks[progress_task].completed + 1
+                            seconds_per_file = elapsed_time / completed_files if completed_files > 0 else 0.0
+
+                            # Update the progress bar
+                            progress.update(
+                                progress_task,
+                                advance=1,
+                                seconds_per_file=seconds_per_file,
+                                current_cell_line=resistance_label,
+                                current_dish=dish_number,
+                            )
+                        
             logging.info("All tasks completed.")
         except:
             logging.error("Error with pool", exc_info=True)
