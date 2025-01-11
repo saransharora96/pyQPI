@@ -5,20 +5,44 @@ from logging.handlers import QueueHandler, QueueListener
 from multiprocessing import Manager, Queue, Process
 import multiprocessing
 from install_modules import upgrade_pip, install_packages
-from config.config_radiation_resistance import INSTALLATION_NEEDED, dataset_location, output_csv_path, log_file_path
+from config.config_radiation_resistance import (
+    INSTALLATION_NEEDED, 
+    ENABLE_LOGGING,
+    dataset_location, 
+    output_csv_path, 
+    log_file_path
+)
 import utils.dir_utils as file_utils
 from main.process_dataset import process_directory
 
+
 def setup_logging(log_file_path: str, log_queue: Queue):
-    """Set up logging to use a Queue for multiprocessing-safe logging."""
+    """
+    Set up logging to use a Queue for multiprocessing-safe logging.
+    """
     # Remove existing handlers
     for handler in logging.root.handlers[:]:
         logging.root.removeHandler(handler)
 
-    # Add a QueueHandler to pass logs to the main process
-    queue_handler = QueueHandler(log_queue)
-    logging.root.addHandler(queue_handler)
-    logging.root.setLevel(logging.INFO)
+    if ENABLE_LOGGING:
+        # Add a QueueHandler to pass logs to the main process
+        queue_handler = QueueHandler(log_queue)
+        logging.root.addHandler(queue_handler)
+        logging.root.setLevel(logging.INFO)
+    else:
+        # Suppress logging by setting a high log level
+        logging.root.setLevel(logging.CRITICAL)
+
+def configure_listener(log_file_path: str, log_queue: Queue):
+    """
+    Configure the QueueListener to write logs from the queue to a file.
+    """
+    if ENABLE_LOGGING:
+        file_handler = logging.FileHandler(log_file_path, mode='a')
+        file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+        listener = QueueListener(log_queue, file_handler)
+        return listener
+    return None
 
 def configure_listener(log_file_path: str, log_queue: Queue):
     """Configure the QueueListener to write logs from the queue to a file."""
@@ -29,11 +53,13 @@ def configure_listener(log_file_path: str, log_queue: Queue):
 
 def execute_code():
 
+    # Set up logging
     log_queue = Queue()
     setup_logging(log_file_path, log_queue)
     listener = configure_listener(log_file_path, log_queue)
-    listener.start()
 
+    if listener:
+        listener.start()
     start_time = time.time()  # Record the start time
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -62,11 +88,13 @@ def execute_code():
     except Exception as e:
         logging.error(f"Processing failed with error: {e}", exc_info=True)
         raise
+    finally:
+        end_time = time.time()  # Record the end time
+        elapsed_time = end_time - start_time  # Calculate the elapsed time
+        print(f"Elapsed time: {elapsed_time:.2f} seconds")
 
-    end_time = time.time()  # Record the end time
-    elapsed_time = end_time - start_time  # Calculate the elapsed time
-    print(f"Elapsed time: {elapsed_time:.2f} seconds")
-    listener.stop() 
+        if listener:
+            listener.stop() 
 
 if __name__ == "__main__":
 

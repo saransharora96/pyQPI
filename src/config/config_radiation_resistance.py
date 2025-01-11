@@ -1,7 +1,8 @@
 import os 
 
 INSTALLATION_NEEDED = False
-RESUME_PROCESSING = True
+RESUME_PROCESSING = False
+ENABLE_LOGGING = False
 
 # Tomocube Instrument Parameters
 wavelength = 532e-9       # wavelength (m)
@@ -33,8 +34,9 @@ disk_mount = '/mnt/f'
 
 output_csv_path = os.path.join(dataset_location, "extracted_parameters.csv")
 
-memory_thresholds = [40, 30, 50]
+memory_thresholds = [40, 30, 50] # percentages
 max_workers = 12
-initial_workers = 3
-max_tasks_per_child = 7
+initial_workers = 12
+max_tasks_per_child = 5
 resource_check_frequency = 5 #seconds
+queue_chunk_size = 24

@@ -36,11 +36,15 @@ from config.config_radiation_resistance import (
     initial_workers,
     max_tasks_per_child,
     resource_check_frequency,
-    RESUME_PROCESSING
+    queue_chunk_size,
+    RESUME_PROCESSING,
+    ENABLE_LOGGING
 )
 import asyncio
 
-def worker_initializer(semaphore, log_queue):
+pool = None
+
+def worker_initializer(semaphore, log_queue, ENABLE_LOGGING):
     """
     Initialize global semaphore for workers.
     """
@@ -48,11 +52,17 @@ def worker_initializer(semaphore, log_queue):
     global_semaphore = semaphore
     global_log_queue = log_queue
 
-    # Attach a QueueHandler to the root logger
-    queue_handler = QueueHandler(log_queue)
-    logging.root.handlers = []  # Remove existing handlers
-    logging.root.addHandler(queue_handler)
-    logging.root.setLevel(logging.INFO)  # Ensure correct logging level
+    # Remove existing handlers
+    logging.root.handlers = []
+
+    if ENABLE_LOGGING:
+        # Add QueueHandler to pass logs to the main process
+        queue_handler = QueueHandler(log_queue)
+        logging.root.addHandler(queue_handler)
+        logging.root.setLevel(logging.INFO)
+    else:
+        # Suppress logging by setting a high log level
+        logging.root.setLevel(logging.CRITICAL)
 
 def log_result(file_path: str, result: Dict[str, Any], csv_lock):
     """
@@ -138,14 +148,39 @@ def process_file_worker(args):
         gc.collect()
     return result
 
-def restart_pool(num_workers):
+def restart_pool_ungracefully(num_workers):
     # not graceful, emergency hard cut for memory followed by restart 
 
     global pool
-    pool.terminate()  # Safely terminate the existing pool
-    pool.join()       # Wait for the pool's worker processes to exit
+    if pool is not None:
+        pool.terminate()  # Safely terminate the existing pool
+        pool.join()       # Wait for the pool's worker processes to exit
     pool = Pool(processes=num_workers, maxtasksperchild=max_tasks_per_child)  # Create a new pool with fewer workers
     logging.info(f"Pool restarted with {num_workers} workers.")
+
+def recreate_pool(worker_count):
+    global pool
+    if pool is not None:
+        pool.close()
+        pool.join()
+    pool = Pool(processes=worker_count)
+
+def update_ui(progress_layout, usage, current_workers):
+    cpu_usage = usage["cpu"]
+    panel_text = (
+        f"CPU || Workers: {current_workers.value}/{max_workers}"
+        f" | Utilization: {cpu_usage['cpu_percent']:.1f}%"
+        f" | Memory: {cpu_usage['memory_percent']:.1f}%"
+    )
+    for key, gpu in usage.items():
+        if "gpu" in key:
+            panel_text += (
+                f" || GPU: Utilization: {gpu['percent']:.1f}%"
+                f" | Memory: {gpu['memory_used']:.1f}/{gpu['memory_total']:.1f} GB"
+                f" | Temperature: {gpu['temperature']:.1f}°C"
+            )
+    monitor_panel = Panel(panel_text)
+    progress_layout["monitor"].update(monitor_panel)
 
 def resource_manager(progress_layout, current_workers, semaphore, worker_lock, stop_event):
     """
@@ -168,34 +203,22 @@ def resource_manager(progress_layout, current_workers, semaphore, worker_lock, s
                         restart_counter += 1
                         semaphore.acquire()  # Block new tasks
                         current_workers.value = max(min(current_workers.value - 1, max_workers),1)
-                        restart_pool(current_workers.value)
+                        restart_pool_ungracefully(current_workers.value)
                         semaphore.release()  # Allow tasks again
 
                     elif cpu_memory_usage > upper_threshold and current_workers.value > 1:
                         current_workers.value -= 1  # Decrease workers
                         semaphore.acquire()
+                        recreate_pool(current_workers.value)
 
                     elif cpu_memory_usage < lower_threshold and current_workers.value < max_workers:
                         current_workers.value += 1  # Increase workers
                         semaphore.release()
+                        recreate_pool(current_workers.value)
+
             except:
                 logging.error("Unable to update current_workers", exc_info=True)
-
-            panel_text = (
-                f"CPU || Workers: {current_workers.value}/{max_workers}"
-                f" | Utilization: {cpu_usage['cpu_percent']:.1f}%"
-                f" | Memory: {cpu_usage['memory_percent']:.1f}%"
-            )
-            for key, gpu in usage.items():
-                if "gpu" in key:
-                    panel_text += (
-                        f" || GPU: Utilization: {gpu['percent']:.1f}%"
-                        f" | Memory: {gpu['memory_used']:.1f}/{gpu['memory_total']:.1f} GB"
-                        f" | Temperature: {gpu['temperature']:.1f}°C"
-                    )
-            monitor_panel = Panel(panel_text)
-            progress_layout["monitor"].update(monitor_panel)
-
+            update_ui(progress_layout, usage, current_workers)
         except Exception as e:
             logging.error(f"Error in resource manager: {e}", exc_info=True)
             break
@@ -237,25 +260,28 @@ def process_dish(dish_path: str, resistance_label: str, dish_number: int, comple
         )
         for file in files
     ]
+    chunk_size = queue_chunk_size
     try:
         with Pool(
             processes=initial_workers, 
             maxtasksperchild=max_tasks_per_child, 
             initializer=worker_initializer, 
-            initargs=(semaphore,log_queue)
+            initargs=(semaphore,log_queue, ENABLE_LOGGING)
         ) as pool:
-            for _ in pool.imap_unordered(process_file_worker, args_list):
-                
-                elapsed_time = time.time() - start_time
-                completed_files = progress.tasks[progress_task].completed - already_processed
-                seconds_per_file = elapsed_time / completed_files if completed_files > 0 else 0.0
-                progress.update(
-                    progress_task, 
-                    advance=1, 
-                    seconds_per_file=seconds_per_file, 
-                    current_cell_line=resistance_label, 
-                    current_dish=dish_number
-                    )
+            for i in range(0, len(args_list), chunk_size):
+                chunk = args_list[i:i + chunk_size]
+                for _ in pool.imap_unordered(process_file_worker, chunk):
+                    
+                    elapsed_time = time.time() - start_time
+                    completed_files = progress.tasks[progress_task].completed - already_processed
+                    seconds_per_file = elapsed_time / completed_files if completed_files > 0 else 0.0
+                    progress.update(
+                        progress_task, 
+                        advance=1, 
+                        seconds_per_file=seconds_per_file, 
+                        current_cell_line=resistance_label, 
+                        current_dish=dish_number
+                        )
     except:
         logging.error("Error with pool", exc_info=True)
     finally:
