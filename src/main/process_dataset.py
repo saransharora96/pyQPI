@@ -11,6 +11,7 @@ from multiprocessing import Pool, Manager, Semaphore, Value
 from threading import Thread
 import threading
 from collections import deque
+from collections import deque
 from logging.handlers import QueueHandler
 from rich.live import Live
 from classes.Cell import Cell
@@ -157,6 +158,7 @@ def process_file_worker(task, worker_index=-1):
 def populate_queue(base_dir, resistance_mapping, task_queue, completely_processed_files, processed_features_for_each_file, csv_lock):
     """Populate a multiprocessing queue with all file processing tasks."""
     
+    tasks = []
     tasks = []
     for resistance_folder in resistance_mapping.keys():
         resistance_path = os.path.join(base_dir, resistance_folder)
