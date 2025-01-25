@@ -97,59 +97,69 @@ class AuxiliaryDataGeneration:
 
             # Process tomogram to generate binary masks and segmented images
             try:
-                segmenter = Segmentation(offset=-0.005)
-                tomogram_binary_mask = process_tomogram(tomogram, segmenter)
+                segmenter = Segmentation(method="min_cross_entropy")
+                tomogram_without_noisy_bottom_planes, tomogram_binary_mask = process_tomogram(tomogram, segmenter)
                 if tomogram_binary_mask is None:
                     raise ValueError(f"process_tomogram returned None for {self.cell.tomogram_path}")
                 tomogram_binary_mask_path = await self.save_h5(tomogram_binary_mask, self.directories['tomogram_binary_mask'], f"{base_name}_tomogram_binary_mask")
+                tomogram_without_noisy_bottom_planes_path = await self.save_image(tomogram_without_noisy_bottom_planes, self.directories['tomogram_without_noisy_bottom_planes'], f"{base_name}_tomogram_without_noisy_bottom_planes" )
                 if tomogram_binary_mask_path:
                     self.cell.add_auxiliary_data_path('tomogram_binary_mask', tomogram_binary_mask_path)
                 else:
                     logging.error(f"Failed to save tomogram_binary_mask for {self.cell.tomogram_path}")
-            except Exception as e:
-                logging.error(f"Error generating tomogram_binary_mask for {self.cell.tomogram_path}: {e}", exc_info=True)
-                tomogram_binary_mask_path = await self.save_h5(tomogram_binary_mask, self.directories['tomogram_binary_mask'], f"{base_name}_tomogram_binary_mask")
-                if tomogram_binary_mask_path:
-                    self.cell.add_auxiliary_data_path('tomogram_binary_mask', tomogram_binary_mask_path)
+                if tomogram_without_noisy_bottom_planes_path:
+                    self.cell.add_auxiliary_data_path('tomogram_without_noisy_bottom_planes', tomogram_without_noisy_bottom_planes_path)
                 else:
-                    logging.error(f"Failed to save tomogram_binary_mask for {self.cell.tomogram_path}")
+                    logging.error(f"Failed to save tomogram_without_noisy_bottom_planes for {self.cell.tomogram_path}")
             except Exception as e:
                 logging.error(f"Error generating tomogram_binary_mask for {self.cell.tomogram_path}: {e}", exc_info=True)
 
-            # Generate and save 2D binary mask
-            try:
-                binary_mask_image = FeatureExtraction.generate_mip(tomogram_binary_mask)
-                binary_mask_image_path = await self.save_image(binary_mask_image, self.directories['image_binary_mask'], f"{base_name}_image_binary_mask")
-                if binary_mask_image_path:
-                    self.cell.add_auxiliary_data_path('image_binary_mask', binary_mask_image_path)
-                else:
-                    logging.error(f"Failed to save binary_mask_image for {self.cell.tomogram_path}")
-            except Exception as e:
-                logging.error(f"Error generating binary_mask_image for {self.cell.tomogram_path}: {e}", exc_info=True)
+            # # Generate and save 2D binary mask
+            # try:
+            #     binary_mask_image = FeatureExtraction.generate_mip(tomogram_binary_mask)
+            #     binary_mask_image_path = await self.save_image(binary_mask_image, self.directories['image_binary_mask'], f"{base_name}_image_binary_mask")
+            #     if binary_mask_image_path:
+            #         self.cell.add_auxiliary_data_path('image_binary_mask', binary_mask_image_path)
+            #     else:
+            #         logging.error(f"Failed to save binary_mask_image for {self.cell.tomogram_path}")
+            # except Exception as e:
+            #     logging.error(f"Error generating binary_mask_image for {self.cell.tomogram_path}: {e}", exc_info=True)
 
-            # Segment the tomogram
-            try:
-                tomogram_segmented = Segmentation.apply_binary_mask(tomogram, tomogram_binary_mask)
-                tomogram_segmented_path = await self.save_h5(tomogram_segmented, self.directories['tomogram_segmented'], f"{base_name}_tomogram_segmented")
-                if tomogram_segmented_path:
-                    self.cell.add_auxiliary_data_path('tomogram_segmented', tomogram_segmented_path)
-                else:
-                    logging.error(f"Failed to save tomogram_segmented for {self.cell.tomogram_path}")
-            except Exception as e:
-                logging.error(f"Error generating tomogram_segmented for {self.cell.tomogram_path}: {e}", exc_info=True)
+            # # Segment the tomogram
+            # try:
+            #     tomogram_segmented = Segmentation.apply_binary_mask(tomogram, tomogram_binary_mask)
+            #     tomogram_segmented_path = await self.save_h5(tomogram_segmented, self.directories['tomogram_segmented'], f"{base_name}_tomogram_segmented")
+            #     if tomogram_segmented_path:
+            #         self.cell.add_auxiliary_data_path('tomogram_segmented', tomogram_segmented_path)
+            #     else:
+            #         logging.error(f"Failed to save tomogram_segmented for {self.cell.tomogram_path}")
+            # except Exception as e:
+            #     logging.error(f"Error generating tomogram_segmented for {self.cell.tomogram_path}: {e}", exc_info=True)
 
             del tomogram_binary_mask
             cp.get_default_memory_pool().free_all_blocks()
+
             # Generate and save MIP
             try:
                 mip = FeatureExtraction.generate_mip(tomogram)
-                mip_path = await self.save_h5(mip, self.directories['mip'], f"{base_name}_mip")
+                mip_path = await self.save_image(mip, self.directories['mip'], f"{base_name}_mip")
                 if mip_path:
                     self.cell.add_auxiliary_data_path('mip', mip_path)
                 else:
                     logging.error(f"Failed to save MIP for {self.cell.tomogram_path}")
             except Exception as e:
                 logging.error(f"Error generating MIP for {self.cell.tomogram_path}: {e}", exc_info=True)
+
+                        # Generate and save MIP
+            try:
+                mip_without_noisy_bottom_planes = FeatureExtraction.generate_mip(tomogram_without_noisy_bottom_planes)
+                mip_without_noisy_bottom_planes_path = await self.save_image(mip_without_noisy_bottom_planes, self.directories['mip_without_noisy_bottom_planes'], f"{base_name}_mip_without_noisy_bottom_planes")
+                if mip_without_noisy_bottom_planes_path:
+                    self.cell.add_auxiliary_data_path('mip_without_noisy_bottom_planes', mip_without_noisy_bottom_planes_path)
+                else:
+                    logging.error(f"Failed to save MIP_without_noisy_bottom_planes for {self.cell.tomogram_path}")
+            except Exception as e:
+                logging.error(f"Error generating MIP_without_noisy_bottom_planes for {self.cell.tomogram_path}: {e}", exc_info=True)
 
             # #Generate and save scaled MIP
             # mip_scaled_path = self.save_image(mip, self.directories['mip_scaled'], f"{base_name}_mip_scaled", scale=True)
@@ -158,31 +168,31 @@ class AuxiliaryDataGeneration:
             del tomogram
             cp.get_default_memory_pool().free_all_blocks()
 
-            # Generate and save segmented MIP
-            try:
-                segmented_mip = FeatureExtraction.generate_mip(tomogram_segmented)
-                segmented_mip_path = await self.save_h5(segmented_mip, self.directories['mip_segmented'], f"{base_name}_mip_segmented")
-                if segmented_mip_path:
-                    self.cell.add_auxiliary_data_path('mip_segmented', segmented_mip_path)
-                else:
-                    logging.error(f"Failed to save segmented MIP for {self.cell.tomogram_path}")
-                del segmented_mip, tomogram_segmented
-                cp.get_default_memory_pool().free_all_blocks()
-            except Exception as e:
-                logging.error(f"Error generating segmented MIP for {self.cell.tomogram_path}: {e}", exc_info=True)
+            # # Generate and save segmented MIP
+            # try:
+            #     segmented_mip = FeatureExtraction.generate_mip(tomogram_segmented)
+            #     segmented_mip_path = await self.save_h5(segmented_mip, self.directories['mip_segmented'], f"{base_name}_mip_segmented")
+            #     if segmented_mip_path:
+            #         self.cell.add_auxiliary_data_path('mip_segmented', segmented_mip_path)
+            #     else:
+            #         logging.error(f"Failed to save segmented MIP for {self.cell.tomogram_path}")
+            #     del segmented_mip, tomogram_segmented
+            #     cp.get_default_memory_pool().free_all_blocks()
+            # except Exception as e:
+            #     logging.error(f"Error generating segmented MIP for {self.cell.tomogram_path}: {e}", exc_info=True)
 
             # Generate and save scaled segmented MIP
-            try:
-                mip_segmented_scaled = Segmentation.apply_binary_mask((mip-mip.min())/(mip.max()-mip.min()), binary_mask_image)
-                mip_segmented_scaled_path = await self.save_image(mip_segmented_scaled, self.directories["mip_segmented_scaled"], f"{base_name}_segmented_MIP_scaled")
-                if mip_segmented_scaled_path:
-                    self.cell.add_auxiliary_data_path('mip_segmented_scaled', mip_segmented_scaled_path)
-                else:
-                    logging.error(f"Failed to save scaled segmented MIP for {self.cell.tomogram_path}")
-                del mip_segmented_scaled, binary_mask_image, mip
-                cp.get_default_memory_pool().free_all_blocks()
-            except Exception as e:
-                logging.error(f"Error generating scaled segmented MIP for {self.cell.tomogram_path}: {e}", exc_info=True)
+            # try:
+            #     mip_segmented_scaled = Segmentation.apply_binary_mask((mip-mip.min())/(mip.max()-mip.min()), binary_mask_image)
+            #     mip_segmented_scaled_path = await self.save_image(mip_segmented_scaled, self.directories["mip_segmented_scaled"], f"{base_name}_segmented_MIP_scaled")
+            #     if mip_segmented_scaled_path:
+            #         self.cell.add_auxiliary_data_path('mip_segmented_scaled', mip_segmented_scaled_path)
+            #     else:
+            #         logging.error(f"Failed to save scaled segmented MIP for {self.cell.tomogram_path}")
+            #     del mip_segmented_scaled, binary_mask_image, mip
+            #     cp.get_default_memory_pool().free_all_blocks()
+            # except Exception as e:
+            #     logging.error(f"Error generating scaled segmented MIP for {self.cell.tomogram_path}: {e}", exc_info=True)
 
             # # Generate and save phase shift
             # phase_shift = FeatureExtraction.generate_phase_delay_image(tomogram, self.pixel_x, self.wavelength, self.background_ri)

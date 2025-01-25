@@ -20,6 +20,7 @@ resistance_mapping = {
 
 log_file_path = "../pyQPI/src/logs/log_file.log"
 files_with_errors = "../pyQPI/src/logs/files_with_errors_skipped_during_processing.log"
+bottom_plane_log = "../pyQPI/src/logs/bottom_plane.log"
 
 # dataset_location = (
 #     r"D:\OneDrive_JohnsHopkins\Desktop\JohnsHopkins\Projects\OracleQPI\pyQPI\data"

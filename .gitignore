@@ -7,3 +7,4 @@
 /.run/
 error_record.log
 /data/
+**/segmentation_dataset.py

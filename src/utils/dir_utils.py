@@ -39,6 +39,8 @@ def get_output_directories(dish_path: str) -> Dict[str, str]:
         "mip_segmented_scaled": os.path.join(dish_path, "MIP_segmented_scaled"),
         "tomogram_binary_mask": os.path.join(dish_path, "Tomogram_binary_mask"),
         "tomogram_segmented": os.path.join(dish_path, "Tomogram_segmented"),
+        "tomogram_without_noisy_bottom_planes": os.path.join(dish_path, "Tomogram_without_noisy_bottom_planes"),
+        "mip_without_noisy_bottom_planes": os.path.join(dish_path, "MIP_without_noisy_bottom_planes"),
     }
     for dir_path in directories.values():
         create_directory(dir_path)
