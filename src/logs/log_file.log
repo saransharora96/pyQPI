@@ -1,0 +1,325 @@
+2025-01-27 15:27:41,242 - INFO - Starting processing...
+2025-01-27 15:28:51,477 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.143937.346.Default-003P008_RI Tomogram.tiff
+2025-01-27 15:28:52,153 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.152422.804.Default-007P005_RI Tomogram.tiff
+2025-01-27 15:28:52,850 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.144605.883.Default-004P004_RI Tomogram.tiff
+2025-01-27 15:29:12,569 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.143106.589.Default-002P002_RI Tomogram.tiff
+2025-01-27 15:29:23,632 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.143108.155.Default-002P016_RI Tomogram.tiff
+2025-01-27 15:29:31,980 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.190255.707.Default-046P014_RI Tomogram.tiff
+2025-01-27 15:29:45,105 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.183300.105.Default-045P070_RI Tomogram.tiff
+2025-01-27 15:29:56,523 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.183259.453.Default-045P060_RI Tomogram.tiff
+2025-01-27 15:29:57,508 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.183258.813.Default-045P050_RI Tomogram.tiff
+2025-01-27 15:30:03,551 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.223909.012.Default-192Stitching_RI Tomogram.tiff
+2025-01-27 15:30:33,552 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:30:34,650 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.183258.090.Default-045P037_RI Tomogram.tiff
+2025-01-27 15:30:35,110 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.183257.392.Default-045P026_RI Tomogram.tiff
+2025-01-27 15:31:19,961 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 2/10)...
+2025-01-27 15:32:08,534 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 3/10)...
+2025-01-27 15:32:14,819 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 4/10)...
+2025-01-27 15:32:17,103 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.170736.665.Default-044P033_RI Tomogram.tiff
+2025-01-27 15:32:17,242 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.170737.547.Default-044P046_RI Tomogram.tiff
+2025-01-27 15:32:29,981 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.183256.639.Default-045P015_RI Tomogram.tiff
+2025-01-27 15:32:38,366 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.170735.871.Default-044P020_RI Tomogram.tiff
+2025-01-27 15:32:41,961 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.170734.195.Default-044P004_RI Tomogram.tiff
+2025-01-27 15:32:52,987 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.163537.312.Default-042P009_RI Tomogram.tiff
+2025-01-27 15:33:12,586 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.163158.546.Default-041P009_RI Tomogram.tiff
+2025-01-27 15:33:13,052 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.162209.678.Default-040P015_RI Tomogram.tiff
+2025-01-27 15:33:14,162 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.225416.087.Default-200Stitching_RI Tomogram.tiff
+2025-01-27 15:33:15,856 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.162207.182.Default-040P003_RI Tomogram.tiff
+2025-01-27 15:33:43,702 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.160201.393.Default-039P037_RI Tomogram.tiff
+2025-01-27 15:33:47,057 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.160202.261.Default-039P051_RI Tomogram.tiff
+2025-01-27 15:33:48,566 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.160159.811.Default-039P014_RI Tomogram.tiff
+2025-01-27 15:34:06,559 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.160157.713.Default-039P003_RI Tomogram.tiff
+2025-01-27 15:34:10,313 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.153452.199.Default-038P035_RI Tomogram.tiff
+2025-01-27 15:34:12,181 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.153451.408.Default-038P024_RI Tomogram.tiff
+2025-01-27 15:34:28,846 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.130012.515.cell_line_2_dish_2-022Stitching_RI Tomogram.tiff
+2025-01-27 15:34:32,270 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.153450.146.Default-038P010_RI Tomogram.tiff
+2025-01-27 15:34:39,234 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.151327.709.Default-037P025_RI Tomogram.tiff
+2025-01-27 15:34:40,136 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.151326.975.Default-037P011_RI Tomogram.tiff
+2025-01-27 15:34:52,179 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.145901.047.Default-036P001_RI Tomogram.tiff
+2025-01-27 15:35:11,685 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.144710.693.Default-035P001_RI Tomogram.tiff
+2025-01-27 15:35:13,815 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.142117.780.Default-033P019_RI Tomogram.tiff
+2025-01-27 15:35:20,756 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.142117.305.Default-033P009_RI Tomogram.tiff
+2025-01-27 15:35:26,212 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.141238.050.Default-032P003_RI Tomogram.tiff
+2025-01-27 15:35:33,826 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.132820.124.Default-030P004_RI Tomogram.tiff
+2025-01-27 15:35:50,021 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.125409.573.Default-024P003_RI Tomogram.tiff
+2025-01-27 15:36:13,463 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_7/20240411.221625.666.Default-191_RI Tomogram.tiff
+2025-01-27 15:36:19,103 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_7/20240411.225111.758.Default-206_RI Tomogram.tiff
+2025-01-27 15:36:21,171 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.225837.345.Default-202Stitching_RI Tomogram.tiff
+2025-01-27 15:36:21,544 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_7/20240411.213405.587.Default-171_RI Tomogram.tiff
+2025-01-27 15:36:34,000 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_7/20240411.205730.212.Default-155_RI Tomogram.tiff
+2025-01-27 15:36:41,077 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_7/20240411.191932.586.Default-134_RI Tomogram.tiff
+2025-01-27 15:36:54,805 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_7/20240411.184303.103.Default-108_RI Tomogram.tiff
+2025-01-27 15:37:04,438 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_7/20240411.175215.009.Default-090_RI Tomogram.tiff
+2025-01-27 15:37:12,771 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_7/20240411.170543.462.Default-075_RI Tomogram.tiff
+2025-01-27 15:37:44,524 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_7/20240411.162635.947.Default-048_RI Tomogram.tiff
+2025-01-27 15:37:46,011 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_7/20240411.164109.181.Default-059_RI Tomogram.tiff
+2025-01-27 15:37:46,479 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:38:18,585 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_7/20240411.161609.103.Default-038_RI Tomogram.tiff
+2025-01-27 15:38:25,578 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:38:26,308 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.223518.498.Default-191Stitching_RI Tomogram.tiff
+2025-01-27 15:38:29,700 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_7/20240411.151022.586.Default-006_RI Tomogram.tiff
+2025-01-27 15:38:46,038 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_7/20240411.155445.559.Default-025_RI Tomogram.tiff
+2025-01-27 15:38:54,402 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.120008.337.Default-006_RI Tomogram.tiff
+2025-01-27 15:39:08,743 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.213631.179.Default-057P010_RI Tomogram.tiff
+2025-01-27 15:39:14,916 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.213628.444.Default-057P003_RI Tomogram.tiff
+2025-01-27 15:39:21,220 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.211101.986.Default-053P027_RI Tomogram.tiff
+2025-01-27 15:39:46,725 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.211100.663.Default-053P008_RI Tomogram.tiff
+2025-01-27 15:39:47,743 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.211101.367.Default-053P018_RI Tomogram.tiff
+2025-01-27 15:39:54,656 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.204950.782.Default-052P023_RI Tomogram.tiff
+2025-01-27 15:39:59,866 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.131215.951.cell_line_2_dish_2-028Stitching_RI Tomogram.tiff
+2025-01-27 15:40:16,275 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.204949.928.Default-052P008_RI Tomogram.tiff
+2025-01-27 15:40:18,722 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.204950.423.Default-052P017_RI Tomogram.tiff
+2025-01-27 15:40:26,698 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.204946.444.Default-052P002_RI Tomogram.tiff
+2025-01-27 15:40:51,388 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:40:52,609 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.203137.001.Default-050P010_RI Tomogram.tiff
+2025-01-27 15:41:05,236 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.203136.953.Default-050P009_RI Tomogram.tiff
+2025-01-27 15:41:05,376 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.203136.375.Default-050P008_RI Tomogram.tiff
+2025-01-27 15:41:40,286 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:41:42,077 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.203136.328.Default-050P007_RI Tomogram.tiff
+2025-01-27 15:42:01,556 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 2/10)...
+2025-01-27 15:42:02,847 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.203136.277.Default-050P006_RI Tomogram.tiff
+2025-01-27 15:42:30,200 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:42:32,284 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.131454.825.cell_line_2_dish_2-030Stitching_RI Tomogram.tiff
+2025-01-27 15:42:33,106 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.203135.019.Default-050P004_RI Tomogram.tiff
+2025-01-27 15:42:40,099 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.203135.895.Default-050P005_RI Tomogram.tiff
+2025-01-27 15:42:54,350 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 2/10)...
+2025-01-27 15:43:24,649 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.203132.109.Default-050P001_RI Tomogram.tiff
+2025-01-27 15:43:25,126 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 3/10)...
+2025-01-27 15:43:26,457 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201144.555.Default-049P023_RI Tomogram.tiff
+2025-01-27 15:43:51,550 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:43:54,904 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.203134.220.Default-050P003_RI Tomogram.tiff
+2025-01-27 15:44:03,025 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201144.347.Default-049P021_RI Tomogram.tiff
+2025-01-27 15:44:43,234 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201144.460.Default-049P022_RI Tomogram.tiff
+2025-01-27 15:44:44,265 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:44:46,497 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201144.305.Default-049P020_RI Tomogram.tiff
+2025-01-27 15:44:47,223 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.123942.088.cell_line_2_dish_2-019Stitching_RI Tomogram.tiff
+2025-01-27 15:45:08,429 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 2/10)...
+2025-01-27 15:45:09,938 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201144.218.Default-049P018_RI Tomogram.tiff
+2025-01-27 15:45:32,709 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 3/10)...
+2025-01-27 15:45:33,562 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201144.167.Default-049P017_RI Tomogram.tiff
+2025-01-27 15:45:57,164 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:46:00,212 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201144.076.Default-049P015_RI Tomogram.tiff
+2025-01-27 15:46:00,226 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201144.263.Default-049P019_RI Tomogram.tiff
+2025-01-27 15:46:20,554 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201144.035.Default-049P014_RI Tomogram.tiff
+2025-01-27 15:47:05,572 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201143.865.Default-049P012_RI Tomogram.tiff
+2025-01-27 15:47:22,381 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.130957.233.cell_line_2_dish_2-026Stitching_RI Tomogram.tiff
+2025-01-27 15:47:38,207 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201143.776.Default-049P010_RI Tomogram.tiff
+2025-01-27 15:47:39,335 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201143.822.Default-049P011_RI Tomogram.tiff
+2025-01-27 15:47:39,538 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201143.907.Default-049P013_RI Tomogram.tiff
+2025-01-27 15:48:10,852 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:48:13,439 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201143.587.Default-049P008_RI Tomogram.tiff
+2025-01-27 15:48:14,058 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201143.538.Default-049P007_RI Tomogram.tiff
+2025-01-27 15:48:14,075 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201143.493.Default-049P006_RI Tomogram.tiff
+2025-01-27 15:48:41,554 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:48:42,850 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201141.062.Default-049P003_RI Tomogram.tiff
+2025-01-27 15:48:42,912 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201143.237.Default-049P005_RI Tomogram.tiff
+2025-01-27 15:49:04,765 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201141.971.Default-049P004_RI Tomogram.tiff
+2025-01-27 15:49:18,860 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.115744.225.cell_line_2_dish_2-005Stitching_RI Tomogram.tiff
+2025-01-27 15:49:29,100 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201138.839.Default-049P001_RI Tomogram.tiff
+2025-01-27 15:49:29,144 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.201140.261.Default-049P002_RI Tomogram.tiff
+2025-01-27 15:49:30,198 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194438.588.Default-048P019_RI Tomogram.tiff
+2025-01-27 15:50:04,410 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194438.339.Default-048P015_RI Tomogram.tiff
+2025-01-27 15:50:04,883 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194438.383.Default-048P016_RI Tomogram.tiff
+2025-01-27 15:50:06,134 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194438.427.Default-048P017_RI Tomogram.tiff
+2025-01-27 15:50:53,931 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194438.236.Default-048P013_RI Tomogram.tiff
+2025-01-27 15:50:53,993 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194438.192.Default-048P012_RI Tomogram.tiff
+2025-01-27 15:50:57,042 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.115506.539.cell_line_2_dish_2-004Stitching_RI Tomogram.tiff
+2025-01-27 15:51:12,738 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194438.281.Default-048P014_RI Tomogram.tiff
+2025-01-27 15:51:29,012 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:51:30,325 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194438.103.Default-048P010_RI Tomogram.tiff
+2025-01-27 15:51:55,954 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:51:56,278 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194437.958.Default-048P008_RI Tomogram.tiff
+2025-01-27 15:52:17,255 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194438.147.Default-048P011_RI Tomogram.tiff
+2025-01-27 15:52:18,109 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 2/10)...
+2025-01-27 15:52:41,533 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 3/10)...
+2025-01-27 15:52:43,091 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194437.785.Default-048P006_RI Tomogram.tiff
+2025-01-27 15:52:45,479 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.230000.627.Default-203Stitching_RI Tomogram.tiff
+2025-01-27 15:52:47,081 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194437.149.Default-048P005_RI Tomogram.tiff
+2025-01-27 15:52:58,282 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194437.875.Default-048P007_RI Tomogram.tiff
+2025-01-27 15:53:13,573 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194436.269.Default-048P004_RI Tomogram.tiff
+2025-01-27 15:53:14,249 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194434.491.Default-048P002_RI Tomogram.tiff
+2025-01-27 15:53:30,892 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_6/20240417.194433.904.Default-048P001_RI Tomogram.tiff
+2025-01-27 15:54:00,098 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.025229.136.Default-098_RI Tomogram.tiff
+2025-01-27 15:54:10,399 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.025203.337.Default-097_RI Tomogram.tiff
+2025-01-27 15:54:10,846 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.025337.993.Default-099_RI Tomogram.tiff
+2025-01-27 15:54:19,035 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.121949.593.cell_line_2_dish_2-012Stitching_RI Tomogram.tiff
+2025-01-27 15:54:26,102 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.025144.245.Default-096_RI Tomogram.tiff
+2025-01-27 15:54:37,599 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.024909.258.Default-095_RI Tomogram.tiff
+2025-01-27 15:54:48,103 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.024635.492.Default-093_RI Tomogram.tiff
+2025-01-27 15:55:14,665 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:55:16,087 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.024517.288.Default-091_RI Tomogram.tiff
+2025-01-27 15:55:16,594 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.024450.477.Default-090_RI Tomogram.tiff
+2025-01-27 15:55:41,465 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.024335.322.Default-089_RI Tomogram.tiff
+2025-01-27 15:55:44,441 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.230047.812.Default-204Stitching_RI Tomogram.tiff
+2025-01-27 15:56:08,240 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.024125.119.Default-087_RI Tomogram.tiff
+2025-01-27 15:56:08,760 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.024259.570.Default-088_RI Tomogram.tiff
+2025-01-27 15:56:23,026 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.024056.069.Default-086_RI Tomogram.tiff
+2025-01-27 15:56:43,093 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.023907.806.Default-083_RI Tomogram.tiff
+2025-01-27 15:56:45,464 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.023928.729.Default-084_RI Tomogram.tiff
+2025-01-27 15:57:04,528 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.023845.463.Default-082_RI Tomogram.tiff
+2025-01-27 15:57:30,362 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.131040.326.cell_line_2_dish_2-027Stitching_RI Tomogram.tiff
+2025-01-27 15:57:33,017 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.023741.885.Default-080_RI Tomogram.tiff
+2025-01-27 15:57:35,061 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.023819.871.Default-081_RI Tomogram.tiff
+2025-01-27 15:57:39,005 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.023708.368.Default-079_RI Tomogram.tiff
+2025-01-27 15:58:14,614 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:58:15,908 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.023332.244.Default-076_RI Tomogram.tiff
+2025-01-27 15:58:17,523 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.023351.540.Default-077_RI Tomogram.tiff
+2025-01-27 15:58:20,843 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.022750.585.Default-075_RI Tomogram.tiff
+2025-01-27 15:58:47,256 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.022514.788.Default-072_RI Tomogram.tiff
+2025-01-27 15:58:48,401 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.022734.542.Default-074_RI Tomogram.tiff
+2025-01-27 15:58:48,788 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.022447.979.Default-071_RI Tomogram.tiff
+2025-01-27 15:59:01,009 - INFO - Data size: 1.01 GB, Saved incrementally: ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/Tomogram_without_noisy_bottom_planes/20240501.224122.655.Default-193Stitching_RI Tomogram_tomogram_without_noisy_bottom_planes.tiff
+2025-01-27 15:59:14,790 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 15:59:57,227 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 2/10)...
+2025-01-27 16:00:00,283 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.022217.461.Default-068_RI Tomogram.tiff
+2025-01-27 16:00:00,354 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.022238.791.Default-069_RI Tomogram.tiff
+2025-01-27 16:00:02,104 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.224122.655.Default-193Stitching_RI Tomogram.tiff
+2025-01-27 16:00:20,481 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.022133.585.Default-067_RI Tomogram.tiff
+2025-01-27 16:00:32,817 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.021838.897.Default-064_RI Tomogram.tiff
+2025-01-27 16:00:35,674 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.022110.633.Default-066_RI Tomogram.tiff
+2025-01-27 16:01:25,691 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 16:01:27,059 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.021311.868.Default-061_RI Tomogram.tiff
+2025-01-27 16:01:28,262 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.021247.089.Default-060_RI Tomogram.tiff
+2025-01-27 16:02:27,420 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.123726.722.cell_line_2_dish_2-018Stitching_RI Tomogram.tiff
+2025-01-27 16:03:04,290 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020831.147.Default-056_RI Tomogram.tiff
+2025-01-27 16:03:05,521 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020950.573.Default-058_RI Tomogram.tiff
+2025-01-27 16:03:07,200 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020919.695.Default-057_RI Tomogram.tiff
+2025-01-27 16:03:39,549 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.225737.449.Default-201Stitching_RI Tomogram.tiff
+2025-01-27 16:03:44,667 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020723.101.Default-053_RI Tomogram.tiff
+2025-01-27 16:03:59,861 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020654.460.Default-052_RI Tomogram.tiff
+2025-01-27 16:04:00,200 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020748.492.Default-054_RI Tomogram.tiff
+2025-01-27 16:04:31,128 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 16:05:25,155 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 2/10)...
+2025-01-27 16:05:26,832 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020540.322.Default-049_RI Tomogram.tiff
+2025-01-27 16:05:27,218 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020507.011.Default-048_RI Tomogram.tiff
+2025-01-27 16:05:28,192 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020607.336.Default-050_RI Tomogram.tiff
+2025-01-27 16:05:56,986 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020423.741.Default-047_RI Tomogram.tiff
+2025-01-27 16:05:58,596 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020337.023.Default-046_RI Tomogram.tiff
+2025-01-27 16:06:11,227 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020322.399.Default-045_RI Tomogram.tiff
+2025-01-27 16:06:38,110 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.131616.939.cell_line_2_dish_2-031Stitching_RI Tomogram.tiff
+2025-01-27 16:06:53,195 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020242.993.Default-043_RI Tomogram.tiff
+2025-01-27 16:07:04,490 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020225.726.Default-042_RI Tomogram.tiff
+2025-01-27 16:07:08,828 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.020256.805.Default-044_RI Tomogram.tiff
+2025-01-27 16:07:31,659 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.015728.554.Default-040_RI Tomogram.tiff
+2025-01-27 16:07:48,743 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.015659.913.Default-039_RI Tomogram.tiff
+2025-01-27 16:07:56,638 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.015511.245.Default-038_RI Tomogram.tiff
+2025-01-27 16:08:13,910 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.015208.839.Default-037_RI Tomogram.tiff
+2025-01-27 16:08:26,632 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.015128.413.Default-036_RI Tomogram.tiff
+2025-01-27 16:08:36,751 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.014701.305.Default-033_RI Tomogram.tiff
+2025-01-27 16:09:18,860 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 16:09:20,576 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.225215.506.Default-199Stitching_RI Tomogram.tiff
+2025-01-27 16:09:22,461 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.014321.522.Default-030_RI Tomogram.tiff
+2025-01-27 16:09:24,252 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.014351.993.Default-031_RI Tomogram.tiff
+2025-01-27 16:09:40,554 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.014248.418.Default-029_RI Tomogram.tiff
+2025-01-27 16:09:56,362 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.013344.445.Default-025_RI Tomogram.tiff
+2025-01-27 16:09:57,179 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.013102.554.Default-023_RI Tomogram.tiff
+2025-01-27 16:10:15,066 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.013031.073.Default-022_RI Tomogram.tiff
+2025-01-27 16:10:55,783 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 16:11:44,125 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 2/10)...
+2025-01-27 16:11:45,889 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.010219.038.Default-020_RI Tomogram.tiff
+2025-01-27 16:12:04,891 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 16:12:06,607 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.222806.965.Default-188Stitching_RI Tomogram.tiff
+2025-01-27 16:12:07,392 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.010121.757.Default-019_RI Tomogram.tiff
+2025-01-27 16:12:25,349 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.012853.977.Default-021_RI Tomogram.tiff
+2025-01-27 16:12:26,923 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.010039.711.Default-018_RI Tomogram.tiff
+2025-01-27 16:12:40,369 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.005921.307.Default-016_RI Tomogram.tiff
+2025-01-27 16:13:00,550 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.005701.960.Default-014_RI Tomogram.tiff
+2025-01-27 16:13:20,001 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.005634.944.Default-013_RI Tomogram.tiff
+2025-01-27 16:13:28,246 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.005604.884.Default-012_RI Tomogram.tiff
+2025-01-27 16:13:47,476 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.005549.242.Default-011_RI Tomogram.tiff
+2025-01-27 16:13:48,517 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.123522.795.cell_line_2_dish_2-016Stitching_RI Tomogram.tiff
+2025-01-27 16:13:51,190 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.005530.556.Default-010_RI Tomogram.tiff
+2025-01-27 16:14:01,987 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.005456.837.Default-009_RI Tomogram.tiff
+2025-01-27 16:14:23,648 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.005439.573.Default-008_RI Tomogram.tiff
+2025-01-27 16:15:07,114 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.005112.180.Default-005_RI Tomogram.tiff
+2025-01-27 16:15:30,737 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.004922.898.Default-003_RI Tomogram.tiff
+2025-01-27 16:15:34,655 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.004956.210.Default-004_RI Tomogram.tiff
+2025-01-27 16:15:47,572 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.004908.680.Default-002_RI Tomogram.tiff
+2025-01-27 16:16:30,411 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.130148.609.cell_line_2_dish_2-023Stitching_RI Tomogram.tiff
+2025-01-27 16:16:43,168 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.003707.913.Default-039_RI Tomogram.tiff
+2025-01-27 16:16:49,719 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.004711.273.Default-001_RI Tomogram.tiff
+2025-01-27 16:17:00,466 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.003916.086.Default-041_RI Tomogram.tiff
+2025-01-27 16:17:18,976 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.003130.120.Default-036_RI Tomogram.tiff
+2025-01-27 16:17:20,623 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.003511.933.Default-037_RI Tomogram.tiff
+2025-01-27 16:17:39,502 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.002607.962.Default-033_RI Tomogram.tiff
+2025-01-27 16:18:04,108 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 16:18:52,468 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 2/10)...
+2025-01-27 16:18:53,816 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.224351.734.Default-195Stitching_RI Tomogram.tiff
+2025-01-27 16:18:54,891 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.002515.559.Default-031_RI Tomogram.tiff
+2025-01-27 16:18:55,210 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.002550.089.Default-032_RI Tomogram.tiff
+2025-01-27 16:19:16,744 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.002438.995.Default-030_RI Tomogram.tiff
+2025-01-27 16:19:39,502 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.001948.117.Default-026_RI Tomogram.tiff
+2025-01-27 16:19:41,096 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.001858.355.Default-025_RI Tomogram.tiff
+2025-01-27 16:19:56,034 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.001828.897.Default-024_RI Tomogram.tiff
+2025-01-27 16:20:28,682 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.224610.629.Default-196Stitching_RI Tomogram.tiff
+2025-01-27 16:20:41,230 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.001241.759.Default-020_RI Tomogram.tiff
+2025-01-27 16:20:44,418 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.001105.679.Default-018_RI Tomogram.tiff
+2025-01-27 16:20:47,883 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.001124.571.Default-019_RI Tomogram.tiff
+2025-01-27 16:21:16,549 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.000944.229.Default-016_RI Tomogram.tiff
+2025-01-27 16:21:19,301 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.000920.666.Default-015_RI Tomogram.tiff
+2025-01-27 16:21:34,635 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.000859.944.Default-014_RI Tomogram.tiff
+2025-01-27 16:22:06,962 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.124155.814.cell_line_2_dish_2-020Stitching_RI Tomogram.tiff
+2025-01-27 16:22:27,354 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.000711.678.Default-013_RI Tomogram.tiff
+2025-01-27 16:22:29,216 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.000530.932.Default-012_RI Tomogram.tiff
+2025-01-27 16:22:35,735 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.000513.663.Default-011_RI Tomogram.tiff
+2025-01-27 16:22:58,266 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 16:23:20,279 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.000439.339.Default-009_RI Tomogram.tiff
+2025-01-27 16:23:23,837 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.000424.915.Default-008_RI Tomogram.tiff
+2025-01-27 16:23:44,329 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.000401.759.Default-007_RI Tomogram.tiff
+2025-01-27 16:24:03,498 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.000338.195.Default-006_RI Tomogram.tiff
+2025-01-27 16:24:03,851 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_2/dish_6/20241227.130901.377.cell_line_2_dish_2-025Stitching_RI Tomogram.tiff
+2025-01-27 16:24:17,316 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.000321.133.Default-005_RI Tomogram.tiff
+2025-01-27 16:24:23,715 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.000250.257.Default-004_RI Tomogram.tiff
+2025-01-27 16:24:45,560 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240123.235740.089.Default-082_RI Tomogram.tiff
+2025-01-27 16:24:47,151 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240124.000140.993.Default-003_RI Tomogram.tiff
+2025-01-27 16:24:51,266 - INFO - 0 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240123.235646.868.Default-081_RI Tomogram.tiff
+2025-01-27 16:25:13,691 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 1/10)...
+2025-01-27 16:26:09,132 - WARNING - OutOfMemoryError: Retrying CuPy allocation in 3s (Attempt 2/10)...
+2025-01-27 16:26:10,445 - INFO - 3 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240123.235508.964.Default-079_RI Tomogram.tiff
+2025-01-27 16:26:11,262 - INFO - 2 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_3/dish_6/20240123.235522.369.Default-080_RI Tomogram.tiff
+2025-01-27 16:26:17,156 - INFO - 1 - Successfully completed ../../../mnt/g/radiation_resistance_dataset_export/cell_line_1/dish_8/20240501.225003.029.Default-198Stitching_RI Tomogram.tiff
+2025-01-27 16:26:25,264 - ERROR - Error with pool
+Traceback (most recent call last):
+  File "/root/pyQPI/src/main/process_dataset.py", line 279, in process_directory
+    with worker_lock:  # Use the shared lock
+  File "/usr/lib/python3.12/multiprocessing/managers.py", line 1057, in __exit__
+    return self._callmethod('release')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/managers.py", line 821, in _callmethod
+    kind, result = conn.recv()
+                   ^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/connection.py", line 430, in _recv_bytes
+    buf = self._recv(4)
+          ^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/connection.py", line 395, in _recv
+    chunk = read(handle, remaining)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/pyQPI/src/main/process_dataset.py", line 263, in process_directory
+    with Pool(
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 739, in __exit__
+    self.terminate()
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 657, in terminate
+    self._terminate()
+  File "/usr/lib/python3.12/multiprocessing/util.py", line 227, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/pool.py", line 732, in _terminate_pool
+    p.join()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 43, in wait
+    return self.poll(os.WNOHANG if timeout == 0.0 else 0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/popen_fork.py", line 27, in poll
+    pid, sts = os.waitpid(self.pid, flag)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

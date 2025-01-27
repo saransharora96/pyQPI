@@ -2,6 +2,7 @@ import os
 import time
 import logging
 from multiprocessing import Manager, Queue
+import warnings
 from install_modules import upgrade_pip, install_packages
 import utils.dir_utils as file_utils
 from process_dataset import process_directory
@@ -12,6 +13,7 @@ from config.config_radiation_resistance import (
     output_csv_path,
     log_file_path
 )
+import cupy as cp
 
 
 def execute_code():
@@ -19,6 +21,10 @@ def execute_code():
     Main function to execute the processing workflow. It sets up logging, manages
     dataset processing, and handles the cleanup of temporary files.
     """
+
+    # Suppress specific PerformanceWarning from CuPy
+    warnings.filterwarnings("ignore", message=".*Using synchronous transfer as pinned memory.*")  # Specific warning message
+
     # Setup logging
     os.remove(log_file_path) if os.path.exists(log_file_path) else None
     log_queue = Queue()
@@ -40,8 +46,8 @@ def execute_code():
         install_packages()
 
     # Remove temporary files
-    file_utils.remove_files(dataset_location, r"", ".png")  # Delete .png thumbnails
-    file_utils.remove_files(dataset_location, r"T\d{3}_", ".tiff")  # Delete T***_ (un-stitched)
+    # file_utils.remove_files(dataset_location, r"", ".png")  # Delete .png thumbnails
+    # file_utils.remove_files(dataset_location, r"T\d{3}_", ".tiff")  # Delete T***_ (un-stitched)
     os.system('cls' if os.name == 'nt' else 'clear')
 
     logging.info("Starting processing...")

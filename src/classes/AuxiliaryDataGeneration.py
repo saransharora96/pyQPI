@@ -10,6 +10,7 @@ from utils.dir_utils import ensure_cupy_array
 import asyncio
 import aiofiles
 import logging
+from config.config_radiation_resistance import chunked_save_threshold, chunk_size
 
 
 class AuxiliaryDataGeneration:
@@ -46,18 +47,50 @@ class AuxiliaryDataGeneration:
         if not os.path.exists(directory):
             await loop.run_in_executor(None, os.makedirs, directory)
 
+    async def retry_cupy_allocation(self, func, *args, retries=10, delay=3, **kwargs):
+        """
+        Retry CuPy memory allocation on failure, supporting both coroutines and regular functions.
+        """
+        for attempt in range(retries):
+            try:
+                # Check if the function is a coroutine
+                if asyncio.iscoroutinefunction(func):
+                    return await func(*args, **kwargs)
+                else:
+                    return func(*args, **kwargs)
+            except cp.cuda.memory.OutOfMemoryError:
+                if attempt < retries - 1:
+                    logging.warning(f"OutOfMemoryError: Retrying CuPy allocation in {delay}s (Attempt {attempt + 1}/{retries})...")
+                    cp.get_default_memory_pool().free_all_blocks()
+                    cp.get_default_pinned_memory_pool().free_all_blocks()
+                    await asyncio.sleep(delay)
+                else:
+                    logging.error("OutOfMemoryError: All retries failed.")
+                    raise
+
     async def save_image(self, data, directory, filename, scale=False):
         """Save an image asynchronously, optionally scaling it to [0, 1]."""
         path = os.path.join(directory, f"{filename}.tiff")
         try:
             if scale:
                 data = (data - data.min()) / (data.max() - data.min())
-
             data = data.get()  # Convert CuPy array to NumPy
-            await asyncio.to_thread(self._sync_save_image, data, path)
+
+            # Use incremental write for large files
+            if data.nbytes > chunked_save_threshold:
+                await asyncio.to_thread(self._incremental_write_tiff, data, path)
+            else:
+                await asyncio.to_thread(self._sync_save_image, data, path)
+                
             return path
         except Exception as e:
-            logging.error(f"Failed to save image at {path}: {e}")
+            logging.error(
+                f"Failed to save image at {path}. Error: {str(e)} | "
+                f"Data size: {data.nbytes / (1024**3):.2f} GB | "
+                f"Data shape: {getattr(data, 'shape', 'Unknown')} | "
+                f"Data type: {getattr(data, 'dtype', 'Unknown')}",
+                exc_info=True,
+                )
             return None
         finally:
             del data    
@@ -65,6 +98,18 @@ class AuxiliaryDataGeneration:
     def _sync_save_image(self, data, path):
         with TiffWriter(path) as tiff_writer:
             tiff_writer.write(data.astype('float32'))
+
+    def _incremental_write_tiff(self, data, path, chunk_size=chunk_size):
+        """Synchronous incremental write for large 3D arrays."""
+        try:
+            with TiffWriter(path, bigtiff=True) as tiff_writer:
+                for i in range(0, data.shape[0], chunk_size):
+                    chunk = data[i:i + chunk_size]
+                    tiff_writer.write(chunk.astype('float32'), contiguous=False)
+                logging.info(f"Data size: {data.nbytes / (1024**3):.2f} GB, Saved incrementally: {path}")
+        except Exception as e:
+            logging.error(f"Failed to write BigTIFF file at {path}: {e}", exc_info=True)
+            raise
 
     async def save_h5(self, data, directory, filename):
         """Save data to an HDF5 file asynchronously."""
@@ -83,13 +128,12 @@ class AuxiliaryDataGeneration:
         with h5py.File(path, "w") as h5file:
             h5file.create_dataset("data", data=data, dtype='float32', compression="gzip")
 
-
     async def generate_and_save_auxiliary_data(self):
         """Generates and saves all required auxiliary data based on the cell's tomogram."""
         try:
             
             # Load the tomogram from the cell
-            tomogram = await self.cell.load_tomogram()
+            tomogram = await self.retry_cupy_allocation(self.cell.load_tomogram)
             if tomogram is None or tomogram.size == 0:
                 raise ValueError(f"Invalid tomogram: {type(tomogram)}, size={getattr(tomogram, 'size', 'N/A')}")
 
@@ -98,10 +142,10 @@ class AuxiliaryDataGeneration:
             # Process tomogram to generate binary masks and segmented images
             try:
                 segmenter = Segmentation(method="min_cross_entropy")
-                tomogram_without_noisy_bottom_planes, tomogram_binary_mask = process_tomogram(tomogram, segmenter)
+                tomogram_without_noisy_bottom_planes, tomogram_binary_mask, bottom_plane, max_plane = await self.retry_cupy_allocation(process_tomogram, tomogram, segmenter)
                 if tomogram_binary_mask is None:
                     raise ValueError(f"process_tomogram returned None for {self.cell.tomogram_path}")
-                tomogram_binary_mask_path = await self.save_h5(tomogram_binary_mask, self.directories['tomogram_binary_mask'], f"{base_name}_tomogram_binary_mask")
+                tomogram_binary_mask_path = await self.save_image(tomogram_binary_mask, self.directories['tomogram_binary_mask'], f"{base_name}_tomogram_binary_mask")
                 tomogram_without_noisy_bottom_planes_path = await self.save_image(tomogram_without_noisy_bottom_planes, self.directories['tomogram_without_noisy_bottom_planes'], f"{base_name}_tomogram_without_noisy_bottom_planes" )
                 if tomogram_binary_mask_path:
                     self.cell.add_auxiliary_data_path('tomogram_binary_mask', tomogram_binary_mask_path)
@@ -125,23 +169,23 @@ class AuxiliaryDataGeneration:
             # except Exception as e:
             #     logging.error(f"Error generating binary_mask_image for {self.cell.tomogram_path}: {e}", exc_info=True)
 
-            # # Segment the tomogram
-            # try:
-            #     tomogram_segmented = Segmentation.apply_binary_mask(tomogram, tomogram_binary_mask)
-            #     tomogram_segmented_path = await self.save_h5(tomogram_segmented, self.directories['tomogram_segmented'], f"{base_name}_tomogram_segmented")
-            #     if tomogram_segmented_path:
-            #         self.cell.add_auxiliary_data_path('tomogram_segmented', tomogram_segmented_path)
-            #     else:
-            #         logging.error(f"Failed to save tomogram_segmented for {self.cell.tomogram_path}")
-            # except Exception as e:
-            #     logging.error(f"Error generating tomogram_segmented for {self.cell.tomogram_path}: {e}", exc_info=True)
+            # Segment the tomogram
+            try:
+                tomogram_segmented = await self.retry_cupy_allocation(Segmentation.apply_binary_mask, tomogram_without_noisy_bottom_planes, tomogram_binary_mask)
+                tomogram_segmented_path = await self.save_h5(tomogram_segmented, self.directories['tomogram_segmented'], f"{base_name}_tomogram_segmented")
+                if tomogram_segmented_path:
+                    self.cell.add_auxiliary_data_path('tomogram_segmented', tomogram_segmented_path)
+                else:
+                    logging.error(f"Failed to save tomogram_segmented for {self.cell.tomogram_path}")
+            except Exception as e:
+                logging.error(f"Error generating tomogram_segmented for {self.cell.tomogram_path}: {e}", exc_info=True)
 
-            del tomogram_binary_mask
+            del tomogram_binary_mask, tomogram_segmented
             cp.get_default_memory_pool().free_all_blocks()
 
             # Generate and save MIP
             try:
-                mip = FeatureExtraction.generate_mip(tomogram)
+                mip = await self.retry_cupy_allocation(FeatureExtraction.generate_mip, tomogram)
                 mip_path = await self.save_image(mip, self.directories['mip'], f"{base_name}_mip")
                 if mip_path:
                     self.cell.add_auxiliary_data_path('mip', mip_path)
@@ -151,8 +195,10 @@ class AuxiliaryDataGeneration:
                 logging.error(f"Error generating MIP for {self.cell.tomogram_path}: {e}", exc_info=True)
 
                         # Generate and save MIP
+            del tomogram
+            cp.get_default_memory_pool().free_all_blocks()
             try:
-                mip_without_noisy_bottom_planes = FeatureExtraction.generate_mip(tomogram_without_noisy_bottom_planes)
+                mip_without_noisy_bottom_planes = await self.retry_cupy_allocation(FeatureExtraction.generate_mip, tomogram_without_noisy_bottom_planes)
                 mip_without_noisy_bottom_planes_path = await self.save_image(mip_without_noisy_bottom_planes, self.directories['mip_without_noisy_bottom_planes'], f"{base_name}_mip_without_noisy_bottom_planes")
                 if mip_without_noisy_bottom_planes_path:
                     self.cell.add_auxiliary_data_path('mip_without_noisy_bottom_planes', mip_without_noisy_bottom_planes_path)
@@ -165,7 +211,7 @@ class AuxiliaryDataGeneration:
             # mip_scaled_path = self.save_image(mip, self.directories['mip_scaled'], f"{base_name}_mip_scaled", scale=True)
             # self.cell.add_auxiliary_data_path('mip_scaled', mip_scaled_path)
 
-            del tomogram
+            del tomogram_without_noisy_bottom_planes
             cp.get_default_memory_pool().free_all_blocks()
 
             # # Generate and save segmented MIP
@@ -209,3 +255,4 @@ class AuxiliaryDataGeneration:
             self.cell.unload_all_data()
             cp.get_default_memory_pool().free_all_blocks()
             cp.get_default_pinned_memory_pool().free_all_blocks()
+            return bottom_plane, max_plane

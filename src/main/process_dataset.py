@@ -34,7 +34,8 @@ from config.config_radiation_resistance import (
     queue_chunk_size,
     max_large_tasks,
     RESUME_PROCESSING,
-    ENABLE_LOGGING
+    ENABLE_LOGGING,
+    reserved_workers_for_large_tasks
 )
 
 
@@ -57,7 +58,7 @@ def worker_initializer(semaphore, log_queue, active_workers, worker_lock, active
         # Set up logging to pass logs to the main process
         queue_handler = QueueHandler(log_queue)
         logging.root.addHandler(queue_handler)
-        logging.root.setLevel(logging.DEBUG)
+        logging.root.setLevel(logging.INFO)
         logging.debug("Worker initialized with logging enabled.")
     else:
         # Suppress logging
@@ -70,7 +71,9 @@ async def process_cell(file_path: str, resistance_label: str, dish_number: int,
     try:
         cell = Cell(file_path, resistance_label, dish_number)
         auxiliary_generator = AuxiliaryDataGeneration(cell, directories, pixel_x=pixel_x, wavelength=wavelength, background_ri=background_ri)
-        await auxiliary_generator.generate_and_save_auxiliary_data()
+        bottom_plane, max_plane = await auxiliary_generator.generate_and_save_auxiliary_data()
+        results["bottom_plane"] = bottom_plane  # Add bottom_plane to results
+        results["max_plane"] = max_plane        # Add max_plane to results
         del auxiliary_generator  # Free auxiliary generator
 
         # Process only unprocessed features
@@ -96,7 +99,8 @@ async def process_cell(file_path: str, resistance_label: str, dish_number: int,
             except Exception as e:
                 logging.warning(f"Feature {feature_name} failed for file {file_path}: {e}")
                 results[f"error"] = str(e)
-
+        log_result(file_path, results, csv_lock, worker_index)
+        
     except Exception as e:
         logging.error(f"Error processing cell {file_path}: {e}", exc_info=True)
         results["error"] = str(e)
@@ -109,7 +113,6 @@ async def process_cell(file_path: str, resistance_label: str, dish_number: int,
         cp.get_default_memory_pool().free_all_blocks()  # Free CuPy memory blocks
         cp.get_default_pinned_memory_pool().free_all_blocks()
         gc.collect()  # Trigger garbage collection
-        log_result(file_path, results, csv_lock, worker_index)
         return results
 
 def process_file_worker(task, worker_index=-1):
@@ -253,7 +256,6 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
     session_file_count = 0
   
     active_large_tasks = manager.Value('i', 0)
-    reserved_workers = [0, 4, 8]
     active_worker_cores = manager.dict({i: False for i in range(current_workers.value)})
 
     with Live(progress_layout, refresh_per_second=1):
@@ -285,7 +287,7 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
                         for task in large_tasks:
                             # Find the first free reserved worker
                             free_worker = next(
-                                (core for core in reserved_workers if not active_worker_cores.get(core, False)),
+                                (core for core in reserved_workers_for_large_tasks if not active_worker_cores.get(core, False)),
                                 None
                             )
                             if free_worker is not None:
@@ -315,7 +317,7 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
                             with worker_lock:
                                 # Mark the reserved worker as free
                                 worker_index = result.get("worker_index", None)
-                                if worker_index in reserved_workers:
+                                if worker_index in reserved_workers_for_large_tasks:
                                     active_worker_cores[worker_index] = False  # Free the reserved worker
                                     logging.debug(f"Worker {worker_index} is now free for large tasks.")
                                 active_large_tasks.value -= 1  # Decrement active large task count
@@ -340,7 +342,7 @@ def process_directory(base_dir: str, output_csv_path: str, csv_lock, log_queue) 
                                 # Find the first free, non-reserved worker
                                 free_worker = next(
                                     (core for core, active in active_worker_cores.items()
-                                    if not active and core not in reserved_workers),
+                                    if not active and core not in reserved_workers_for_large_tasks),
                                     None
                                 )
                                 if free_worker is not None:

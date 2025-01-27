@@ -25,26 +25,51 @@ def create_directory(path: str) -> None:
     os.makedirs(path, exist_ok=True)
 
 
-def get_output_directories(dish_path: str) -> Dict[str, str]:
+def get_output_directories(dish_path: str = None) -> Dict[str, str]:
     """
-    Get or create output directories for MIP and Phase images.
+    Get output directories for MIP and Phase images.
+
+    Args:
+        dish_path (str): Path to the dish directory. If None, returns the directory names without a base path.
+
+    Returns:
+        Dict[str, str]: Dictionary of output directory paths or names.
     """
-    directories = {
-        "mip": os.path.join(dish_path, "MIP"),
-        "mip_scaled": os.path.join(dish_path, "MIP_scaled"),
-        "phase": os.path.join(dish_path, "Phase"),
-        "phase_scaled": os.path.join(dish_path, "Phase_scaled"),
-        "image_binary_mask": os.path.join(dish_path, "Image_binary_mask"),
-        "mip_segmented": os.path.join(dish_path, "MIP_segmented"),
-        "mip_segmented_scaled": os.path.join(dish_path, "MIP_segmented_scaled"),
-        "tomogram_binary_mask": os.path.join(dish_path, "Tomogram_binary_mask"),
-        "tomogram_segmented": os.path.join(dish_path, "Tomogram_segmented"),
-        "tomogram_without_noisy_bottom_planes": os.path.join(dish_path, "Tomogram_without_noisy_bottom_planes"),
-        "mip_without_noisy_bottom_planes": os.path.join(dish_path, "MIP_without_noisy_bottom_planes"),
-    }
-    for dir_path in directories.values():
-        create_directory(dir_path)
-    return directories
+    if not dish_path:
+        # Return just the directory names
+        return {
+            "mip": "MIP",
+            "mip_scaled": "MIP_scaled",
+            "phase": "Phase",
+            "phase_scaled": "Phase_scaled",
+            "image_binary_mask": "Image_binary_mask",
+            "mip_segmented": "MIP_segmented",
+            "mip_segmented_scaled": "MIP_segmented_scaled",
+            "tomogram_binary_mask": "Tomogram_binary_mask",
+            "tomogram_segmented": "Tomogram_segmented",
+            "tomogram_without_noisy_bottom_planes": "Tomogram_without_noisy_bottom_planes",
+            "mip_without_noisy_bottom_planes": "MIP_without_noisy_bottom_planes",
+        }
+    else:
+        # Return the full paths based on the provided dish_path
+        directories = {
+            "mip": os.path.join(dish_path, "MIP"),
+            "mip_scaled": os.path.join(dish_path, "MIP_scaled"),
+            "phase": os.path.join(dish_path, "Phase"),
+            "phase_scaled": os.path.join(dish_path, "Phase_scaled"),
+            "image_binary_mask": os.path.join(dish_path, "Image_binary_mask"),
+            "mip_segmented": os.path.join(dish_path, "MIP_segmented"),
+            "mip_segmented_scaled": os.path.join(dish_path, "MIP_segmented_scaled"),
+            "tomogram_binary_mask": os.path.join(dish_path, "Tomogram_binary_mask"),
+            "tomogram_segmented": os.path.join(dish_path, "Tomogram_segmented"),
+            "tomogram_without_noisy_bottom_planes": os.path.join(dish_path, "Tomogram_without_noisy_bottom_planes"),
+            "mip_without_noisy_bottom_planes": os.path.join(dish_path, "MIP_without_noisy_bottom_planes"),
+        }
+        for dir_path in directories.values():
+            create_directory(dir_path)
+
+        return directories
+
 
 
 def count_total_files(base_dir: str, resistance_mapping: dict) -> int:
@@ -193,12 +218,10 @@ def update_processed_file(tracker_path, file_path):
 
 
 def reset_processing_environment(dataset_location, processing_log_path, output_csv_path):
-    # Remove directories and specific files
-    generated_dir = [
-        "MIP", "MIP_scaled", "Phase", "Phase_scaled", "Image_binary_mask",
-        "MIP_segmented", "MIP_segmented_scaled", "Tomogram_binary_mask",
-        "Tomogram_segmented"
-    ]
+
+    # Extract generated directories directly from the `get_output_directories` function
+    directories = get_output_directories("")  # Call with an empty string to get the relative paths
+    generated_dir = [os.path.basename(path) for path in directories.values()]
     remove_directories(dataset_location, generated_dir)
 
     # Remove logs and output files
